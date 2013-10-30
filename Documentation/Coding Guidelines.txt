@@ -1,0 +1,116 @@
+GENERAL CODING
+- all scripts written by the team should be written in C#
+
+- these coding conventions for indentation and naming apply
+	http://msdn.microsoft.com/en-us/library/vstudio/ff926074.aspx
+
+- only use English in your code
+	all names should be in English
+	all formal documentation should be in English
+	only informal code comments (e.g. one line TODOs) can be written in a different language
+
+- names of public and protected variables should be significant
+	express the purpose of the variable
+	v1 is not significant as it does not say anything useful
+	vector1 is not significant either, the type information is already displayed by the IDE
+	trainCars may be ok for a vector containing train car objects
+	trainCardVector is ok, but redundant
+
+- scripts, methods and classes should all have significant names
+	if should takes as little time as possible to understand their purpose
+	if there are 2 ways of understanding it, Murphy's law apply
+
+- methods returning a value (or a reference) are preferred to methods having side effects on arguments
+	it's easier to think of a function in terms of inputs->output
+	if a you write a function with side effects, document them
+
+- prefer the creation of script components instead of hard-coding methods in GameObject classes
+	scripts are classes that extend the MonoBehaviour class
+	they can be attached to a GameObject instance
+
+- you agree that all the code you write will be covered by a license
+	to be discussed (Apache2?, MIT?, GPL?)
+
+- variables that affect gameplay (like player speed) should be public
+	this allows for real time calibration through the IDE Configurator
+
+- only use the IDE to rename and move your files
+
+- organize resources in folders
+	all scripts should be in a folder named Scripts, or one of its subfolders
+	all lights should be in a folder named Lights, or one of its subfolders
+	...
+
+- prefer declaring constants instead of hard-coding magic values
+	if you decide to change that value, you won't need to hunt for all occurrences
+
+
+
+CAMERAS
+- use the lateUpdate method for cameras following an object
+
+
+
+PHYSICS
+- transform() and rotate() methods should not be used with physics affected objects, unless they are marked as kinematic
+
+- updates to physics behaviors should be done in the FixedUpdate method
+	such method is frame independent and is meant to be used or physics
+
+- any object with a collider component but no RigidBody component is expected to be static
+	that means it should not move, not even rotate in place
+	otherwise add a RigidBody component to that object
+	if you need it to move without being influenced by external forces, tick "is Kinematic"
+	see minute 11.40 of http://unity3d.com/learn/tutorials/projects/roll-a-ball/collecting-and-counting
+
+- collision meshes should be a simple version of model meshes
+	a collision mesh that is the same as the model negatively impacts performances
+	another option is using a collection of primitives (e.g. boxes and spheres)
+
+
+
+VERSIONING
+- code should be formatted before each synchronization with public repository
+	in MonoDevelop you can use Edit|Format|Format Document
+
+- commit messages should be significant
+	say the purpose of the commit
+	"changed some stuff" is _not_ significant, it does not say anything useful
+	"changed class CL1" is not significant either, this information is already part of the commit details
+	"partially implemented method X" is significant
+	"fixed bug referenced in ticket X" is significant
+	"more of the same" is ok for small changes over previous commit
+
+- create your own branch if you are gonna make changes that can impact others' work
+	avoid breaking functionality in main branch
+
+
+
+USE OF 3rd PARTY STUFF
+Copy-pasting 3rd party code into your code is NOT allowed
+	keep 3rd party code distinct from yours (e.g. in different scripts)
+	if you use 3rd party functions, add a comment and document that
+
+Scripts written by 3rd party can be written in languages other than C#, but C# scripts are preferred
+
+3rd party scripts can be used only if their license is one of the following:
+- weak copyleft as MIT, BSD, Zlib, Apache 2
+- use of code covered by other licenses, such as GPL, is NOT allowed until discussed
+
+3rd party resources can be used only if their license is one of the following:
+- Creative Commons as CC0, CC-BY
+- use of resources covered by CC-BY-NC licenses is forbidden
+- use of resources covered by other licenses, such as CC-BY-SA, is NOT allowed until discussed
+
+Used 3rd party scripts must be mentioned in a text file named "3rd party scripts.txt"
+Used 3rd party resources must be mentioned in a text file named "3rd party resources.txt"
+
+The following details must be provided:
+- name of resource (e.g. cat.png)
+- source URL (the website you got it from)
+- license of the resource
+- author/company name(s)
+
+
+
+
