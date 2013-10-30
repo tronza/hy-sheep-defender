@@ -44,6 +44,9 @@ GENERAL CODING
 - prefer declaring constants instead of hard-coding magic values
 	if you decide to change that value, you won't need to hunt for all occurrences
 
+- use refactoring for renaming functions or variables in the code
+    never use search and replace
+    select the name in MonoDevelop, right click > refactor > rename
 
 
 CAMERAS
