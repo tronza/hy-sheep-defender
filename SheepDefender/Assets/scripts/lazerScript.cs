@@ -3,7 +3,7 @@ using System.Collections;
 
 public class lazerScript : MonoBehaviour {
 	
-	int speed = 5;
+	int speed = 7;
 
 	// Use this for initialization
 	void Start () {

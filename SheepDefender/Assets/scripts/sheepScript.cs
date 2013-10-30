@@ -61,7 +61,7 @@ public class sheepScript : MonoBehaviour {
         {
 			if(Time.time >= nextShot)
 			{
-				Instantiate(lazer_prefab,new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+1,gameObject.transform.localPosition.z),gameObject.transform.localRotation);
+				Instantiate(lazer_prefab,new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+2,gameObject.transform.localPosition.z),gameObject.transform.localRotation);
 				nextShot = Time.time + fireRate;
 			}
         }
