@@ -1,0 +1,12 @@
+Template
+Name: 
+source 
+license: 
+authors: 
+
+Example
+Name: Screw_you_cat.png
+source URL: http://commons.wikimedia.org/wiki/File:Screw_you_cat.png
+license: CC BY-SA-2.5
+authors: see link
+
