@@ -1,0 +1,18 @@
+The division of work for the first part of the project is the following:
+
+Group 1: Sheep (2 people)
+This group’s task would be to make the hero sheep, its movements and guns. We would need some kind of interface to change the weapon in use; it could be as simple as small buttons for each weapon at the bottom of the screen.
+    Group members:
+    Arthur Joly
+    Jonathan Ilambo Isombeco
+
+Group 2: Props (2 people)
+This group would be in charge of making the kind of buildable items the player can add to the game screen, like brick walls to stop the wolves or turrets that shoot the wolves. Building these would need coins that are obtained by killing wolves. This would also need a GUI to actually build these. I was thinking of something similar to Plants vs zombies i.e. a drag-and-drop interface for building the props. This group would also be in charge of making a system of counting the amount of coins collected.
+    Group members:
+    Kai Kulju
+    Agostino Sturaro
+
+Group 3: Level (3 people)
+This group would make some kind of a loadable level file that tells how the wolves will spawn in the game world and which kinds of wolves there are in each level. This group would also make the wolves, their movement and what happens when they touch an obstacle or the fence protecting the sheep.
+    Group members:
+    

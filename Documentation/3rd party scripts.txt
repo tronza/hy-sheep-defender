@@ -1,0 +1,14 @@
+Template
+Name: 
+source 
+license: 
+authors: 
+
+Example
+Name: EnemyAI.cs
+source URL: http://unity3d.com/learn/tutorials/projects/stealth/enemy-ai
+license: not stated, but the FAQ says:
+    Can we use the code/art/assets in Unity Technologies' example projects?
+    Yes, all assets in our tutorial and example projects may be used in both commercial and non-commercial use in Unity-based projects. The assets themselves may not be resold, however.
+authors: Unity Technologies
+
