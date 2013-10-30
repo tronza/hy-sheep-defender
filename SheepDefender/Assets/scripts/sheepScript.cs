@@ -57,22 +57,21 @@ public class sheepScript : MonoBehaviour {
 			
         }
 		
-		/*if(Input.GetAxis("FireLazer")!=0)
+		if(Input.GetAxis("Jump")!=0)
         {
 			if(Time.time >= nextShot)
 			{
-				Instantiate(lazer_prefab,new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y,gameObject.transform.localPosition.z),gameObject.transform.localRotation);
+				Instantiate(lazer_prefab,new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+1,gameObject.transform.localPosition.z),gameObject.transform.localRotation);
 				nextShot = Time.time + fireRate;
 			}
-        }	*/
+        }
 	}
 	
-	/*void OnCollisionEnter(Collision collision) {
+	void OnCollisionEnter(Collision collision) {
 		collidedWith=collision.gameObject;
 	}
 	
 	void OnCollisionExit(Collision collision){
 		collidedWith=null;
-	}*/
+	}
 }
-
