@@ -18,7 +18,7 @@ public class fenceScript : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		if( collision.gameObject.tag=="lazer" )
 		{
-			health-=25;
+			health-=5;
 			if(health<=0)
 			{
 				
