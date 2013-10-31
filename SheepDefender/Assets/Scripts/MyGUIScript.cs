@@ -6,6 +6,7 @@ public class MyGUIScript : MonoBehaviour
 	public GameInfo myGameInfo;
 	public Texture2D turretImage;
 	bool hideToggleValue = false;
+	GUIContent[] turrets;
 //	public Texture[] turretImages;
 //	int selectedTurret = -1;
 	
@@ -15,7 +16,11 @@ public class MyGUIScript : MonoBehaviour
 	
 	void Start()
 	{
-		
+		turrets = new GUIContent[] {
+			new GUIContent("Turret 1", turretImage),
+			new GUIContent("Turret 2", turretImage),
+			new GUIContent("Turret 3", turretImage)
+		};
 	}
 	
 	void OnGUI ()
@@ -49,12 +54,28 @@ public class MyGUIScript : MonoBehaviour
 		GUILayout.Toggle(hideToggleValue, "hide");
 		
 		//Buttons cannot be grayed out in a SelectionGrid -> discard
-		selectedTurret= GUILayout.SelectionGrid(selectedTurret, turretImages, 1);
-		//TODO: a way to reset selection (just set to -1)
+//		selectedTurret= GUILayout.SelectionGrid(selectedTurret, turretImages, 1);	
+
+//		if(GUILayout.Button(new GUIContent("Turret 1", turretImage))) {
+//			Debug.Log("turret 1");
+//		}
+//		if(GUILayout.Button(new GUIContent("Turret 2", turretImage))) {
+//			Debug.Log("turret 2");
+//		}
+//		if(GUILayout.Button(new GUIContent("Turret 3", turretImage))) {
+//			Debug.Log("turret 3");
+//		}
 		
-		GUILayout.Button(new GUIContent("Turret 1", turretImage));
-		GUILayout.Button(new GUIContent("Turret 2", turretImage));
-		GUILayout.Button(new GUIContent("Turret 3", turretImage));
+		if(GUILayout.Button(turrets[0])) {
+			Debug.Log("turret 0");
+		}
+		if(GUILayout.Button(turrets[1])) {
+			Debug.Log("turret 1");
+		}
+		if(GUILayout.Button(turrets[2])) {
+			Debug.Log("turret 2");
+		}
+		
 		GUILayout.FlexibleSpace (); //fill
 		GUILayout.EndVertical ();
 		
