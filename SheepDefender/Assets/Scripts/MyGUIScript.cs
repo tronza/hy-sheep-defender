@@ -33,8 +33,6 @@ public class MyGUIScript : MonoBehaviour
 		
 		//display player/level info
 		GUILayout.BeginHorizontal ();
-		GUILayout.FlexibleSpace (); //fill
-		
 		//TODO: ask WTH player info they want to have
 		//TODO: add some padding on the sides
 		GUILayout.Label("Coins: "+myGameInfo.coins);
@@ -45,12 +43,9 @@ public class MyGUIScript : MonoBehaviour
 		GUILayout.EndHorizontal ();
 		
 		//display turret shop and close button
-//		GUILayout.BeginHorizontal (shopOptions);
-		//TODO: handle button clicks
-		
-		//turret shop
 		GUILayout.BeginVertical (shopOptions);
 		GUILayout.Label("Shop");
+		//TODO: handle clicks on toggle
 		GUILayout.Toggle(hideToggleValue, "hide");
 		
 		//Buttons cannot be grayed out in a SelectionGrid -> discard
@@ -78,14 +73,7 @@ public class MyGUIScript : MonoBehaviour
 		
 		GUILayout.FlexibleSpace (); //fill
 		GUILayout.EndVertical ();
-		
-//		GUILayout.Button("<>", hideButtonOptions);
-//		
-//		GUILayout.EndHorizontal ();
-		
-//		GUILayout.FlexibleSpace (); //fill
 		GUILayout.EndVertical ();
-//		GUILayout.FlexibleSpace (); //fill
 		GUILayout.EndArea ();
 	}
 }
