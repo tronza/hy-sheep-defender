@@ -47,7 +47,7 @@ public class sheepScript : MonoBehaviour {
         {
 			if(collidedWith!=null)
 			{
-				if(collidedWith.tag=="left" ||collidedWith.tag=="right" ||collidedWith.tag=="top" ||collidedWith.tag=="bottom")
+				if(collidedWith.tag=="left" ||collidedWith.tag=="right" ||collidedWith.tag=="top" ||collidedWith.tag=="bottom" ||collidedWith.tag=="fenceBottom" ||collidedWith.tag=="fenceTop" ||collidedWith.tag=="fenceRight" ||collidedWith.tag=="fenceLeft")
 				{
 					return;
 				}
