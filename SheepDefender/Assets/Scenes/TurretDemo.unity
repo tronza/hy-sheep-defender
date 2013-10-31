@@ -219,6 +219,50 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!1 &708298781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 708298783}
+  - 114: {fileID: 708298782}
+  m_Layer: 0
+  m_Name: MyGUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &708298782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 708298781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778c1b2fd8351a14bb5bd6af8dc92269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myGameInfo: {fileID: 1789139306}
+  turretImage: {fileID: 2800000, guid: 177fcb0bbf5d34248b3e69a5ad60d03a, type: 3}
+  turretImages:
+  - {fileID: 2800000, guid: 177fcb0bbf5d34248b3e69a5ad60d03a, type: 3}
+  - {fileID: 2800000, guid: 177fcb0bbf5d34248b3e69a5ad60d03a, type: 3}
+  - {fileID: 2800000, guid: 177fcb0bbf5d34248b3e69a5ad60d03a, type: 3}
+--- !u!4 &708298783
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 708298781}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &803468146
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +344,47 @@ MonoBehaviour:
   damage: 10
   cooldownTime: 2
   target: {fileID: 2122372442}
+--- !u!1 &1789139305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1789139307}
+  - 114: {fileID: 1789139306}
+  m_Layer: 0
+  m_Name: GameInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1789139306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1789139305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019fcb7c176cdf044b77f54454a41ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: 999
+  level: 1
+  playerName: unnammed
+--- !u!4 &1789139307
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1789139305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10, y: 100, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &2122372437
 GameObject:
   m_ObjectHideFlags: 0
