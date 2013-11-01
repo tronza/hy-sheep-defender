@@ -30,13 +30,12 @@ public class Turret : MonoBehaviour
 	
 	void DealDamage ()
 	{
-		if (this.target.HasHealth ()) {
+		if (this.target != null && this.target.HasHealth ()) {
 			this.target.ReceiveDamage (damage);
 			
-			if (this.target.HasHealth ()) {
+			if (this.target != null && this.target.HasHealth ()) {
 				this.AcquireNextTarget ();	
 			}
-			
 		} else {
 			this.target = null;
 			
