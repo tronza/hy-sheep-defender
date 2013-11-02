@@ -5,12 +5,20 @@ using System.IO;
 using System.Collections.Generic;
 
 public class level : MonoBehaviour {
-	public string levelName;//name of the level eg. level1
-	public int levelDuration;//Shows the total time for completing the level
-	public int timeEllapsed =0;//shows how much time has ellapsed
+	private string levelName;//name of the level eg. level1
+	private int levelDuration;//Shows the total time for completing the level
+	private int timeEllapsed =0;//shows how much time has ellapsed
 	private Dictionary<int, string[]> wolvesToSpawn = new Dictionary<int, string[]>();//Key is the point in time (second) in which wolves of the value (string array) are generated
 	private GameObject[] spawnPoints;//The possible places the wolves can spawn to
 	private int lastWolfsId =0;
+	
+	public Texture progressbarBackground;
+	public Texture progressbarForeground;
+	
+	private int progressBarX = 1;
+	private int progressBarY = 1;
+	private int progressBarH = 32;
+	private int progressBarW = 256;
 	
 	// Use this for initialization
 	void Start () {
@@ -22,8 +30,17 @@ public class level : MonoBehaviour {
 		
 		spawnPoints = GameObject.FindGameObjectsWithTag("Spawn"); //all spawn points in scene
 		
-		InvokeRepeating("timerTick", 1, 1);
+		InvokeRepeating("timerTick", 1, 1);//Start the timer that checks for new wolves to spawn
 		
+	}
+	
+	private void drawProgressBar(){//draws the background
+		GUI.DrawTexture(new Rect(progressBarX , progressBarY, progressBarW, progressBarH), progressbarBackground);
+		float progress = ((float)timeEllapsed / (float)levelDuration);
+		if(progress>1){//don't draw an overly long progressbar if the level has ended
+			progress=1;
+		}
+		GUI.DrawTexture(new Rect(progressBarX , progressBarY, progressBarW * progress, progressBarH), progressbarForeground);
 	}
 	
 	// Update is called once per frame
@@ -31,19 +48,26 @@ public class level : MonoBehaviour {
 
 	
 	}
+	void OnGUI() {
+		drawProgressBar();//draws the progressbar to track the level's progress
+		
+	}
 	
-	private void timerTick(){
-			timeEllapsed++;
-				if(wolvesToSpawn.ContainsKey(timeEllapsed)){//There are wolves to spawn at this time point
-					System.Random rnd = new System.Random();
-					string[] wolves = wolvesToSpawn[timeEllapsed];
-					for(int i=0;i<wolves.Length;i++){
-						string wolfName = wolves[i];
-						GameObject spawner = spawnPoints[rnd.Next(0, spawnPoints.Length)];
-						spawnWolf(wolfName,lastWolfsId,spawner);
-						lastWolfsId++;
-					}
-				}
+	private void timerTick(){//This occurs every second and checks for new wolves to be added
+		timeEllapsed++;
+		if(timeEllapsed>=levelDuration){//don't check for the wolves if the level has already ended
+			return;
+		}
+		if(wolvesToSpawn.ContainsKey(timeEllapsed)){//There are wolves to spawn at this time point
+			System.Random rnd = new System.Random();
+			string[] wolves = wolvesToSpawn[timeEllapsed];
+			for(int i=0;i<wolves.Length;i++){
+				string wolfName = wolves[i];
+				GameObject spawner = spawnPoints[rnd.Next(0, spawnPoints.Length)];
+				spawnWolf(wolfName,lastWolfsId,spawner);
+				lastWolfsId++;
+			}
+		}
 	}
 	
 	private void spawnWolf(String prefabName, int wolfNumber, GameObject spawnPoint) {
@@ -79,4 +103,5 @@ public class level : MonoBehaviour {
                 return -1;
             }
 	}
+	
 }

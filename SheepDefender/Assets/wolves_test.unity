@@ -1175,9 +1175,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 263b96c0a3631490e9855a27649b1fc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: 
-  levelDuration: 0
-  timeEllapsed: 0
+  progressbarBackground: {fileID: 2800000, guid: bf725cc26e88444079e8a2aba4a4fb5f,
+    type: 3}
+  progressbarForeground: {fileID: 2800000, guid: 966f28fdbe334470fa433b976696d8dd,
+    type: 3}
 --- !u!4 &1227023982
 Transform:
   m_ObjectHideFlags: 0
