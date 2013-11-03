@@ -3,7 +3,10 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
-
+//This class loads a level file and generates the wolves accordingly.
+//The level file will be searched in a subfolder called "levels" in the game's root folder. E.g. levels/level_name.ini
+//Wolf prefabs need to be in the Resources folder and have the exact same name that is used in the level file
+//Wolves will spawn at random in the position of any gameobject that has been tagged with "Spawn" tag
 public class level : MonoBehaviour {
 	private string levelName;//name of the level eg. level1
 	private int levelDuration;//Shows the total time for completing the level
@@ -15,10 +18,10 @@ public class level : MonoBehaviour {
 	public Texture progressbarBackground;
 	public Texture progressbarForeground;
 	
-	private int progressBarX = 1;
-	private int progressBarY = 1;
-	private int progressBarH = 32;
-	private int progressBarW = 256;
+	public int progressBarX = 1;
+	public int progressBarY = 1;
+	public int progressBarH = 32;
+	public int progressBarW = 256;
 	
 	// Use this for initialization
 	void Start () {
@@ -56,18 +59,36 @@ public class level : MonoBehaviour {
 	private void timerTick(){//This occurs every second and checks for new wolves to be added
 		timeEllapsed++;
 		if(timeEllapsed>=levelDuration){//don't check for the wolves if the level has already ended
+			
+			//Place the end of a level function here
+			
 			return;
 		}
 		if(wolvesToSpawn.ContainsKey(timeEllapsed)){//There are wolves to spawn at this time point
 			System.Random rnd = new System.Random();
 			string[] wolves = wolvesToSpawn[timeEllapsed];
+			List<int> spawnIndices = generateListWithNumbers(spawnPoints.Length);//This list contains the possible indicies so that if the number of wolves is smaller than the number of spawners, multiple wolves won't spawn on the same spot
 			for(int i=0;i<wolves.Length;i++){
-				string wolfName = wolves[i];
-				GameObject spawner = spawnPoints[rnd.Next(0, spawnPoints.Length)];
+				if(spawnIndices.Count ==0 ){//If the indices list is empty, refill it (only incase there are more wolves at this time point in the level file than there are spawners)
+					spawnIndices = generateListWithNumbers(spawnPoints.Length);
+				}
+				string wolfName = wolves[i];//The wolf to generate
+				int randomIndex = rnd.Next(0, spawnIndices.Count);
+				int spawnPosition = spawnIndices[randomIndex];
+				spawnIndices.RemoveAt(randomIndex);//Remove the index from list, so that another wolf won't spawn there
+				GameObject spawner = spawnPoints[spawnPosition];
 				spawnWolf(wolfName,lastWolfsId,spawner);
 				lastWolfsId++;
 			}
 		}
+	}
+	
+	private List<int> generateListWithNumbers(int maxInt){//Generates a list containing numbers from 0 to maxInt
+		List<int> returnList = new List<int>();
+		for(int i=0;i<maxInt;i++){
+			returnList.Add(i);
+		}
+		return returnList;
 	}
 	
 	private void spawnWolf(String prefabName, int wolfNumber, GameObject spawnPoint) {

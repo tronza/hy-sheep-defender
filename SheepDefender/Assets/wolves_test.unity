@@ -1179,6 +1179,10 @@ MonoBehaviour:
     type: 3}
   progressbarForeground: {fileID: 2800000, guid: 966f28fdbe334470fa433b976696d8dd,
     type: 3}
+  progressBarX: 1
+  progressBarY: 1
+  progressBarH: 32
+  progressBarW: 256
 --- !u!4 &1227023982
 Transform:
   m_ObjectHideFlags: 0
