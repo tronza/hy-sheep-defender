@@ -15,7 +15,7 @@ public class Turret : MonoBehaviour
 	void Update ()
 	{
 		if (this.HasTargetAcquired ()) {
-			transform.LookAt (this.target.transform.position);	
+			transform.LookAt (this.target.transform.position);
 		}
 		
 		// TODO: it takes one extra frame (!) to find a new target
@@ -37,11 +37,14 @@ public class Turret : MonoBehaviour
 			RaycastHit hit;
         	
 			if (Physics.Raycast (transform.position, transform.TransformDirection (Vector3.forward), out hit)) {
-				
 				// It really does not matter if the target is the target, only the classification matters here.
-				if (hit.collider.gameObject.tag == this.target.tag) {
-					Debug.DrawLine (transform.position, hit.transform.position, Color.yellow, 0.5f, false);
-					hit.collider.gameObject.SendMessage ("ReceiveDamage", damage);
+				try {
+					if (hit.collider.gameObject.tag == this.target.tag) {
+						Debug.DrawLine (transform.position, hit.transform.position, Color.yellow, 0.5f, false);
+						hit.collider.gameObject.SendMessage ("ReceiveDamage", damage);
+					}
+				} catch (UnityException e) {
+					Debug.Log (e.Message);
 				}
 			}
 			
