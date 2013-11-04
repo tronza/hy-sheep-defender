@@ -7,7 +7,6 @@ using System.Collections.Generic;
 /**
  * The LevelMenu class. Used for displaying the level menu.
  * 
- * @author Jannis Seemann (jannisseemann@gmail.com)
  * @since 0.1
  */
 public class LevelMenu : MonoBehaviour {
@@ -25,7 +24,7 @@ public class LevelMenu : MonoBehaviour {
 		}
 		
 		/**
-		 * @TODO(jannisseemann): Return a title that can be specified in the ini file. 
+		 * @TODO: Return a title that can be specified in the ini file. 
 		 */
 		public string GetTitle() {
 			return fileName;	
