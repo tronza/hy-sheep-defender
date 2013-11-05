@@ -355,6 +355,8 @@ GameObject:
   - 4: {fileID: 400046}
   - 137: {fileID: 13700000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
+  - 195: {fileID: 19500000}
   m_Layer: 0
   m_Name: sheepPrefab
   m_TagString: sheep
@@ -470,7 +472,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100030}
-  m_LocalRotation: {x: .512206078, y: .685850859, z: .516754031, w: -.0147972349}
+  m_LocalRotation: {x: .512206018, y: .685850799, z: .516753972, w: -.014797233}
   m_LocalPosition: {x: 8.56816769e-08, y: -1.41561031e-07, z: 1.38931524e-08}
   m_LocalScale: {x: 1, y: 1, z: 1.00000012}
   m_Children:
@@ -528,7 +530,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100008}
-  m_LocalRotation: {x: .0109565463, y: .198742092, z: .0653854087, w: .977806866}
+  m_LocalRotation: {x: .0109565472, y: .198742107, z: .0653854162, w: .977806926}
   m_LocalPosition: {x: -.431281626, y: -3.14321369e-08, z: 1.21071926e-08}
   m_LocalScale: {x: 1, y: .999999881, z: .99999994}
   m_Children:
@@ -660,7 +662,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5f23280e6a0fa4babd33c507d057ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lazer_prefab: {fileID: 0}
+  damage: 5
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dieEffect: {fileID: 0}
+  health: 100
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -712,6 +727,26 @@ SkinnedMeshRenderer:
     m_Center: {x: .655320287, y: -.118838847, z: -.0467108786}
     m_Extent: {x: 1.01764345, y: 1.37190342, z: .809386253}
   m_DirtyAABB: 0
+--- !u!195 &19500000
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100046}
+  m_Enabled: 1
+  m_Radius: .5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -73,7 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
-  m_NavMesh: {fileID: 0}
+  m_NavMesh: {fileID: 19400000, guid: 362a8c5bb1e054b62baeeaddb594cbb3, type: 2}
 --- !u!1 &4963375
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,7 +1325,12 @@ Prefab:
       propertyPath: m_Size.z
       value: 5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11400004, guid: 4c99a7732848d45e398ae22f34b8d708, type: 2}
+      propertyPath: attackDamage
+      value: 100
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: 4c99a7732848d45e398ae22f34b8d708, type: 2}
   m_RootGameObject: {fileID: 191317248}
   m_IsPrefabParent: 0
@@ -1626,7 +1631,7 @@ Prefab:
       objectReference: {fileID: 400000, guid: 81744248ecbd4174d8c6ff095da09ef9, type: 2}
     - target: {fileID: 100046, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
       propertyPath: m_TagString
-      value: Attacker
+      value: Defender
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
@@ -1670,6 +1675,8 @@ GameObject:
   - 33: {fileID: 1353631604}
   - 65: {fileID: 1353631603}
   - 114: {fileID: 1353631602}
+  - 114: {fileID: 1353631605}
+  - 195: {fileID: 1353631606}
   m_Layer: 0
   m_Name: TargetCube
   m_TagString: Attacker
@@ -1724,6 +1731,43 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1071457277}
   m_GameObject: {fileID: 1353631600}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1353631605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400004, guid: 4c99a7732848d45e398ae22f34b8d708,
+    type: 2}
+  m_PrefabInternal: {fileID: 1071457277}
+  m_GameObject: {fileID: 1353631600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 081a5714d0b324d66ae454ad3f051966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  priorityTarget: {fileID: 0}
+  attackDistance: 3
+  attackDamage: 100
+--- !u!195 &1353631606
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 19500000, guid: 4c99a7732848d45e398ae22f34b8d708,
+    type: 2}
+  m_PrefabInternal: {fileID: 1071457277}
+  m_GameObject: {fileID: 1353631600}
+  m_Enabled: 1
+  m_Radius: .5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: .5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1367668733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1813,11 +1857,13 @@ GameObject:
   - 4: {fileID: 1476238540}
   - 137: {fileID: 1476238541}
   - 114: {fileID: 1476238542}
+  - 114: {fileID: 1476238545}
+  - 195: {fileID: 1476238546}
   - 54: {fileID: 1476238543}
   - 65: {fileID: 1476238544}
   m_Layer: 0
   m_Name: Sheep
-  m_TagString: Attacker
+  m_TagString: Defender
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1926,6 +1972,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .5, y: 1, z: 2.29999995}
   m_Center: {x: 0, y: 1, z: 2}
+--- !u!114 &1476238545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 4f048a33c8cce3744ba62d8cd92f811c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1322656280}
+  m_GameObject: {fileID: 1476238539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dieEffect: {fileID: 0}
+  health: 100
+--- !u!195 &1476238546
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 19500000, guid: 4f048a33c8cce3744ba62d8cd92f811c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1322656280}
+  m_GameObject: {fileID: 1476238539}
+  m_Enabled: 1
+  m_Radius: .5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1482516885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,7 +2221,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1770940000
 Transform:
@@ -2231,7 +2312,7 @@ GameObject:
   m_TagString: ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &1773554293
 Renderer:
