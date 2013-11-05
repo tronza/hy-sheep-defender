@@ -5,7 +5,7 @@ using System.Text;
 using System.Collections;
 using System.IO;
 
-    class IniFileTool
+    public class IniFileTool
     {
         public Encoding merkkikoodaus = Encoding.UTF8;
         private String file = "";

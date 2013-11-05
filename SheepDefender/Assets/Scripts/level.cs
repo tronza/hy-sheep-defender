@@ -25,8 +25,8 @@ public class level : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		string levelName = "level1";
 		char pathSeparator = Path.DirectorySeparatorChar;
-		levelName = "level1";//to be changed when we have a level menu
 		string levelPath = "levels" + pathSeparator + levelName +".ini";
 		
 		loadLevelFile(levelPath);//loads the level file
