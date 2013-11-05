@@ -9,6 +9,8 @@ public class sheepScript : MonoBehaviour {
 	int ajoutAngle = 2;
 	GameObject collidedWith ;
 	
+	public Transform lazer_prefab;
+	
 	public float damage = 5f;
 	
 	// Use this for initialization
@@ -55,7 +57,7 @@ public class sheepScript : MonoBehaviour {
         {
 			if(Time.time >= nextShot)
 			{
-				RaycastHit hit;
+				/*RaycastHit hit;
         	
 				if (Physics.Raycast (transform.position, transform.TransformDirection (Vector3.forward), out hit)) {
 					try {
@@ -64,8 +66,8 @@ public class sheepScript : MonoBehaviour {
 					} catch (UnityException e) {
 						Debug.Log (e.Message);
 					}
-				}
-				
+				}*/
+				Instantiate(lazer_prefab,new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+2,gameObject.transform.localPosition.z),gameObject.transform.localRotation);
 				nextShot = Time.time + fireRate;
 			}
         }
