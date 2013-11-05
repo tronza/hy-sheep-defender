@@ -42,7 +42,7 @@ public class sheepScript : MonoBehaviour {
 		/* Forward and backward */ 
 		if(Input.GetAxis("Vertical")!=0)
         {
-			if (collidedWith!=null)
+			if (collidedWith!=null && !(collidedWith.tag == "Attacker"))
 			{
 				return;
 			}
