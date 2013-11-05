@@ -2,9 +2,6 @@
 using System.Collections;
 
 public class fenceScript : MonoBehaviour {
-	
-	int health = 100 ;
-	
 	// Use this for initialization
 	void Start () {
 	
@@ -18,12 +15,7 @@ public class fenceScript : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		if( collision.gameObject.tag=="lazer" )
 		{
-			health-=5;
-			if(health<=0)
-			{
-				
-				Destroy(gameObject);
-			}
+			// Why would lazer hurt the fence?
 		}
 	}
 }

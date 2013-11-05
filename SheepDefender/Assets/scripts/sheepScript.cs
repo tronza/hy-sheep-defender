@@ -2,17 +2,14 @@
 using System.Collections;
 
 public class sheepScript : MonoBehaviour {
-
-	int health = 100 ;
 	int speed = 10;
 	float fireRate =0.2F;
 	double nextShot =0.0;
 	int angle = 0;
 	int ajoutAngle = 2;
-	bool collided = false ;
 	GameObject collidedWith ;
-	public Transform lazer_prefab;
 	
+	public float damage = 5f;
 	
 	// Use this for initialization
 	void Start () {
@@ -45,12 +42,9 @@ public class sheepScript : MonoBehaviour {
 		/* Forward and backward */ 
 		if(Input.GetAxis("Vertical")!=0)
         {
-			if(collidedWith!=null)
+			if (collidedWith!=null)
 			{
-				if(collidedWith.tag=="left" ||collidedWith.tag=="right" ||collidedWith.tag=="top" ||collidedWith.tag=="bottom" ||collidedWith.tag=="fenceBottom" ||collidedWith.tag=="fenceTop" ||collidedWith.tag=="fenceRight" ||collidedWith.tag=="fenceLeft")
-				{
-					return;
-				}
+				return;
 			}
 			
 			gameObject.transform.Translate(0,0,Input.GetAxis("Vertical")*speed*Time.deltaTime);
@@ -61,7 +55,17 @@ public class sheepScript : MonoBehaviour {
         {
 			if(Time.time >= nextShot)
 			{
-				Instantiate(lazer_prefab,new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+2,gameObject.transform.localPosition.z),gameObject.transform.localRotation);
+				RaycastHit hit;
+        	
+				if (Physics.Raycast (transform.position, transform.TransformDirection (Vector3.forward), out hit)) {
+					try {
+						Debug.DrawLine (transform.position, hit.point, Color.yellow, 0.5f, false);
+						hit.collider.gameObject.SendMessage ("ReceiveDamage", damage);
+					} catch (UnityException e) {
+						Debug.Log (e.Message);
+					}
+				}
+				
 				nextShot = Time.time + fireRate;
 			}
         }
