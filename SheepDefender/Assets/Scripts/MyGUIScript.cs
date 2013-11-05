@@ -6,7 +6,8 @@ public class MyGUIScript : MonoBehaviour
 	//public vars
 	public GameInfo myGameInfo;
 	public Texture2D turretImage;
-	public TurretPlacer myTurretPlacer;
+	//NOTE: you could use a Transform reference, but this is clearer
+	public Object turretPrefab;
 		
 	//private vars
 	bool buttonsHidden = false;
@@ -14,6 +15,8 @@ public class MyGUIScript : MonoBehaviour
 	GUIContent[] turrets;
 	int selectedTurret = -1;
 	bool selectedTurretChanged = false;
+	bool placingTurret = false;
+	bool discardClick = false;
 	
 	//TODO: find a way to scale button icon, without stretching it
 	GUILayoutOption[] shopOptions = {GUILayout.MaxWidth (0.2f * Screen.width)};
@@ -74,7 +77,11 @@ public class MyGUIScript : MonoBehaviour
 			if (selectedTurretChanged) {
 				Debug.Log("Selected turret: " + selectedTurret);
 				selectedTurretChanged = false;
-				myTurretPlacer.createTurret(selectedTurret);
+				placingTurret = true;
+				discardClick = true;
+			}
+			else if (discardClick) {
+				discardClick = false;
 			}
 			
 			GUILayout.FlexibleSpace (); //fill
@@ -97,5 +104,25 @@ public class MyGUIScript : MonoBehaviour
 	int GetSelectedTurret()
 	{
 		return selectedTurret;
+	}
+	
+	//this is the placing of the turret
+	void Update()
+	{
+		//the first click is on the button and should be discarded
+		if(placingTurret && Input.GetMouseButtonDown(0) && !discardClick) {
+			Plane plane = new Plane (Vector3.up, 0);
+			float dist;
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			if (plane.Raycast (ray, out dist)) {
+				Vector3 point = ray.GetPoint (dist);
+				Instantiate (turretPrefab, point, Quaternion.identity);
+				placingTurret = false;
+			}
+		}
+		
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+			placingTurret = false;
+		}
 	}
 }
