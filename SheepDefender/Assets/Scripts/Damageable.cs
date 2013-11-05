@@ -3,8 +3,9 @@ using System.Collections;
 
 public class Damageable : MonoBehaviour
 {
+	public GameObject dieEffect;
 	public float health = 100f;
-
+	
 	// Use this for initialization
 	void Start ()
 	{
@@ -13,9 +14,6 @@ public class Damageable : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (!this.HasHealth ()) {
-			Destroy (gameObject);
-		}
 	}
 
 	public void ReceiveDamage (float damage)
@@ -26,6 +24,14 @@ public class Damageable : MonoBehaviour
 		// } etc.
 
 		this.health -= damage;
+		
+		if (!this.HasHealth ()) {
+			// TODO: what happens to the referencing turrets etc after destroying the object?
+			Destroy (gameObject, 2);
+			gameObject.tag = null;
+			
+			Destroy (Instantiate (dieEffect, transform.position, Quaternion.identity), 3);
+		}
 	}
 
 	public bool HasHealth ()

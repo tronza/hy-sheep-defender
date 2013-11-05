@@ -5,8 +5,7 @@ public class Turret : MonoBehaviour
 {
 	public float damage = 10f;
 	public float cooldownTime = 2f; // Seconds
-	public Damageable target = null; // TODO: change to private when not debugging!
-	
+	GameObject target = null;
 	float cooldownRemaining = 0f;
 	
 	void Start ()
@@ -15,6 +14,10 @@ public class Turret : MonoBehaviour
 
 	void Update ()
 	{
+		if (this.HasTargetAcquired ()) {
+			transform.LookAt (this.target.transform.position);
+		}
+		
 		// TODO: it takes one extra frame (!) to find a new target
 		if (cooldownRemaining <= 0) {
 			if (this.HasTargetAcquired ()) {
@@ -30,13 +33,24 @@ public class Turret : MonoBehaviour
 	
 	void DealDamage ()
 	{
-		if (this.target.HasHealth ()) {
-			this.target.ReceiveDamage (damage);
-			
-			if (this.target.HasHealth ()) {
-				this.AcquireNextTarget ();	
+		if (this.target != null) {
+			RaycastHit hit;
+        	
+			if (Physics.Raycast (transform.position, transform.TransformDirection (Vector3.forward), out hit)) {
+				// It really does not matter if the target is the target, only the classification matters here.
+				try {
+					if (hit.collider.gameObject.tag == this.target.tag) {
+						Debug.DrawLine (transform.position, hit.transform.position, Color.yellow, 0.5f, false);
+						hit.collider.gameObject.SendMessage ("ReceiveDamage", damage);
+					}
+				} catch (UnityException e) {
+					Debug.Log (e.Message);
+				}
 			}
 			
+			if (this.target != null) {
+				this.AcquireNextTarget ();	
+			}
 		} else {
 			this.target = null;
 			
@@ -58,9 +72,35 @@ public class Turret : MonoBehaviour
 		this.target = this.FindTarget ();
 	}
 	
-	// TODO: implement something that checks for the nearest and most dangerous target
-	Damageable FindTarget ()
+	bool canBeAttacked (GameObject go)
 	{
-		return this.target;
+		RaycastHit hit;
+		
+		if (Physics.Raycast (transform.position, (go.transform.position - transform.position), out hit)) {
+			if (hit.collider.gameObject == go) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	GameObject FindTarget ()
+	{
+		GameObject closest = null;
+		float distance = Mathf.Infinity;
+		Vector3 position = transform.position;
+		
+		foreach (GameObject go in GameObject.FindGameObjectsWithTag("Attacker")) {
+			Vector3 diff = go.transform.position - position;
+			float curDistance = diff.sqrMagnitude;
+			
+			if ((curDistance < distance) && (canBeAttacked (go))) {
+				closest = go;		
+				distance = curDistance;
+			}
+		}
+		
+		return closest;
 	}
 }
