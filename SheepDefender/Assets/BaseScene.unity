@@ -592,6 +592,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a531ee245978aeb4aae3faf972ec727a, type: 2}
+      propertyPath: m_TagString
+      value: Defender
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a531ee245978aeb4aae3faf972ec727a, type: 2}
   m_RootGameObject: {fileID: 2102366546}
@@ -1894,7 +1898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5f23280e6a0fa4babd33c507d057ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lazer_prefab: {fileID: 400000, guid: 81744248ecbd4174d8c6ff095da09ef9, type: 2}
+  damage: 5
 --- !u!54 &1476238543
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2576,7 +2580,7 @@ GameObject:
   - 114: {fileID: 2102366552}
   m_Layer: 0
   m_Name: wallPrefab
-  m_TagString: fenceBottom
+  m_TagString: Defender
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

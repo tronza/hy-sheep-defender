@@ -4,16 +4,6 @@
 TagManager:
   tags:
   - ground
-  - sheep
-  - bottom
-  - top
-  - left
-  - right
-  - lazer
-  - fenceTop
-  - fenceBottom
-  - fenceRight
-  - fenceLeft
   - Spawn
   - Defender
   - Attacker
