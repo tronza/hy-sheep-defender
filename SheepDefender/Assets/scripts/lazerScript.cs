@@ -18,6 +18,6 @@ public class lazerScript : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision collision) {
 		Debug.Log (gameObject);
-		Destroy (gameObject, 3f);
+		Destroy (gameObject);
 	}
 }
