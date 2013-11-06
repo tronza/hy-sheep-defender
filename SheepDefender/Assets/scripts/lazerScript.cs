@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class lazerScript : MonoBehaviour {
-	
-	int speed = 16;
+	public float damage = 5f;
+	public int speed = 16;
 
 	// Use this for initialization
 	void Start () {
@@ -12,12 +12,13 @@ public class lazerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		gameObject.transform.Translate(0,0,speed*Time.deltaTime);
-		//Debug.
-	
 	}
 	
 	void OnCollisionEnter(Collision collision) {
-		Debug.Log (gameObject);
+		if (collision.gameObject.tag == "Attacker") {
+			collision.gameObject.SendMessage("ReceiveDamage", 5f);
+		}
+		
 		Destroy (gameObject);
 	}
 }

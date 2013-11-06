@@ -7,6 +7,8 @@ public class enemyWolfAI : MonoBehaviour {
 
 	public float attackDistance = 3;
 	public float attackDamage = 5;
+	
+	GameObject collidedWith;
 
 	// Use this for initialization
 	void Start () {
@@ -38,7 +40,7 @@ public class enemyWolfAI : MonoBehaviour {
 					nextAttack = attackInterval;
 				}
 			} else {
-					Move(target);
+				Move(target);
 			}
 
 		} else if (target == null) {
@@ -77,6 +79,7 @@ public class enemyWolfAI : MonoBehaviour {
 	void Move(Transform target) {
 		//animation.CrossFade("run"); //run animation
 		//avoid obstacles on terrain
+		
 		this.gameObject.GetComponent<NavMeshAgent>().destination = target.position;
 	}
 
@@ -90,5 +93,13 @@ public class enemyWolfAI : MonoBehaviour {
 		} else {
 			target = FindNearestObject(); //updates target to closest target
 		}
+	}
+	
+	void OnCollisionEnter(Collision collision) {
+		collidedWith=collision.gameObject;
+	}
+	
+	void OnCollisionExit(Collision collision){
+		collidedWith=null;
 	}
 }

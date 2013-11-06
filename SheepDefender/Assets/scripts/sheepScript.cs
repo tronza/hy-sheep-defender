@@ -24,8 +24,7 @@ public class sheepScript : MonoBehaviour {
 		/* Rotation */
 		if(Input.GetAxis("Horizontal")!=0)
         {
-            //gameObject.transform.Translate(-Input.GetAxis("Horizontal")*speed*Time.deltaTime,0,0);
-			if(angle>360 || angle<-360)
+            if(angle>360 || angle<-360)
 			{	
 				angle=0;
 			}
@@ -57,16 +56,6 @@ public class sheepScript : MonoBehaviour {
         {
 			if(Time.time >= nextShot)
 			{
-				/*RaycastHit hit;
-        	
-				if (Physics.Raycast (transform.position, transform.TransformDirection (Vector3.forward), out hit)) {
-					try {
-						Debug.DrawLine (transform.position, hit.point, Color.yellow, 0.5f, false);
-						hit.collider.gameObject.SendMessage ("ReceiveDamage", damage);
-					} catch (UnityException e) {
-						Debug.Log (e.Message);
-					}
-				}*/
 				Instantiate(lazer_prefab,new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+2,gameObject.transform.localPosition.z),gameObject.transform.localRotation);
 				nextShot = Time.time + fireRate;
 			}
