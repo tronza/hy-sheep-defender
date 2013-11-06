@@ -1,6 +1,6 @@
-/Temp/
-/Library/
-/Obj/
+/SheepDefender/Temp/
+/SheepDefender/Library/
+/SheepDefender/Obj/
 
 *.csproj
 *.unityproj
