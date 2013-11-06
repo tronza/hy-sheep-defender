@@ -116,7 +116,9 @@ public class MyGUIScript : MonoBehaviour
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			if (plane.Raycast (ray, out dist)) {
 				Vector3 point = ray.GetPoint (dist);
-				Instantiate (turretPrefab, point, Quaternion.identity);
+				//hardcoded adjustment for cube height
+				Vector3 vectorHalfUp = new Vector3 (0f, 0.5f, 0f);
+				Instantiate (turretPrefab, point + vectorHalfUp, Quaternion.identity);
 				placingTurret = false;
 			}
 		}
