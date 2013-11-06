@@ -8,4 +8,5 @@
 *.user
 *.userprefs
 *.DS_store
+*.DS_Store
 *.pidb
