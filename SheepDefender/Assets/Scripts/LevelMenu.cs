@@ -113,8 +113,10 @@ public class LevelMenu : MonoBehaviour {
 	private void LoadLevelMenuItems() {
 		string[] files = Directory.GetFiles(this.iniPath);
 		foreach(string fileName in files) {
+			if(fileName.EndsWith(".ini")){
 			IniFileTool iniFileTool = new IniFileTool(this.iniPath + Path.DirectorySeparatorChar + fileName);
-			this.items.AddLast(new LevelMenu.LevelMenuItem(iniFileTool, fileName));		
+			this.items.AddLast(new LevelMenu.LevelMenuItem(iniFileTool, fileName));
+			}
 		}
 	}
 
@@ -137,6 +139,8 @@ public class LevelMenu : MonoBehaviour {
 		this.Hide ();
 		// @TODO( Load level.
 		print ("loading level: " + levelMenuItem.GetTitle());
+		PlayerPrefs.SetString("level", levelMenuItem.GetTitle());
+		Application.LoadLevel("BaseScene");
 	}
 	
 	/**

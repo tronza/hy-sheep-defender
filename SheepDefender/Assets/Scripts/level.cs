@@ -25,9 +25,8 @@ public class level : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		string levelName = "level1";
-		char pathSeparator = Path.DirectorySeparatorChar;
-		string levelPath = "levels" + pathSeparator + levelName +".ini";
+		levelName = PlayerPrefs.GetString("level");
+		string levelPath = levelName;
 		
 		loadLevelFile(levelPath);//loads the level file
 		
