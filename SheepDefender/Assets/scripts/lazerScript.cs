@@ -16,7 +16,7 @@ public class lazerScript : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision collision) {
 		if (collision.gameObject.tag == "Attacker") {
-			collision.gameObject.SendMessage("ReceiveDamage", 5f);
+			collision.gameObject.SendMessage("ReceiveDamage", damage);
 		}
 		
 		Destroy (gameObject);
