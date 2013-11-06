@@ -10,12 +10,22 @@ public class Turret : MonoBehaviour
 	
 	void Start ()
 	{
+		LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
+	    lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
+	    lineRenderer.SetColors(Color.cyan, Color.blue);
+	    lineRenderer.SetWidth(0.1f, 0.1f);
+	    lineRenderer.SetVertexCount(2);
 	}
 
 	void Update ()
 	{
 		if (this.HasTargetAcquired ()) {
 			transform.LookAt (this.target.transform.position);
+		}
+		
+		if (cooldownRemaining <= (cooldownTime/2)) {
+			LineRenderer lineRenderer = GetComponent<LineRenderer>();
+			lineRenderer.enabled = false;
 		}
 		
 		// TODO: it takes one extra frame (!) to find a new target
@@ -41,6 +51,12 @@ public class Turret : MonoBehaviour
 				try {
 					if (hit.collider.gameObject.tag == this.target.tag) {
 						Debug.DrawLine (transform.position, hit.transform.position, Color.yellow, 0.5f, false);
+						
+						LineRenderer lineRenderer = GetComponent<LineRenderer>();
+						lineRenderer.enabled = true;
+						lineRenderer.SetPosition (0, transform.position);
+						lineRenderer.SetPosition (1, hit.transform.position);
+						
 						hit.collider.gameObject.SendMessage ("ReceiveDamage", damage);
 					}
 				} catch (UnityException e) {
