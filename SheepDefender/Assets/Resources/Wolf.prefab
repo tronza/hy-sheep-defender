@@ -570,6 +570,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 65: {fileID: 6500000}
   - 54: {fileID: 5400000}
+  - 54: {fileID: 5400002}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Attacker
@@ -1027,7 +1028,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100076}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .100000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -1044,6 +1045,21 @@ Rigidbody:
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &5400002
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100076}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -1112,9 +1128,9 @@ SkinnedMeshRenderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: e67afabcc7e664773b636996acbd538f, type: 2}
-  - {fileID: 2100000, guid: c1516259a2c094af7b21fadc8bc9f6ca, type: 2}
-  - {fileID: 2100000, guid: c1516259a2c094af7b21fadc8bc9f6ca, type: 2}
-  - {fileID: 2100000, guid: c1516259a2c094af7b21fadc8bc9f6ca, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
