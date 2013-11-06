@@ -27,10 +27,9 @@ public class Damageable : MonoBehaviour
 		
 		if (!this.HasHealth ()) {
 			// TODO: what happens to the referencing turrets etc after destroying the object?
-			Destroy (gameObject, 2);
-			gameObject.tag = null;
+			Destroy (gameObject);
 			
-			Destroy (Instantiate (dieEffect, transform.position, Quaternion.identity), 3);
+			Destroy (Instantiate (dieEffect, transform.position, Quaternion.identity), 1);
 		}
 	}
 

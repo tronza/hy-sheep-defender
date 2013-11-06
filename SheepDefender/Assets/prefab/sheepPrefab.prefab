@@ -357,9 +357,11 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 195: {fileID: 19500000}
+  - 54: {fileID: 5400000}
+  - 65: {fileID: 6500000}
   m_Layer: 0
   m_Name: sheepPrefab
-  m_TagString: sheep
+  m_TagString: Defender
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -634,7 +636,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100044}
   m_LocalRotation: {x: -.512090683, y: .487609714, z: .4876104, w: .512089849}
-  m_LocalPosition: {x: -.464225948, y: 1.40270197, z: 1.64358318}
+  m_LocalPosition: {x: .0280651934, y: 1.40270221, z: .107402727}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400042}
@@ -646,11 +648,38 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100046}
   m_LocalRotation: {x: 2.64195652e-08, y: 5.28322985e-08, z: -2.79396684e-09, w: 1}
-  m_LocalPosition: {x: -5.70907879, y: .054622665, z: -30.9557896}
+  m_LocalPosition: {x: -7.4505806e-09, y: .200000003, z: -25.1372566}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400044}
   m_Father: {fileID: 0}
+--- !u!54 &5400000
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100046}
+  serializedVersion: 2
+  m_Mass: 1.00000001e-07
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!65 &6500000
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .5, y: 1, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -662,6 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5f23280e6a0fa4babd33c507d057ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lazer_prefab: {fileID: 400000, guid: 81744248ecbd4174d8c6ff095da09ef9, type: 2}
   damage: 5
 --- !u!114 &11400002
 MonoBehaviour:
@@ -674,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dieEffect: {fileID: 0}
+  dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
 --- !u!137 &13700000
 SkinnedMeshRenderer:
