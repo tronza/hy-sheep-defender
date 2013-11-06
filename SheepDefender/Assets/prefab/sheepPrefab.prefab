@@ -662,6 +662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5f23280e6a0fa4babd33c507d057ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lazer_prefab: {fileID: 0}
   damage: 5
 --- !u!114 &11400002
 MonoBehaviour:
@@ -674,7 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dieEffect: {fileID: 0}
+  dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
 --- !u!137 &13700000
 SkinnedMeshRenderer:

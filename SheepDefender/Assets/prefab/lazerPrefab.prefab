@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc0fae7d6b6978d47b683b5f4e848205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 25
+  speed: 16
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
