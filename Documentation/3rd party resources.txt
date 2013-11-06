@@ -1,6 +1,6 @@
 Template
 Name: 
-source 
+source URL: 
 license: 
 authors: 
 
@@ -10,3 +10,7 @@ source URL: http://commons.wikimedia.org/wiki/File:Screw_you_cat.png
 license: CC BY-SA-2.5
 authors: see link
 
+Name: gnomishflameturret.v7337.png
+source URL: http://cdn.warcraftpets.com/images/wow64/icons/inv/gizmo/gnomishflameturret.v7337.png
+license: ?
+authors: ?
