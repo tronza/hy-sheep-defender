@@ -21,6 +21,7 @@ public class MyGUIScript : MonoBehaviour
 	GameObject createdTurret;
 	bool discardClick = false;
 	
+	
 	//TODO: find a way to scale button icon, without stretching it
 	GUILayoutOption[] shopOptions = {GUILayout.MaxWidth (0.2f * Screen.width)};
 	
@@ -45,11 +46,11 @@ public class MyGUIScript : MonoBehaviour
 			GUILayout.BeginHorizontal ();
 			//TODO: ask WTH player info they want to have
 			//TODO: add some padding on the sides
-			GUILayout.Label ("Coins: " + myGameInfo.coins);
+			GUILayout.Label ("Coins: " /*+ myGameInfo.coins*/);
 			GUILayout.FlexibleSpace (); //fill
-			GUILayout.Label ("Level: " + myGameInfo.level);
+			GUILayout.Label ("Level: " /*+ myGameInfo.level*/);
 			GUILayout.FlexibleSpace (); //fill
-			GUILayout.Label ("Player name: " + myGameInfo.playerName);
+			GUILayout.Label ("Player name: " /*+ myGameInfo.playerName*/);
 			GUILayout.EndHorizontal ();
 			
 			if (placingTurret) {

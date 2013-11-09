@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class enemyWolfAI : MonoBehaviour {
@@ -97,6 +97,7 @@ public class enemyWolfAI : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision collision) {
 		collidedWith=collision.gameObject;
+		SetTarget();
 	}
 	
 	void OnCollisionExit(Collision collision){

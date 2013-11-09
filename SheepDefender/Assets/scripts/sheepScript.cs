@@ -7,9 +7,11 @@ public class sheepScript : MonoBehaviour {
 	double nextShot =0.0;
 	int angle = 0;
 	int ajoutAngle = 2;
+	int currentWeapon=1;
 	GameObject collidedWith ;
 	
-	public Transform lazer_prefab;
+	public Transform lazer_red_prefab;
+	public Transform lazer_green_prefab;
 	
 	public float damage = 5f;
 	
@@ -57,10 +59,26 @@ public class sheepScript : MonoBehaviour {
 			if(Time.time >= nextShot)
 			{
 				// TODO: make the projectile spawn slightly in front of the game object
-				Instantiate (lazer_prefab, transform.position, transform.rotation);
+				if(currentWeapon==1)
+				{
+					Instantiate (lazer_red_prefab, transform.position, transform.rotation);
+				}
+				else if(currentWeapon==2)
+				{
+					Instantiate (lazer_green_prefab, transform.position, transform.rotation);
+				}
 				nextShot = Time.time + fireRate;
 			}
         }
+		
+		if(Input.GetAxis("Mouse ScrollWheel")>0)
+		{
+			currentWeapon++;
+			if(currentWeapon>2)
+			{
+				currentWeapon=1;
+			}
+		}
 	}
 	
 	void OnCollisionEnter(Collision collision) {
