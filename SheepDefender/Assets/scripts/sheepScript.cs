@@ -6,7 +6,7 @@ public class sheepScript : MonoBehaviour {
 	float fireRate =0.2F;
 	double nextShot =0.0;
 	int angle = 0;
-	int ajoutAngle = 2;
+	int amountAngle = 2;
 	int currentWeapon=1;
 	GameObject collidedWith ;
 	
@@ -32,14 +32,15 @@ public class sheepScript : MonoBehaviour {
 			}
 			if(Input.GetAxis("Horizontal")>0)
 			{
-				angle+=ajoutAngle;
+				angle+=amountAngle;
 			}
 			if(Input.GetAxis("Horizontal")<0)
 			{
-				angle-=ajoutAngle;
+				angle-=amountAngle;
 			}
 			
 			gameObject.transform.rotation = Quaternion.Euler(0,angle,0);
+
         }
 		
 		/* Forward and backward */ 

@@ -2273,6 +2273,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1641749756}
   - 114: {fileID: 1641749757}
+  - 114: {fileID: 1641749758}
   m_Layer: 0
   m_Name: GUIobj
   m_TagString: Untagged
@@ -2302,11 +2303,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778c1b2fd8351a14bb5bd6af8dc92269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myGameInfo: {fileID: 0}
+  myGameInfo: {fileID: 1641749758}
   turretImage: {fileID: 2800000, guid: 177fcb0bbf5d34248b3e69a5ad60d03a, type: 3}
   wallImage: {fileID: 2800000, guid: fdfb89921ff33624a9144ff335b69a57, type: 3}
   turretPrefab: {fileID: 100000, guid: d35ed114aa2e14421b0667c96eb54bcb, type: 2}
   wallPrefab: {fileID: 100000, guid: a531ee245978aeb4aae3faf972ec727a, type: 2}
+--- !u!114 &1641749758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1641749755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019fcb7c176cdf044b77f54454a41ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: 500
+  level: 1
+  playerName: unnammed
+  priceTurret: 50
+  priceWall: 30
 --- !u!1 &1726351680
 GameObject:
   m_ObjectHideFlags: 0

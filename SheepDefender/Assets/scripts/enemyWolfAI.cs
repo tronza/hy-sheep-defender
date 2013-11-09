@@ -97,7 +97,6 @@ public class enemyWolfAI : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision collision) {
 		collidedWith=collision.gameObject;
-		SetTarget();
 	}
 	
 	void OnCollisionExit(Collision collision){
