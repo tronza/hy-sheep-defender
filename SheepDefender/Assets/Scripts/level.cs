@@ -8,7 +8,7 @@ using System.Collections.Generic;
 //Wolf prefabs need to be in the Resources folder and have the exact same name that is used in the level file
 //Wolves will spawn at random in the position of any gameobject that has been tagged with "Spawn" tag
 public class level : MonoBehaviour {
-	private string levelName;//name of the level eg. level1
+	private string levelName;//name of the level eg. levels/level1.ini
 	private int levelDuration;//Shows the total time for completing the level
 	private int timeEllapsed =0;//shows how much time has ellapsed
 	private Dictionary<int, string[]> wolvesToSpawn = new Dictionary<int, string[]>();//Key is the point in time (second) in which wolves of the value (string array) are generated
@@ -26,9 +26,8 @@ public class level : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		levelName = PlayerPrefs.GetString("level");
-		string levelPath = levelName;
 		
-		loadLevelFile(levelPath);//loads the level file
+		loadLevelFile(levelName );//loads the level file
 		
 		spawnPoints = GameObject.FindGameObjectsWithTag("Spawn"); //all spawn points in scene
 		
@@ -76,7 +75,7 @@ public class level : MonoBehaviour {
 				int spawnPosition = spawnIndices[randomIndex];
 				spawnIndices.RemoveAt(randomIndex);//Remove the index from list, so that another wolf won't spawn there
 				GameObject spawner = spawnPoints[spawnPosition];
-				spawnWolf(wolfName,lastWolfsId,spawner);
+				spawnGameObject(wolfName,lastWolfsId,spawner.transform.position, spawner.transform.rotation);
 				lastWolfsId++;
 			}
 		}
@@ -90,9 +89,11 @@ public class level : MonoBehaviour {
 		return returnList;
 	}
 	
-	private void spawnWolf(String prefabName, int wolfNumber, GameObject spawnPoint) {
-		GameObject wolf = (GameObject)Instantiate(Resources.Load(prefabName), spawnPoint.transform.position, spawnPoint.transform.rotation);
-		wolf.name = "enemyWolf"+wolfNumber; //unique name.
+	private void spawnGameObject(String prefabName, int wolfNumber, Vector3 position, Quaternion rotation) {
+		GameObject gameObj = (GameObject)Instantiate(Resources.Load(prefabName), position, rotation);
+		if(wolfNumber!=-1){//-1 means that it's not a wolf
+			gameObj.name = "enemyWolf"+wolfNumber; //unique name.
+		}
 	}
 	
 	private void loadLevelFile(string levelPath){//levelPath eg. levels/level1.ini
@@ -110,6 +111,18 @@ public class level : MonoBehaviour {
 			}
 		}
 		
+		//Loading defined sceneObjects
+		int numberOfObjects = iniReader.getNumberOfKeys("sceneObjects");
+		for(int i =0;i<numberOfObjects;i++){
+			String newObj = iniReader.getValueByIndex("sceneObjects",i,null);
+			if(newObj!=null){//there is a new object to add
+				string[] objSettings = newObj.Split(';');
+				string objName = objSettings[0];
+				Vector3 position = new Vector3(convertStringToFloat(objSettings[1]),convertStringToFloat(objSettings[2]),convertStringToFloat(objSettings[3]));
+				spawnGameObject(objName,-1,position,Quaternion.identity);
+			}
+		}
+		
 	}
 	
 	
@@ -123,5 +136,14 @@ public class level : MonoBehaviour {
                 return -1;
             }
 	}
-	
+		private float convertStringToFloat(string stringToConvert){//Converts int to string, if fails, returns 0
+		try
+            {
+                float number = float.Parse(stringToConvert);
+                return number;
+            }
+            catch (Exception e) {
+                return 0;
+            }
+	}
 }
