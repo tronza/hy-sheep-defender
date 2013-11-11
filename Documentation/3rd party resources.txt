@@ -14,3 +14,8 @@ Name: gnomishflameturret.v7337.png
 source URL: http://cdn.warcraftpets.com/images/wow64/icons/inv/gizmo/gnomishflameturret.v7337.png
 license: ?
 authors: ?
+
+Name: wolf.blend
+source URL: http://opengameart.org/content/winter-wolf-normal-wolf
+license: CC BY SA
+authors: umask007
