@@ -1,0 +1,31 @@
+Level files are regular INI files which means that they consist of groups that are marked with [] (example [group1]) and key value pairs that are below the group they belong to (example key1=value1). Groups inside of groups are not supported.
+
+Level file structure:
+
+level group
+keys:
+	- durationInSecs : Defines the level's duration in seconds. If not set, the default value is 30.
+
+example:
+[level]
+durationInSecs=60
+
+
+<number> group
+The number of this group indicates the point of time in seconds at which it's processed by the level.cs class. Each group is processed once, values that pass the durationInSecs set in the level group won't be processed. 
+keys:
+	-spawn : Contains a semicolon separated list of the game objects to be created at the indicated time point. Each member of the list needs to be a valid prefab name for a prefab that is located under the Resources folder. If not set, the default value is Wolf.
+
+example:
+[1]
+spawn=Wolf;Wolf
+
+
+sceneObjects group
+Contains a list of objects to be created at the start of the scene. The key names in this group aren't important, the main thing is that every key has a unique name.
+keys:
+	<unique name> : Contains a semicolon separated list. The first element is the name of the prefab to be created and the following elements are x, y and z coordinates.
+
+example:
+[sceneObjects]
+obj1=Tree;1.564746;3.930864;42.47418
