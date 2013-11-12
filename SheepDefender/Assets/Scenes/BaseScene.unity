@@ -14,13 +14,13 @@ SceneSettings:
 --- !u!104 &2
 RenderSettings:
   m_Fog: 0
-  m_FogColor: {r: .5, g: .5, b: .5, a: 1}
+  m_FogColor: {r: .727941155, g: .722588658, b: .722588658, a: 1}
   m_FogMode: 3
   m_FogDensity: .00999999978
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientLight: {r: .200000003, g: .200000003, b: .200000003, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_AmbientLight: {r: .477941155, g: .372464538, b: .238970578, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 65e23cf682a06f34c91e31bab700dca1, type: 2}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_HaloTexture: {fileID: 0}
@@ -1325,8 +1325,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1111061513}
-  m_LocalRotation: {x: .342020154, y: 0, z: 0, w: .939692676}
-  m_LocalPosition: {x: 0, y: 24.7435799, z: -50.7914848}
+  m_LocalRotation: {x: .258819044, y: 0, z: 0, w: .965925813}
+  m_LocalPosition: {x: 0, y: 40, z: -63.7346153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1546,6 +1546,10 @@ Prefab:
       propertyPath: lazer_green_prefab
       value: 
       objectReference: {fileID: 400000, guid: d15baafa88cb105468a10259ad3eeb46, type: 2}
+    - target: {fileID: 5400000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
   m_RootGameObject: {fileID: 1476238539}

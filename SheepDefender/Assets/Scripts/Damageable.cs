@@ -6,6 +6,8 @@ public class Damageable : MonoBehaviour
 	public GameObject dieEffect;
 	public float health = 100f;
 	
+	public Transform coin_prefab;
+	
 	// Use this for initialization
 	void Start ()
 	{
@@ -30,6 +32,10 @@ public class Damageable : MonoBehaviour
 			Destroy (gameObject);
 			
 			Destroy (Instantiate (dieEffect, transform.position, Quaternion.identity), 1);
+			if(gameObject.name=="Wolf"){
+				Instantiate(coin_prefab, new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+0.5F,gameObject.transform.localPosition.z), new Quaternion(Random.Range(0.0F, 180.0F),Random.Range(0.0F, 180.0F),Random.Range(0.0F, 180.0F),0));
+			}
+			
 		}
 	}
 
