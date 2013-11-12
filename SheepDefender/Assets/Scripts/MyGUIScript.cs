@@ -20,6 +20,8 @@ public class MyGUIScript : MonoBehaviour
 	bool placingTurret = false;
 	GameObject createdTurret;
 	bool discardClick = false;
+	int price=0;
+	
 	
 	//TODO: find a way to scale button icon, without stretching it
 	GUILayoutOption[] shopOptions = {GUILayout.MaxWidth (0.2f * Screen.width)};
@@ -110,27 +112,33 @@ public class MyGUIScript : MonoBehaviour
 	{
 		//the first click is the one on the GUI and is thus discarded
 		//TODO: use a "ghost" when positioning the turrets and walls, otherwise it can be placed over a wolf
-		if (placingTurret) {
-			if (createdTurret == null) {
-				if (Input.GetMouseButtonDown (0) && !discardClick) {
-					Plane plane = new Plane (Vector3.up, 0);
-					float dist;
-					Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-					if (plane.Raycast (ray, out dist)) {
-						Vector3 point = ray.GetPoint (dist);
-						createdTurret = CreateTurret (selectedTurret, point);
-						DisableAllButRender (createdTurret);
+		if(myGameInfo.coins>0)
+		{
+			if (placingTurret) {
+				if (createdTurret == null) {
+					if (Input.GetMouseButtonDown (0) && !discardClick) {
+						Plane plane = new Plane (Vector3.up, 0);
+						float dist;
+						Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+						if (plane.Raycast (ray, out dist)) {
+							Vector3 point = ray.GetPoint (dist);
+							createdTurret = CreateTurret (selectedTurret, point);
+							DisableAllButRender (createdTurret);
+						}
 					}
-				}
-			} else {
-				if (Input.GetMouseButtonDown (1)) {
-					//rotate turret 90 degrees a time
-					createdTurret.transform.Rotate (0, 90, 0);
-				}
-				if (Input.GetMouseButtonDown (0)) {
-					EnableAll (createdTurret);
-					createdTurret = null;
-					placingTurret = false;
+				} else {
+					if (Input.GetMouseButtonDown (1)) {
+						//rotate turret 90 degrees a time
+						createdTurret.transform.Rotate (0, 90, 0);
+					}
+					if (Input.GetMouseButtonDown (0)) {
+						EnableAll (createdTurret);
+						createdTurret = null;
+						placingTurret = false;
+						
+						myGameInfo.coins-=price;
+	
+					}
 				}
 			}
 		}
@@ -166,11 +174,13 @@ public class MyGUIScript : MonoBehaviour
 		case 0:
 			//hardcoded adjustment for cube height
 			Vector3 turretHeight = new Vector3 (0f, 0.5f, 0f);
+			price=myGameInfo.priceTurret;
 			return (GameObject)Instantiate (turretPrefab, position + turretHeight, Quaternion.identity);
 			break;
 		case 1:
 			//hardcoded adjustment for wall height
 			Vector3 wallHeight = new Vector3 (0f, 2.5f, 0f);
+			price=myGameInfo.priceWall;
 			return (GameObject)Instantiate (wallPrefab, position + wallHeight, Quaternion.identity);
 			break;
 		default:

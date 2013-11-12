@@ -667,7 +667,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400018, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
   m_PrefabInternal: {fileID: 1322656280}
   m_GameObject: {fileID: 645491192}
-  m_LocalRotation: {x: .512206018, y: .685850799, z: .516753972, w: -.014797233}
+  m_LocalRotation: {x: .512206078, y: .685850859, z: .516754031, w: -.014797234}
   m_LocalPosition: {x: 8.56816769e-08, y: -1.41561031e-07, z: 1.38931524e-08}
   m_LocalScale: {x: 1, y: 1, z: 1.00000012}
   m_Children:
@@ -922,7 +922,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400018, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
   m_PrefabInternal: {fileID: 82912820}
   m_GameObject: {fileID: 811721030}
-  m_LocalRotation: {x: .512206018, y: .685850799, z: .516753972, w: -.014797233}
+  m_LocalRotation: {x: .512206078, y: .685850859, z: .516754031, w: -.014797234}
   m_LocalPosition: {x: 8.56816769e-08, y: -1.41561031e-07, z: 1.38931524e-08}
   m_LocalScale: {x: 1, y: 1, z: 1.00000012}
   m_Children:
@@ -1538,6 +1538,14 @@ Prefab:
       propertyPath: m_Center.z
       value: .200000003
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+      propertyPath: lazer_red_prefab
+      value: 
+      objectReference: {fileID: 400000, guid: 81744248ecbd4174d8c6ff095da09ef9, type: 2}
+    - target: {fileID: 11400000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+      propertyPath: lazer_green_prefab
+      value: 
+      objectReference: {fileID: 400000, guid: d15baafa88cb105468a10259ad3eeb46, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
   m_RootGameObject: {fileID: 1476238539}
@@ -1754,7 +1762,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5f23280e6a0fa4babd33c507d057ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lazer_prefab: {fileID: 400000, guid: 81744248ecbd4174d8c6ff095da09ef9, type: 2}
+  lazer_red_prefab: {fileID: 400000, guid: 81744248ecbd4174d8c6ff095da09ef9, type: 2}
+  lazer_green_prefab: {fileID: 400000, guid: d15baafa88cb105468a10259ad3eeb46, type: 2}
   damage: 5
 --- !u!54 &1476238543
 Rigidbody:
@@ -2255,6 +2264,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+--- !u!1 &1641749755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1641749756}
+  - 114: {fileID: 1641749757}
+  - 114: {fileID: 1641749758}
+  m_Layer: 0
+  m_Name: GUIobj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1641749756
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1641749755}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -49}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &1641749757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1641749755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778c1b2fd8351a14bb5bd6af8dc92269, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myGameInfo: {fileID: 1641749758}
+  turretImage: {fileID: 2800000, guid: 177fcb0bbf5d34248b3e69a5ad60d03a, type: 3}
+  wallImage: {fileID: 2800000, guid: fdfb89921ff33624a9144ff335b69a57, type: 3}
+  turretPrefab: {fileID: 100000, guid: d35ed114aa2e14421b0667c96eb54bcb, type: 2}
+  wallPrefab: {fileID: 100000, guid: a531ee245978aeb4aae3faf972ec727a, type: 2}
+--- !u!114 &1641749758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1641749755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019fcb7c176cdf044b77f54454a41ac3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coins: 500
+  level: 1
+  playerName: unnammed
+  priceTurret: 50
+  priceWall: 30
 --- !u!1 &1726351680
 GameObject:
   m_ObjectHideFlags: 0
