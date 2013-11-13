@@ -15,14 +15,8 @@ public class sheepScript : MonoBehaviour {
 	
 	public float damage = 5f;
 	
-	// Use this for initialization
-	void Start () {
-		PlayerPrefs.SetInt(PlayerPrefKeys.LEVEL_GAMEOVER, 0);
-	}
-	
-	void OnDestroy() {
-		print ("Sheep has been destroyed.");
-		PlayerPrefs.SetInt(PlayerPrefKeys.LEVEL_GAMEOVER, 1);
+	void Start() {
+		
 	}
 	
 	// Update is called once per frame
