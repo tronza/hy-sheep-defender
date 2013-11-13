@@ -24,10 +24,10 @@ public class enemyWolfAI : MonoBehaviour {
 		}
 		if (target != null) {
 			//look at target
-			Vector3 dir = (target.position - transform.position).normalized;
-			dir.y = 0;
-			transform.rotation = Quaternion.FromToRotation(Vector3.left, dir);
-			Debug.DrawLine(target.position, transform.position, Color.red); //draws line to current target for viewing in editor
+			//Vector3 dir = (target.position - transform.position).normalized;
+			//dir.y = 0;
+			//transform.rotation = Quaternion.FromToRotation(Vector3.left, dir);
+			//Debug.DrawLine(target.position, transform.position, Color.red); //draws line to current target for viewing in editor
 
 			//calculate time to attack
 			float distance = Vector3.Distance(target.position, transform.position);
@@ -39,9 +39,9 @@ public class enemyWolfAI : MonoBehaviour {
 					Attack(target);
 					nextAttack = attackInterval;
 				}
-			} else {
-				Move(target);
-			}
+			} //else {
+			//	Move(target);
+			//}
 
 		} else if (target == null) {
 			//animation.CrossFade("idle");
@@ -80,7 +80,7 @@ public class enemyWolfAI : MonoBehaviour {
 		//animation.CrossFade("run"); //run animation
 		//avoid obstacles on terrain
 		
-		this.gameObject.GetComponent<NavMeshAgent>().destination = target.position;
+		//this.gameObject.GetComponent<NavMeshAgent>().destination = target.position;
 	}
 
 	void Attack(Transform target) {
