@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Damageable : MonoBehaviour
 {
+	
+	/**
+	 * dieEffect may be null. Then the Damageable object will just... disappear.
+	 */
 	public GameObject dieEffect;
 	public float health = 100f;
 	
@@ -29,7 +33,9 @@ public class Damageable : MonoBehaviour
 			// TODO: what happens to the referencing turrets etc after destroying the object?
 			Destroy (gameObject);
 			
-			Destroy (Instantiate (dieEffect, transform.position, Quaternion.identity), 1);
+			if (this.dieEffect) {
+				Destroy (Instantiate (this.dieEffect, transform.position, Quaternion.identity), 1);	
+			}
 		}
 	}
 

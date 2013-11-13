@@ -15,8 +15,7 @@ public class sheepScript : MonoBehaviour {
 	
 	public float damage = 5f;
 	
-	// Use this for initialization
-	void Start () {
+	void Start() {
 		
 	}
 	
