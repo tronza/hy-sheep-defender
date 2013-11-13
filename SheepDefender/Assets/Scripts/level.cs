@@ -25,7 +25,7 @@ public class level : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		levelName = PlayerPrefs.GetString("level");
+		levelName = PlayerPrefs.GetString(PlayerPrefKeys.LEVEL_CURRENT);
 		
 		loadLevelFile(levelName );//loads the level file
 		
