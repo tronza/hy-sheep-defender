@@ -16,7 +16,6 @@ public class Prologue : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.anyKeyDown){
-			Debug.Log("prolokiii");
 			ShowTitle();
 		}
 	}
