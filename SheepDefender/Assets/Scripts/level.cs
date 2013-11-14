@@ -27,15 +27,15 @@ public class level : MonoBehaviour {
 	void Start () {
 		levelName = PlayerPrefs.GetString(PlayerPrefKeys.LEVEL_CURRENT);
 		
-		loadLevelFile(levelName );//loads the level file
+		LoadLevelFile(levelName );//loads the level file
 		
 		spawnPoints = GameObject.FindGameObjectsWithTag("Spawn"); //all spawn points in scene
 		
-		InvokeRepeating("timerTick", 1, 1);//Start the timer that checks for new wolves to spawn
+		InvokeRepeating("TimerTick", 1, 1);//Start the timer that checks for new wolves to spawn
 		
 	}
 	
-	private void drawProgressBar(){//draws the background
+	private void DrawProgressBar(){//draws the background
 		GUI.DrawTexture(new Rect(progressBarX , progressBarY, progressBarW, progressBarH), progressbarBackground);
 		float progress = ((float)timeEllapsed / (float)levelDuration);
 		if(progress>1){//don't draw an overly long progressbar if the level has ended
@@ -50,11 +50,11 @@ public class level : MonoBehaviour {
 	
 	}
 	void OnGUI() {
-		drawProgressBar();//draws the progressbar to track the level's progress
+		DrawProgressBar();//draws the progressbar to track the level's progress
 		
 	}
 	
-	private void timerTick(){//This occurs every second and checks for new wolves to be added
+	private void TimerTick(){//This occurs every second and checks for new wolves to be added
 		timeEllapsed++;
 		if(timeEllapsed>=levelDuration){//don't check for the wolves if the level has already ended
 			
@@ -65,23 +65,23 @@ public class level : MonoBehaviour {
 		if(wolvesToSpawn.ContainsKey(timeEllapsed)){//There are wolves to spawn at this time point
 			System.Random rnd = new System.Random();
 			string[] wolves = wolvesToSpawn[timeEllapsed];
-			List<int> spawnIndices = generateListWithNumbers(spawnPoints.Length);//This list contains the possible indicies so that if the number of wolves is smaller than the number of spawners, multiple wolves won't spawn on the same spot
+			List<int> spawnIndices = GenerateListWithNumbers(spawnPoints.Length);//This list contains the possible indicies so that if the number of wolves is smaller than the number of spawners, multiple wolves won't spawn on the same spot
 			for(int i=0;i<wolves.Length;i++){
 				if(spawnIndices.Count ==0 ){//If the indices list is empty, refill it (only incase there are more wolves at this time point in the level file than there are spawners)
-					spawnIndices = generateListWithNumbers(spawnPoints.Length);
+					spawnIndices = GenerateListWithNumbers(spawnPoints.Length);
 				}
 				string wolfName = wolves[i];//The wolf to generate
 				int randomIndex = rnd.Next(0, spawnIndices.Count);
 				int spawnPosition = spawnIndices[randomIndex];
 				spawnIndices.RemoveAt(randomIndex);//Remove the index from list, so that another wolf won't spawn there
 				GameObject spawner = spawnPoints[spawnPosition];
-				spawnGameObject(wolfName,lastWolfsId,spawner.transform.position, spawner.transform.rotation);
+				SpawnGameObject(wolfName,lastWolfsId,spawner.transform.position, spawner.transform.rotation);
 				lastWolfsId++;
 			}
 		}
 	}
 	
-	private List<int> generateListWithNumbers(int maxInt){//Generates a list containing numbers from 0 to maxInt
+	private List<int> GenerateListWithNumbers(int maxInt){//Generates a list containing numbers from 0 to maxInt
 		List<int> returnList = new List<int>();
 		for(int i=0;i<maxInt;i++){
 			returnList.Add(i);
@@ -89,14 +89,14 @@ public class level : MonoBehaviour {
 		return returnList;
 	}
 	
-	private void spawnGameObject(String prefabName, int wolfNumber, Vector3 position, Quaternion rotation) {
+	private void SpawnGameObject(String prefabName, int wolfNumber, Vector3 position, Quaternion rotation) {
 		GameObject gameObj = (GameObject)Instantiate(Resources.Load(prefabName), position, rotation);
 		if(wolfNumber!=-1){//-1 means that it's not a wolf
 			gameObj.name = "enemyWolf"+wolfNumber; //unique name.
 		}
 	}
 	
-	private void loadLevelFile(string levelPath){//levelPath eg. levels/level1.ini
+	private void LoadLevelFile(string levelPath){//levelPath eg. levels/level1.ini
 		IniFileTool iniReader = new IniFileTool(levelPath, true);
 		levelDuration = iniReader.getValue("level","durationInSecs", 30);//loads the time
 		
@@ -104,7 +104,7 @@ public class level : MonoBehaviour {
 		int numberOfGroups = iniReader.getNumberOfGroups();
 		for(int i=0; i<numberOfGroups; i++){
 			string groupName = iniReader.getGroupByIndex(i);
-			int sec = convertStringToInt(groupName);
+			int sec = ConvertStringToInt(groupName);
 			if(sec!=-1){//is a group that specifies time
 				string wolves = iniReader.getValue(groupName,"spawn","wolf");
 				wolvesToSpawn.Add(sec,wolves.Split(';')); //sets the time to the group name and wolves obtained from the level file to the dictionary
@@ -118,15 +118,15 @@ public class level : MonoBehaviour {
 			if(newObj!=null){//there is a new object to add
 				string[] objSettings = newObj.Split(';');
 				string objName = objSettings[0];
-				Vector3 position = new Vector3(convertStringToFloat(objSettings[1]),convertStringToFloat(objSettings[2]),convertStringToFloat(objSettings[3]));
-				spawnGameObject(objName,-1,position,Quaternion.identity);
+				Vector3 position = new Vector3(ConvertStringToFloat(objSettings[1]),ConvertStringToFloat(objSettings[2]),ConvertStringToFloat(objSettings[3]));
+				SpawnGameObject(objName,-1,position,Quaternion.identity);
 			}
 		}
 		
 	}
 	
 	
-	private int convertStringToInt(string stringToConvert){//Converts int to string, if fails, returns -1
+	private int ConvertStringToInt(string stringToConvert){//Converts int to string, if fails, returns -1
 		try
             {
                 int number = Convert.ToInt32(stringToConvert);
@@ -136,7 +136,7 @@ public class level : MonoBehaviour {
                 return -1;
             }
 	}
-		private float convertStringToFloat(string stringToConvert){//Converts int to string, if fails, returns 0
+		private float ConvertStringToFloat(string stringToConvert){//Converts int to string, if fails, returns 0
 		try
             {
                 float number = float.Parse(stringToConvert);
