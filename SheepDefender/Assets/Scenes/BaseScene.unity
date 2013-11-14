@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 0}
   health: 100
+  coin_prefab: {fileID: 0}
 --- !u!23 &108273800
 Renderer:
   m_ObjectHideFlags: 0
@@ -471,6 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 0}
   health: 100
+  coin_prefab: {fileID: 0}
 --- !u!23 &376799298
 Renderer:
   m_ObjectHideFlags: 0
@@ -961,6 +963,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 0}
   health: 100
+  coin_prefab: {fileID: 0}
 --- !u!23 &846460228
 Renderer:
   m_ObjectHideFlags: 0
@@ -1326,7 +1329,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1111061513}
   m_LocalRotation: {x: .258819044, y: 0, z: 0, w: .965925813}
-  m_LocalPosition: {x: 0, y: 40, z: -63.7346153}
+  m_LocalPosition: {x: 1.73525333, y: 26.3284225, z: -53.2468224}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1472,15 +1475,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400046, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -7.4505806e-09
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400046, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .200000003
+      value: .344618797
       objectReference: {fileID: 0}
     - target: {fileID: 400046, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -25.1372566
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400046, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1550,7 +1553,13 @@ Prefab:
       propertyPath: m_Constraints
       value: 126
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6500000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5400000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+    - {fileID: 6500000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
   m_RootGameObject: {fileID: 1476238539}
   m_IsPrefabParent: 0
@@ -1679,8 +1688,6 @@ GameObject:
   - 114: {fileID: 1476238542}
   - 114: {fileID: 1476238545}
   - 195: {fileID: 1476238546}
-  - 54: {fileID: 1476238548}
-  - 65: {fileID: 1476238547}
   - 54: {fileID: 1476238543}
   - 65: {fileID: 1476238544}
   m_Layer: 0
@@ -1697,7 +1704,7 @@ Transform:
   m_PrefabInternal: {fileID: 1322656280}
   m_GameObject: {fileID: 1476238539}
   m_LocalRotation: {x: 2.64195652e-08, y: 5.28322985e-08, z: -2.79396684e-09, w: 1}
-  m_LocalPosition: {x: -7.4505806e-09, y: .200000003, z: -25.1372566}
+  m_LocalPosition: {x: 0, y: .344618797, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 998141556}
@@ -1768,7 +1775,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lazer_red_prefab: {fileID: 400000, guid: 81744248ecbd4174d8c6ff095da09ef9, type: 2}
   lazer_green_prefab: {fileID: 400000, guid: d15baafa88cb105468a10259ad3eeb46, type: 2}
-  damage: 5
 --- !u!54 &1476238543
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1778,11 +1784,11 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1.00000001e-07
   m_Drag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &1476238544
 BoxCollider:
@@ -1794,8 +1800,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .5, y: 1, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: -.0244052503, y: .5, z: .223812833}
 --- !u!114 &1476238545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1810,6 +1816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+  coin_prefab: {fileID: 0}
 --- !u!195 &1476238546
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1831,35 +1838,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!65 &1476238547
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500000, guid: 4f048a33c8cce3744ba62d8cd92f811c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1322656280}
-  m_GameObject: {fileID: 1476238539}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .5, y: 1, z: 2.5}
-  m_Center: {x: 0, y: 1, z: .200000003}
---- !u!54 &1476238548
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5400000, guid: 4f048a33c8cce3744ba62d8cd92f811c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1322656280}
-  m_GameObject: {fileID: 1476238539}
-  serializedVersion: 2
-  m_Mass: 1.00000001e-07
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &1482516885
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,6 +2246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+  coin_prefab: {fileID: 0}
 --- !u!1 &1641749755
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,6 +2596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 0}
   health: 100
+  coin_prefab: {fileID: 0}
 --- !u!23 &1825489471
 Renderer:
   m_ObjectHideFlags: 0
@@ -3074,6 +3054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+  coin_prefab: {fileID: 0}
 --- !u!137 &2104394105
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

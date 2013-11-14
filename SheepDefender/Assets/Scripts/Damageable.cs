@@ -30,10 +30,10 @@ public class Damageable : MonoBehaviour
 		if (!this.HasHealth ()) {
 			// TODO: what happens to the referencing turrets etc after destroying the object?
 			Destroy (gameObject);
-			
 			Destroy (Instantiate (dieEffect, transform.position, Quaternion.identity), 1);
-			if(gameObject.name=="Wolf"){
-				Instantiate(coin_prefab, new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+0.5F,gameObject.transform.localPosition.z), new Quaternion(Random.Range(0.0F, 180.0F),Random.Range(0.0F, 180.0F),Random.Range(0.0F, 180.0F),0));
+			
+			if(gameObject.name.Contains("Wolf")){
+				Instantiate(coin_prefab, new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+0.5F,gameObject.transform.localPosition.z), new Quaternion(0.0F,0.0F,0.0F,0));
 			}
 			
 		}
