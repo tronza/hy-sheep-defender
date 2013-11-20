@@ -2880,7 +2880,7 @@ GameObject:
   - 143: {fileID: 196122404}
   - 114: {fileID: 196122403}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3299,7 +3299,7 @@ GameObject:
   - 143: {fileID: 222626904}
   - 114: {fileID: 222626903}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3772,7 +3772,7 @@ GameObject:
   - 143: {fileID: 254904846}
   - 114: {fileID: 254904845}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6915,7 +6915,7 @@ GameObject:
   - 143: {fileID: 531643761}
   - 114: {fileID: 531643760}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7497,7 +7497,7 @@ GameObject:
   - 143: {fileID: 546006275}
   - 114: {fileID: 546006274}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8700,7 +8700,7 @@ GameObject:
   - 143: {fileID: 612710658}
   - 114: {fileID: 612710657}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10159,7 +10159,7 @@ GameObject:
   - 143: {fileID: 697703680}
   - 114: {fileID: 697703679}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10858,7 +10858,7 @@ GameObject:
   - 143: {fileID: 728418959}
   - 114: {fileID: 728418958}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11541,7 +11541,7 @@ GameObject:
   - 143: {fileID: 763702078}
   - 114: {fileID: 763702077}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12294,7 +12294,7 @@ GameObject:
   - 143: {fileID: 803636437}
   - 114: {fileID: 803636436}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12841,7 +12841,7 @@ GameObject:
   - 143: {fileID: 857952458}
   - 114: {fileID: 857952457}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13962,7 +13962,7 @@ GameObject:
   - 143: {fileID: 933939246}
   - 114: {fileID: 933939245}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17274,7 +17274,7 @@ GameObject:
   - 143: {fileID: 1184328032}
   - 114: {fileID: 1184328031}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18233,7 +18233,7 @@ GameObject:
   - 143: {fileID: 1246550788}
   - 114: {fileID: 1246550787}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19691,7 +19691,7 @@ GameObject:
   - 143: {fileID: 1323070815}
   - 114: {fileID: 1323070814}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20174,7 +20174,7 @@ GameObject:
   - 143: {fileID: 1358598300}
   - 114: {fileID: 1358598299}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21382,7 +21382,7 @@ GameObject:
   - 143: {fileID: 1438274738}
   - 114: {fileID: 1438274737}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22291,7 +22291,7 @@ GameObject:
   - 143: {fileID: 1478857601}
   - 114: {fileID: 1478857600}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24658,7 +24658,7 @@ GameObject:
   - 143: {fileID: 1622663433}
   - 114: {fileID: 1622663432}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25220,7 +25220,7 @@ GameObject:
   - 143: {fileID: 1653998083}
   - 114: {fileID: 1653998082}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28134,7 +28134,7 @@ GameObject:
   - 143: {fileID: 1891140444}
   - 114: {fileID: 1891140443}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29331,7 +29331,7 @@ GameObject:
   - 143: {fileID: 1969908834}
   - 114: {fileID: 1969908833}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29479,7 +29479,7 @@ GameObject:
   - 143: {fileID: 1971902807}
   - 114: {fileID: 1971902806}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30195,7 +30195,7 @@ GameObject:
   - 143: {fileID: 2018414365}
   - 114: {fileID: 2018414364}
   m_Layer: 0
-  m_Name: Wolf 1
+  m_Name: Wolf
   m_TagString: Attacker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
