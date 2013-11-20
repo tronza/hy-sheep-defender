@@ -13,10 +13,11 @@ public class sheepScript : MonoBehaviour {
 	public Transform lazer_red_prefab;
 	public Transform lazer_green_prefab;
 	
+	public GameObject theGun;
+	
 	public float damage = 5f;
 	
-	void Start() {
-		
+	void Start() {	
 	}
 	
 	// Update is called once per frame
@@ -61,11 +62,11 @@ public class sheepScript : MonoBehaviour {
 				// TODO: make the projectile spawn slightly in front of the game object
 				if(currentWeapon==1)
 				{
-					Instantiate (lazer_red_prefab, transform.position, transform.rotation);
+					Instantiate (lazer_red_prefab, theGun.transform.position, theGun.transform.rotation);
 				}
 				else if(currentWeapon==2)
 				{
-					Instantiate (lazer_green_prefab, transform.position, transform.rotation);
+					Instantiate (lazer_green_prefab, theGun.transform.position, theGun.transform.rotation);
 				}
 				nextShot = Time.time + fireRate;
 			}
