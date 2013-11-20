@@ -16,11 +16,11 @@ public class sheepScript : MonoBehaviour {
 	
 	private Vector3 moveDirection = Vector3.zero;
 	
-	/* Start() : is used for initialization
-	 * Nothing
-	 * */
-	void Start () {
-		
+	public GameObject theGun;
+	
+	public float damage = 5f;
+	
+	void Start() {	
 	}
 	
 	/* Update() : is called once per frame
@@ -74,11 +74,11 @@ public class sheepScript : MonoBehaviour {
 			{
 				if(currentWeapon==1) //red lazer
 				{
-					Instantiate (lazer_red_prefab, new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+0.8F,gameObject.transform.localPosition.z), transform.rotation);
+					Instantiate (lazer_red_prefab, theGun.transform.position, theGun.transform.rotation);
 				}
 				else if(currentWeapon==2) //green lazer
 				{
-					Instantiate (lazer_green_prefab, new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+0.8F,gameObject.transform.localPosition.z), transform.rotation);
+					Instantiate (lazer_green_prefab, theGun.transform.position, theGun.transform.rotation);
 				}
 				nextShot = Time.time + fireRate; //set the next shot time
 			}

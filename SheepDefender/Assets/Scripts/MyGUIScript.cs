@@ -36,7 +36,7 @@ public class MyGUIScript : MonoBehaviour
 	
 	void OnGUI ()
 	{
-		if (!allHidden) {
+		if (!allHidden && PlayerPrefs.GetInt (PlayerPrefKeys.LEVEL_GAMEOVER) == 0) {
 			//use all the screen, dynamically adjust
 			GUILayout.BeginArea (new Rect (0, 0, Screen.width, Screen.height));
 			

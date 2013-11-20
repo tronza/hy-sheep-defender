@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Damageable : MonoBehaviour
 {
+	
+	/**
+	 * dieEffect may be null. Then the Damageable object will just... disappear.
+	 */
 	public GameObject dieEffect;
 	public float health = 100f;
 	
@@ -30,12 +34,14 @@ public class Damageable : MonoBehaviour
 		if (!this.HasHealth ()) {
 			// TODO: what happens to the referencing turrets etc after destroying the object?
 			Destroy (gameObject);
-			Destroy (Instantiate (dieEffect, transform.position, Quaternion.identity), 1);
 			
 			if(gameObject.name.Contains("Wolf")){
 				Instantiate(coin_prefab, new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+0.5F,gameObject.transform.localPosition.z), new Quaternion(0.0F,0.0F,0.0F,0));
 			}
 			
+			if (this.dieEffect) {
+				Destroy (Instantiate (this.dieEffect, transform.position, Quaternion.identity), 1);	
+			}
 		}
 	}
 

@@ -139,7 +139,7 @@ public class LevelMenu : MonoBehaviour {
 		this.Hide ();
 		// @TODO( Load level.
 		print ("loading level: " + levelMenuItem.GetTitle());
-		PlayerPrefs.SetString("level", levelMenuItem.GetTitle());
+		PlayerPrefs.SetString(PlayerPrefKeys.LEVEL_CURRENT, levelMenuItem.GetTitle());
 		Application.LoadLevel("BaseScene");
 	}
 	

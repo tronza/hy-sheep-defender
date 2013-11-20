@@ -4,13 +4,8 @@ using System.Collections;
 public class lazerScript : MonoBehaviour {
 	public float damage = 5f; //damage delt by the lazer
 	public int speed = 16; //lazer speed
+	public GameObject PlayerSheep;
 
-	/* Start() : is used for initialization
-	 * Nothing
-	 * */
-	void Start () {
-	}
-	
 	/* Update() : is called once per frame
 	 * move the lazer
 	 * */
@@ -25,9 +20,12 @@ public class lazerScript : MonoBehaviour {
 		if (collision.gameObject.tag == "Attacker") 
 		{
 			collision.gameObject.SendMessage("ReceiveDamage", damage);
+			PlayerSheep = GameObject.Find ("Sheep");
+			collision.gameObject.SendMessage ("ChangeTarget", PlayerSheep.transform);
 		}
 		
 		//does not destroy itself if it collide with the player
+		// TODO: Should these be Sheep/sheep or Target/target ???
 		if (!(collision.gameObject.name.Contains("heep") && !(collision.gameObject.name.Contains("arget")))) 
 		{
 			Destroy(gameObject);
