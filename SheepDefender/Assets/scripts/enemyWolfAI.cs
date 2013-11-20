@@ -48,12 +48,14 @@ public class enemyWolfAI : MonoBehaviour {
 			}
 
 		} else if (target == null) {
-			//animation.CrossFade("idle");
+			animation.CrossFade("idle");
 		}
 	}
 
 	void SetTarget() {
-		target = FindNearestObject();
+		if (priorityTarget == null) {
+			target = FindNearestObject();
+		}
 	}
 
 	public Transform FindNearestObject() {
@@ -81,7 +83,7 @@ public class enemyWolfAI : MonoBehaviour {
 	}
 
 	void Move(Transform target) {
-		//animation.CrossFade("run"); //run animation
+		animation.CrossFade("run"); //run animation
 		//avoid obstacles on terrain
 		
 		this.gameObject.GetComponent<NavMeshAgent>().destination = target.position;
@@ -91,7 +93,7 @@ public class enemyWolfAI : MonoBehaviour {
 		float distance = Vector3.Distance(target.transform.position, transform.position);
 		if (target != null) {
 			if(distance <= attackDistance) {
-				//animation.CrossFade("attack");
+				animation.Play("attack");
 				target.SendMessage("ReceiveDamage", attackDamage, SendMessageOptions.DontRequireReceiver);
 			}
 		} else {
@@ -105,5 +107,9 @@ public class enemyWolfAI : MonoBehaviour {
 	
 	void OnCollisionExit(Collision collision){
 		collidedWith=null;
+	}
+	
+	void ChangeTarget(Transform p_target) {
+		priorityTarget = p_target;
 	}
 }

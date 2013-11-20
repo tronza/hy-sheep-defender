@@ -58,6 +58,7 @@ public class Turret : MonoBehaviour
 						lineRenderer.SetPosition (1, hit.transform.position);
 						
 						hit.collider.gameObject.SendMessage ("ReceiveDamage", damage);
+						hit.collider.gameObject.SendMessage ("ChangeTarget", this.transform);
 					}
 				} catch (UnityException e) {
 					Debug.Log (e.Message);
