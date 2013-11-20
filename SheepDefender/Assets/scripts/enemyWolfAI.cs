@@ -9,7 +9,11 @@ public class enemyWolfAI : MonoBehaviour {
 	public float attackDamage = 5;
 	
 	GameObject collidedWith;
-
+	
+	void Awake() {
+		SetTarget ();
+	}
+	
 	// Use this for initialization
 	void Start () {
 		nextAttack = 0;
@@ -44,12 +48,14 @@ public class enemyWolfAI : MonoBehaviour {
 			//}
 
 		} else if (target == null) {
-			//animation.CrossFade("idle");
+			animation.CrossFade("idle");
 		}
 	}
 
 	void SetTarget() {
-		target = FindNearestObject();
+		if (priorityTarget == null) {
+			target = FindNearestObject();
+		}
 	}
 
 	public Transform FindNearestObject() {
@@ -58,26 +64,26 @@ public class enemyWolfAI : MonoBehaviour {
 		Transform closest = null;
 
 		sheep = GameObject.FindGameObjectsWithTag("Defender"); //walls and sheep in array
-		//print ("number of sheep found: "+sheep.Length);
+		print ("number of sheep found: "+sheep.Length);
 		
 		if (sheep.Length > 0) {
 			closest = sheep[0].transform;
 			float minDist = Mathf.Infinity;
 	
 			foreach (GameObject s in sheep) { //for object in array, what is closest
-				calcDist = Vector3.Distance(closest.transform.position, transform.position);
+				calcDist = Vector3.Distance(s.transform.position, transform.position);
 				if (calcDist < minDist) {
 					closest = s.transform;
 					minDist = calcDist;
 				}
 			}
 		}
-		//print ("chosen sheep "+closest.transform.name);
+		print ("chosen sheep "+closest.transform.name);
 		return closest;
 	}
 
 	void Move(Transform target) {
-		//animation.CrossFade("run"); //run animation
+		animation.CrossFade("run"); //run animation
 		//avoid obstacles on terrain
 		
 		//this.gameObject.GetComponent<NavMeshAgent>().destination = target.position;
@@ -87,7 +93,7 @@ public class enemyWolfAI : MonoBehaviour {
 		float distance = Vector3.Distance(target.transform.position, transform.position);
 		if (target != null) {
 			if(distance <= attackDistance) {
-				//animation.CrossFade("attack");
+				animation.Play("attack");
 				target.SendMessage("ReceiveDamage", attackDamage, SendMessageOptions.DontRequireReceiver);
 			}
 		} else {
@@ -101,5 +107,9 @@ public class enemyWolfAI : MonoBehaviour {
 	
 	void OnCollisionExit(Collision collision){
 		collidedWith=null;
+	}
+	
+	void ChangeTarget(Transform p_target) {
+		priorityTarget = p_target;
 	}
 }
