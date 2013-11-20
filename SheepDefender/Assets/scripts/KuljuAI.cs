@@ -19,77 +19,107 @@ public class KuljuAI : MonoBehaviour {
     //The waypoint we are currently moving towards
     private int currentWaypoint = 0;
 	
+	float repathRate = 0.5f;
+	protected float lastPathSearch = -9999;
+	
     public void Start () {
         seeker = GetComponent<Seeker>();
         controller = GetComponent<CharacterController>();
 		
-        //Start a new path to the targetPosition, return the result to the OnPathComplete function
-        //path = seeker.StartPath (transform.position, target.transform.position, OnPathComplete);
+		InvokeRepeating ("Repath", 0, 1.0f + Random.Range(0.0f, 1.0f));
     }
     
     public void OnPathComplete (Path p) {
-		Debug.Log ("Yey, we got a path back. Did it have an error? "+p.error);
         if (!p.error) {
             path = p;
             //Reset the waypoint counter
             currentWaypoint = 0;
         }
     }
- 
-    public void FixedUpdate () {
-		if (TargetInLineOfSight()) {
-			// Lets forget about the path we had in mind before, because we have a target in sight
-			path = null;
-			currentWaypoint = 0;
-			
-			Vector3 dir = (target.transform.collider.ClosestPointOnBounds (transform.position) - transform.position).normalized;
-			
-			// Lets face to the direction of the target
-			transform.forward = dir;
-			
-			dir *= speed * Time.fixedDeltaTime;
-			controller.SimpleMove (dir);			
-		} else {
-			// Lets calculate a new path if there's none
-			// i.e. if we had target in sight but it is lost now
-			if (path == null) {
-				path = seeker.StartPath (transform.position, target.transform.position, OnPathComplete);
-	        }
-	        
-	        if (currentWaypoint >= path.vectorPath.Count) {
-				path = seeker.StartPath (transform.position, target.transform.position, OnPathComplete);
-				
-				Debug.Log ("End Of Path Reached (" + path.vectorPath.Count + ") <= (" + currentWaypoint + ")");
-	            return;
-	        }
-			
-		  	//Direction to the next waypoint
-	        Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
-	        dir *= speed * Time.fixedDeltaTime;
-	        controller.SimpleMove (dir);
-			
-			transform.forward = dir; // Where the object looks towards
-			
-			//Check if we are close enough to the next waypoint
-	        //If we are, proceed to follow the next waypoint
-	        if (Vector3.Distance (transform.position,path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
-	            currentWaypoint++;
-	            return;
-	        }
+	
+	public IEnumerator WaitToRepath () {
+		float timeLeft = repathRate - (Time.time-lastPathSearch);
+		
+		yield return new WaitForSeconds (timeLeft);
+		Repath ();
+	}
+	
+	public virtual void Repath ()
+	{
+		if (target == null) {
+			target = FindNearestObject();
 		}
-		//cooldownRemaining -= Time.deltaTime;
+		
+		lastPathSearch = Time.time;
+		
+		if (seeker == null || target == null || !seeker.IsDone ()) {
+			StartCoroutine (WaitToRepath ());
+			
+			return;
+		}
+		
+		Path path = ABPath.Construct(transform.position, target.transform.position, null);
+		seeker.StartPath (path, OnPathComplete);
+	}
+	
+	public void FixedUpdate () {
+		// Add Repath () every 0.5f seconds
+		
+		// This applies the physics to the gameobject
+		controller.SimpleMove(Vector3.zero);
+		
+		Vector3 dir;
+	
+		// Lets calculate a new path if there's none
+		// i.e. if we had target in sight but it is lost now
+		if (path == null) {
+			Repath ();
+			return;
+		}
+        
+        if (currentWaypoint >= path.vectorPath.Count) {
+			Repath ();
+			return;
+        }
+		
+	  	//Direction to the next waypoint
+        dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
+        dir *= speed * Time.fixedDeltaTime;
+        controller.SimpleMove (dir);
+		
+		//Check if we are close enough to the next waypoint
+        //If we are, proceed to follow the next waypoint
+        if (Vector3.Distance (transform.position,path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
+            currentWaypoint++;
+            return;
+        }
+		
+		// Animation hack, so that the stupid wolf don't run sideways...
+		dir.y = 0;
+		transform.rotation = Quaternion.FromToRotation(Vector3.left, dir);
+		
+		animation.CrossFade("run");
     }
 	
-	bool TargetInLineOfSight()
-	{
-		RaycastHit hit;
+	public GameObject FindNearestObject() {
+		GameObject[] sheep; 
+		float calcDist;
+		GameObject closest = null;
+
+		sheep = GameObject.FindGameObjectsWithTag("Defender"); //walls and sheep in array
 		
-		if (Physics.Raycast (transform.position, (target.transform.collider.ClosestPointOnBounds (transform.position) - transform.position), out hit)) {
-			if (hit.collider.gameObject == target) {
-				return true;	
+		if (sheep.Length > 0) {
+			float minDist = Mathf.Infinity;
+	
+			foreach (GameObject s in sheep) { //for object in array, what is closest
+				calcDist = Vector3.Distance(s.transform.position, transform.position);
+				if (calcDist < minDist) {
+					closest = s;
+					minDist = calcDist;
+				}
 			}
 		}
-
-		return false;
+		
+		return closest;
 	}
 }

@@ -48,7 +48,7 @@ public class enemyWolfAI : MonoBehaviour {
 			//}
 
 		} else if (target == null) {
-			animation.CrossFade("idle");
+			animation.Play("idle");
 		}
 	}
 
@@ -64,7 +64,6 @@ public class enemyWolfAI : MonoBehaviour {
 		Transform closest = null;
 
 		sheep = GameObject.FindGameObjectsWithTag("Defender"); //walls and sheep in array
-		print ("number of sheep found: "+sheep.Length);
 		
 		if (sheep.Length > 0) {
 			closest = sheep[0].transform;
@@ -78,7 +77,7 @@ public class enemyWolfAI : MonoBehaviour {
 				}
 			}
 		}
-		print ("chosen sheep "+closest.transform.name);
+		
 		return closest;
 	}
 
