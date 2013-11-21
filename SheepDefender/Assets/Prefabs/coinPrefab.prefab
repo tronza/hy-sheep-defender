@@ -43,7 +43,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 73dc3931d2369f74b9b89d500ae6ebc1, type: 2}
+  - {fileID: 2100000, guid: fb06f72a662d1444f89ed4b58f68b54a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -64,9 +64,10 @@ Animation:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: a4ceddc32651f84488ed1015d4bbccfc, type: 2}
+  m_Animation: {fileID: 7400000, guid: a4f558ed90e4f42eebea265ab0f54383, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: a4ceddc32651f84488ed1015d4bbccfc, type: 2}
+  - {fileID: 7400000, guid: a4f558ed90e4f42eebea265ab0f54383, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -82,10 +83,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5da012fee49b1014abf99fc7f71beddf, type: 3}
+  m_Script: {fileID: 11500000, guid: dfadc6521484841a395ad0bd4d87697f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
+  dieEffect: {fileID: 100000, guid: 7a598717ded698c4dbdd57c2260fa1e1, type: 2}
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -36,7 +36,11 @@ public class Damageable : MonoBehaviour
 			Destroy (gameObject);
 			
 			if(gameObject.name.Contains("Wolf")){
-				Instantiate(coin_prefab, new Vector3(gameObject.transform.localPosition.x,gameObject.transform.localPosition.y+0.5F,gameObject.transform.localPosition.z), new Quaternion(0.0F,0.0F,0.0F,0));
+				Instantiate(coin_prefab, new Vector3(
+					transform.localPosition.x,
+					transform.localPosition.y+0.5F,
+					transform.localPosition.z
+				), Quaternion.identity);
 			}
 			
 			if (this.dieEffect) {

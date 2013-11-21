@@ -1068,8 +1068,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dieEffect: {fileID: 0}
+  dieEffect: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   health: 100
+  coin_prefab: {fileID: 400000, guid: a261febd8c86c48ee917fa9809b1742f, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

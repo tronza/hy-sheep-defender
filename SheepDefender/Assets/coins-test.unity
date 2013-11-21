@@ -176,7 +176,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400018, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
   m_PrefabInternal: {fileID: 719846145}
   m_GameObject: {fileID: 55642536}
-  m_LocalRotation: {x: .512206078, y: .685850859, z: .516754031, w: -.014797234}
+  m_LocalRotation: {x: .512206018, y: .685850799, z: .516753972, w: -.0147972321}
   m_LocalPosition: {x: 8.56816769e-08, y: -1.41561031e-07, z: 1.38931524e-08}
   m_LocalScale: {x: 1, y: 1, z: 1.00000012}
   m_Children:
@@ -712,7 +712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
-  coin_prefab: {fileID: 400000, guid: 17d49eb48aa441e43a281da9d80cce8d, type: 2}
+  coin_prefab: {fileID: 400000, guid: a261febd8c86c48ee917fa9809b1742f, type: 2}
 --- !u!195 &443426319
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -884,6 +884,32 @@ Transform:
   m_Children:
   - {fileID: 1436288172}
   m_Father: {fileID: 810740323}
+--- !u!1 &641334201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100048, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+  m_PrefabInternal: {fileID: 719846145}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 641334202}
+  m_Layer: 0
+  m_Name: TheGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &641334202
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400048, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+  m_PrefabInternal: {fileID: 719846145}
+  m_GameObject: {fileID: 641334201}
+  m_LocalRotation: {x: -2.64195652e-08, y: -5.28322985e-08, z: 2.79396684e-09, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 2.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1806301936}
 --- !u!1 &682913511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1065,10 @@ Prefab:
     - target: {fileID: 100046, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
       propertyPath: m_TagString
       value: Defender
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+      propertyPath: coin_prefab
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
@@ -1954,6 +1984,8 @@ GameObject:
   - 195: {fileID: 1806301939}
   - 54: {fileID: 1806301938}
   - 65: {fileID: 1806301937}
+  - 54: {fileID: 1806301944}
+  - 65: {fileID: 1806301943}
   m_Layer: 0
   m_Name: sheepPrefab
   m_TagString: Defender
@@ -1972,6 +2004,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 306141238}
+  - {fileID: 641334202}
   m_Father: {fileID: 0}
 --- !u!65 &1806301937
 BoxCollider:
@@ -1984,8 +2017,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .5, y: 1, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: .5, y: 1, z: 2.5}
+  m_Center: {x: 0, y: 1, z: .200000003}
 --- !u!54 &1806301938
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2052,6 +2085,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lazer_red_prefab: {fileID: 400000, guid: 81744248ecbd4174d8c6ff095da09ef9, type: 2}
   lazer_green_prefab: {fileID: 400000, guid: d15baafa88cb105468a10259ad3eeb46, type: 2}
+  theGun: {fileID: 641334201}
   damage: 5
 --- !u!137 &1806301942
 SkinnedMeshRenderer:
@@ -2105,6 +2139,35 @@ SkinnedMeshRenderer:
     m_Center: {x: .655320287, y: -.118838847, z: -.0467108786}
     m_Extent: {x: 1.01764345, y: 1.37190342, z: .809386253}
   m_DirtyAABB: 0
+--- !u!65 &1806301943
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 4f048a33c8cce3744ba62d8cd92f811c,
+    type: 2}
+  m_PrefabInternal: {fileID: 719846145}
+  m_GameObject: {fileID: 1806301935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .5, y: 1, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &1806301944
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400002, guid: 4f048a33c8cce3744ba62d8cd92f811c,
+    type: 2}
+  m_PrefabInternal: {fileID: 719846145}
+  m_GameObject: {fileID: 1806301935}
+  serializedVersion: 2
+  m_Mass: 1.00000001e-07
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1811649901
 GameObject:
   m_ObjectHideFlags: 0
