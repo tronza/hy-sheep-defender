@@ -153,7 +153,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400076, guid: 4c99a7732848d45e398ae22f34b8d708, type: 2}
   m_PrefabInternal: {fileID: 305509233}
   m_GameObject: {fileID: 28204774}
-  m_LocalRotation: {x: 0, y: .285516798, z: 0, w: .958373785}
+  m_LocalRotation: {x: 0, y: .285516798, z: 0, w: .958373725}
   m_LocalPosition: {x: 59.9726982, y: 0, z: 587.543884}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -202,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+  coin_prefab: {fileID: 0}
 --- !u!195 &28204779
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -395,7 +396,7 @@ GameObject:
   - 4: {fileID: 65660517}
   - 33: {fileID: 65660519}
   - 23: {fileID: 65660518}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +476,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 77128052}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID58
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -501,7 +502,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 77226500}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,7 +687,7 @@ GameObject:
   - 4: {fileID: 134381253}
   - 33: {fileID: 134381255}
   - 23: {fileID: 134381254}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,6 +774,8 @@ GameObject:
   - 195: {fileID: 156375133}
   - 54: {fileID: 156375132}
   - 65: {fileID: 156375131}
+  - 54: {fileID: 156375138}
+  - 65: {fileID: 156375137}
   m_Layer: 0
   m_Name: sheepPrefab
   m_TagString: Defender
@@ -791,6 +794,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 381732058}
+  - {fileID: 1628137668}
   m_Father: {fileID: 0}
 --- !u!65 &156375131
 BoxCollider:
@@ -803,8 +807,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .5, y: 1, z: 1}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: .5, y: 1, z: 2.5}
+  m_Center: {x: 0, y: 1, z: .200000003}
 --- !u!54 &156375132
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -856,6 +860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+  coin_prefab: {fileID: 0}
 --- !u!114 &156375135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,8 +873,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5f23280e6a0fa4babd33c507d057ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lazer_red_prefab: {fileID: 0}
-  lazer_green_prefab: {fileID: 0}
+  lazer_red_prefab: {fileID: 400000, guid: 81744248ecbd4174d8c6ff095da09ef9, type: 2}
+  lazer_green_prefab: {fileID: 400000, guid: d15baafa88cb105468a10259ad3eeb46, type: 2}
+  theGun: {fileID: 1628137667}
   damage: 5
 --- !u!137 &156375136
 SkinnedMeshRenderer:
@@ -923,6 +929,35 @@ SkinnedMeshRenderer:
     m_Center: {x: .655320287, y: -.118838847, z: -.0467108786}
     m_Extent: {x: 1.01764345, y: 1.37190342, z: .809386253}
   m_DirtyAABB: 0
+--- !u!65 &156375137
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500002, guid: 4f048a33c8cce3744ba62d8cd92f811c,
+    type: 2}
+  m_PrefabInternal: {fileID: 399758453}
+  m_GameObject: {fileID: 156375129}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .5, y: 1, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!54 &156375138
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400002, guid: 4f048a33c8cce3744ba62d8cd92f811c,
+    type: 2}
+  m_PrefabInternal: {fileID: 399758453}
+  m_GameObject: {fileID: 156375129}
+  serializedVersion: 2
+  m_Mass: 1.00000001e-07
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &157121067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1222,7 +1257,7 @@ GameObject:
   - 4: {fileID: 237652339}
   - 33: {fileID: 237652341}
   - 23: {fileID: 237652340}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1331,7 +1366,7 @@ GameObject:
   - 4: {fileID: 276867378}
   - 33: {fileID: 276867380}
   - 23: {fileID: 276867379}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1386,7 +1421,7 @@ GameObject:
   - 4: {fileID: 281283327}
   - 33: {fileID: 281283329}
   - 23: {fileID: 281283328}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID39
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1576,7 +1611,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 348797512}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID58
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2039,7 +2074,7 @@ GameObject:
   - 4: {fileID: 409664395}
   - 33: {fileID: 409664397}
   - 23: {fileID: 409664396}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2176,7 +2211,7 @@ GameObject:
   - 23: {fileID: 414686610}
   - 95: {fileID: 414686609}
   - 136: {fileID: 414686608}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2288,7 +2323,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 449583093}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2514,7 +2549,7 @@ GameObject:
   - 4: {fileID: 503689798}
   - 33: {fileID: 503689800}
   - 23: {fileID: 503689799}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2569,7 +2604,7 @@ GameObject:
   - 4: {fileID: 506534104}
   - 33: {fileID: 506534106}
   - 23: {fileID: 506534105}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2651,7 +2686,7 @@ GameObject:
   - 4: {fileID: 513993503}
   - 33: {fileID: 513993505}
   - 23: {fileID: 513993504}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2706,7 +2741,7 @@ GameObject:
   - 4: {fileID: 519495599}
   - 33: {fileID: 519495601}
   - 23: {fileID: 519495600}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2830,7 +2865,7 @@ GameObject:
   - 4: {fileID: 548886097}
   - 33: {fileID: 548886099}
   - 23: {fileID: 548886098}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2887,7 +2922,7 @@ GameObject:
   - 23: {fileID: 552470188}
   - 95: {fileID: 552470187}
   - 136: {fileID: 552470186}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3157,7 +3192,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 660572457}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID58
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3183,7 +3218,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 661533558}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3212,7 +3247,7 @@ GameObject:
   - 4: {fileID: 683315084}
   - 33: {fileID: 683315086}
   - 23: {fileID: 683315085}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3266,7 +3301,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 691314085}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID58
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3294,7 +3329,7 @@ GameObject:
   - 4: {fileID: 708461100}
   - 33: {fileID: 708461102}
   - 23: {fileID: 708461101}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID39
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3812,7 +3847,7 @@ GameObject:
   - 4: {fileID: 879348652}
   - 33: {fileID: 879348654}
   - 23: {fileID: 879348653}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3921,7 +3956,7 @@ GameObject:
   - 4: {fileID: 952240142}
   - 33: {fileID: 952240144}
   - 23: {fileID: 952240143}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4016,7 +4051,7 @@ GameObject:
   - 4: {fileID: 968053168}
   - 33: {fileID: 968053170}
   - 23: {fileID: 968053169}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4141,7 +4176,7 @@ GameObject:
   - 4: {fileID: 994374133}
   - 33: {fileID: 994374135}
   - 23: {fileID: 994374134}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4198,7 +4233,7 @@ GameObject:
   - 23: {fileID: 995112236}
   - 95: {fileID: 995112235}
   - 136: {fileID: 995112234}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4549,7 +4584,7 @@ GameObject:
   - 4: {fileID: 1071980856}
   - 33: {fileID: 1071980858}
   - 23: {fileID: 1071980857}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4781,7 +4816,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1116514350}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5250,7 +5285,7 @@ GameObject:
   - 4: {fileID: 1230463563}
   - 33: {fileID: 1230463565}
   - 23: {fileID: 1230463564}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID39
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5303,7 +5338,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1237493965}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5414,7 +5449,7 @@ GameObject:
   - 4: {fileID: 1301206103}
   - 33: {fileID: 1301206105}
   - 23: {fileID: 1301206104}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID31
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5659,7 +5694,7 @@ GameObject:
   - 4: {fileID: 1427450060}
   - 33: {fileID: 1427450062}
   - 23: {fileID: 1427450061}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6041,7 +6076,7 @@ GameObject:
   - 4: {fileID: 1498054155}
   - 33: {fileID: 1498054157}
   - 23: {fileID: 1498054156}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6512,7 +6547,7 @@ GameObject:
   - 4: {fileID: 1619349763}
   - 33: {fileID: 1619349765}
   - 23: {fileID: 1619349764}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID39
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6583,6 +6618,32 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1.00000012}
   m_Children: []
   m_Father: {fileID: 932115927}
+--- !u!1 &1628137667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100048, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+  m_PrefabInternal: {fileID: 399758453}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1628137668}
+  m_Layer: 0
+  m_Name: TheGun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1628137668
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400048, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+  m_PrefabInternal: {fileID: 399758453}
+  m_GameObject: {fileID: 1628137667}
+  m_LocalRotation: {x: -2.64195652e-08, y: -5.28322985e-08, z: 2.79396684e-09, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 2.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 156375130}
 --- !u!1 &1632804617
 GameObject:
   m_ObjectHideFlags: 0
@@ -6788,7 +6849,7 @@ GameObject:
   - 23: {fileID: 1687003080}
   - 95: {fileID: 1687003079}
   - 136: {fileID: 1687003078}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6901,7 +6962,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1708554585}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID58
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6956,7 +7017,7 @@ GameObject:
   - 4: {fileID: 1733154270}
   - 33: {fileID: 1733154272}
   - 23: {fileID: 1733154271}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7171,7 +7232,7 @@ GameObject:
   - 4: {fileID: 1843894387}
   - 33: {fileID: 1843894389}
   - 23: {fileID: 1843894388}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7228,7 +7289,7 @@ GameObject:
   - 23: {fileID: 1852175618}
   - 95: {fileID: 1852175617}
   - 136: {fileID: 1852175616}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7395,7 +7456,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1881488672}
-  m_LocalRotation: {x: .450347006, y: .56820941, z: -.440369368, w: .529528677}
+  m_LocalRotation: {x: .450346977, y: .56820941, z: -.440369338, w: .529528677}
   m_LocalPosition: {x: 13.4623785, y: 9.10003662, z: 984.46814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -7523,7 +7584,7 @@ GameObject:
   - 23: {fileID: 1903279313}
   - 95: {fileID: 1903279312}
   - 136: {fileID: 1903279311}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: tree_model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7732,6 +7793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+  coin_prefab: {fileID: 0}
 --- !u!195 &1932699785
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7805,7 +7867,7 @@ GameObject:
   - 4: {fileID: 1956441851}
   - 33: {fileID: 1956441850}
   - 23: {fileID: 1956441849}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID15
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7939,7 +8001,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1978272742}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7968,7 +8030,7 @@ GameObject:
   - 4: {fileID: 1990502229}
   - 33: {fileID: 1990502231}
   - 23: {fileID: 1990502230}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID23
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8023,7 +8085,7 @@ GameObject:
   - 4: {fileID: 1992322836}
   - 33: {fileID: 1992322838}
   - 23: {fileID: 1992322837}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID45
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8188,7 +8250,7 @@ GameObject:
   - 4: {fileID: 2029237618}
   - 33: {fileID: 2029237617}
   - 23: {fileID: 2029237616}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID39
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8324,7 +8386,7 @@ GameObject:
   - 4: {fileID: 2095331925}
   - 33: {fileID: 2095331927}
   - 23: {fileID: 2095331926}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID39
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8498,7 +8560,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400018, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
   m_PrefabInternal: {fileID: 399758453}
   m_GameObject: {fileID: 2112142702}
-  m_LocalRotation: {x: .512206078, y: .685850859, z: .516754031, w: -.014797234}
+  m_LocalRotation: {x: .512206018, y: .685850799, z: .516753972, w: -.0147972321}
   m_LocalPosition: {x: 8.56816769e-08, y: -1.41561031e-07, z: 1.38931524e-08}
   m_LocalScale: {x: 1, y: 1, z: 1.00000012}
   m_Children:
@@ -8552,7 +8614,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 2138149136}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ID58
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,6 +10,8 @@ public class Damageable : MonoBehaviour
 	public GameObject dieEffect;
 	public float health = 100f;
 	
+	public Transform coin_prefab;
+	
 	// Use this for initialization
 	void Start ()
 	{
@@ -32,6 +34,14 @@ public class Damageable : MonoBehaviour
 		if (!this.HasHealth ()) {
 			// TODO: what happens to the referencing turrets etc after destroying the object?
 			Destroy (gameObject);
+			
+			if(gameObject.name.Contains("Wolf")){
+				Instantiate(coin_prefab, new Vector3(
+					transform.localPosition.x,
+					transform.localPosition.y+0.5F,
+					transform.localPosition.z
+				), Quaternion.identity);
+			}
 			
 			if (this.dieEffect) {
 				Destroy (Instantiate (this.dieEffect, transform.position, Quaternion.identity), 1);	
