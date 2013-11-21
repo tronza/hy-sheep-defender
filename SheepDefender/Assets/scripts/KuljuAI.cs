@@ -19,9 +19,6 @@ public class KuljuAI : MonoBehaviour {
     //The waypoint we are currently moving towards
     private int currentWaypoint = 0;
 	
-	float repathRate = 0.5f;
-	protected float lastPathSearch = -9999;
-	
     public void Start () {
         seeker = GetComponent<Seeker>();
         controller = GetComponent<CharacterController>();
@@ -37,24 +34,13 @@ public class KuljuAI : MonoBehaviour {
         }
     }
 	
-	public IEnumerator WaitToRepath () {
-		float timeLeft = repathRate - (Time.time-lastPathSearch);
-		
-		yield return new WaitForSeconds (timeLeft);
-		Repath ();
-	}
-	
 	public virtual void Repath ()
 	{
 		if (target == null) {
 			target = FindNearestObject();
 		}
 		
-		lastPathSearch = Time.time;
-		
 		if (seeker == null || target == null || !seeker.IsDone ()) {
-			StartCoroutine (WaitToRepath ());
-			
 			return;
 		}
 		
@@ -63,8 +49,6 @@ public class KuljuAI : MonoBehaviour {
 	}
 	
 	public void FixedUpdate () {
-		// Add Repath () every 0.5f seconds
-		
 		// This applies the physics to the gameobject
 		controller.SimpleMove(Vector3.zero);
 		
