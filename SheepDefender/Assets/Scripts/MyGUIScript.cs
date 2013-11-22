@@ -133,6 +133,9 @@ public class MyGUIScript : MonoBehaviour
 					}
 					if (Input.GetMouseButtonDown (0)) {
 						EnableAll (createdTurret);
+
+						AstarPath.active.UpdateGraphs(createdTurret.collider.bounds);
+
 						createdTurret = null;
 						placingTurret = false;
 						

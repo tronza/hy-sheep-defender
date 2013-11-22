@@ -19,3 +19,8 @@ Name: wolf.blend
 source URL: http://opengameart.org/content/winter-wolf-normal-wolf
 license: CC BY SA
 authors: umask007
+
+Name: Fence
+source URL: http://opengameart.org/content/basic-wooden-fence
+license: CC0
+Author: WeaponGuy
