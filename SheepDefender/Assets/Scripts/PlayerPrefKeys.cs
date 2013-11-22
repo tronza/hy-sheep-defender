@@ -22,5 +22,8 @@ public sealed class PlayerPrefKeys
 	 */
 	public const string LEVEL_CURRENT = "level_current";
 	
+	//For PayerPrefs, is mute set
+	public const string MUTE = "mute";
+	
 }
 
