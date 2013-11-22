@@ -5,14 +5,14 @@ public class MuteButton : MonoBehaviour
 {
 	
 	private Mute muter;
-	private bool muteStatus = false;
+	private bool muteStatus;
 	public Texture muteOffTexture;
 	public Texture muteOnTexture;
 	// Use this for initialization
-	void Start ()
+	void OnEnable ()
 	{
 		muter = gameObject.GetComponent<Mute> ();
-		ChangeTexture(muter.GetMute());
+		ChangeTexture(!muter.GetMute());
 	}
 	
 	// Update is called once per frame

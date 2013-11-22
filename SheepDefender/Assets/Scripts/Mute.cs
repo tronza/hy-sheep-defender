@@ -11,9 +11,9 @@ using System.Collections;
 public class Mute : MonoBehaviour
 {
 	public GameObject cameraWithAudioListener;
-	private bool muteStatus;
+	private bool muteStatus = false;
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
 		int mute = PlayerPrefs.GetInt (PlayerPrefKeys.MUTE);//1-> mute, 0 -> sound on
 		if (mute == null) {//sets the initial value if no value is saved
@@ -34,6 +34,7 @@ public class Mute : MonoBehaviour
 	
 	public void SetMute (bool soundOff)
 	{
+		
 		AudioListener audio = cameraWithAudioListener.GetComponent<AudioListener> ();
 		if (soundOff) {
 			PlayerPrefs.SetInt (PlayerPrefKeys.MUTE, 1);
@@ -48,7 +49,7 @@ public class Mute : MonoBehaviour
 
 	public bool GetMute ()
 	{
-		return muteStatus;
+		return this.muteStatus;
 	}
 	
 }
