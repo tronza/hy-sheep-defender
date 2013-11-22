@@ -15,20 +15,20 @@ public class LevelMenu : MonoBehaviour {
 	 * Helper class to encapsulate the ini file tool to allow easier unit testing later.
 	 */
 	public class LevelMenuItem {
-		private IniFileTool iniFileTool;
+		private string levelName;
 		private string fileName;
 		
-		public LevelMenuItem(IniFileTool iniFileTool, string fileName) {
+		public LevelMenuItem(string levelName, string fileName) {
 			this.fileName = fileName;
-			this.iniFileTool = iniFileTool;
+			this.levelName = levelName;
 		}
 		
-		/**
-		 * @TODO: Return a title that can be specified in the ini file. 
-		 */
 		public string GetTitle() {
-			return fileName;	
-		}		
+			return levelName;	
+		}
+		public string GetPath(){
+			return fileName;
+		}
 	}
 	
 	/**
@@ -114,8 +114,9 @@ public class LevelMenu : MonoBehaviour {
 		string[] files = Directory.GetFiles(this.iniPath);
 		foreach(string fileName in files) {
 			if(fileName.EndsWith(".ini")){
-			IniFileTool iniFileTool = new IniFileTool(this.iniPath + Path.DirectorySeparatorChar + fileName);
-			this.items.AddLast(new LevelMenu.LevelMenuItem(iniFileTool, fileName));
+			IniFileTool iniFileTool = new IniFileTool(fileName);
+			string levelName = iniFileTool.getValue("level","name","Unnamed level");
+			this.items.AddLast(new LevelMenu.LevelMenuItem(levelName, fileName));
 			}
 		}
 	}
@@ -138,8 +139,8 @@ public class LevelMenu : MonoBehaviour {
 	public void LoadLevel(LevelMenuItem levelMenuItem) {
 		this.Hide ();
 		// @TODO( Load level.
-		print ("loading level: " + levelMenuItem.GetTitle());
-		PlayerPrefs.SetString(PlayerPrefKeys.LEVEL_CURRENT, levelMenuItem.GetTitle());
+		print ("loading level: " + levelMenuItem.GetPath());
+		PlayerPrefs.SetString(PlayerPrefKeys.LEVEL_CURRENT, levelMenuItem.GetPath());
 		Application.LoadLevel("BaseScene");
 	}
 	
