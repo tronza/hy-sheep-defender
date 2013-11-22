@@ -4,10 +4,11 @@ using System.Collections;
 public class Trigger : MonoBehaviour {
 	public bool triggered = false;
 	Projector projector;
+	Color baseColor;
 	
 	void Start() {
 		projector = GetComponent<Projector>();
-		projector.material.color = Color.white;
+		baseColor = projector.material.color;
 	}
 	
 	void OnTriggerEnter(Collider other) {
@@ -17,6 +18,6 @@ public class Trigger : MonoBehaviour {
 	
 	void OnTriggerExit(Collider other) {
         triggered = false;
-		projector.material.color = Color.white;
+		projector.material.color = baseColor;
     }
 }
