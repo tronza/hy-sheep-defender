@@ -11,6 +11,7 @@ public class MyGUIScript : MonoBehaviour
 	
 	//private vars
 	Projector lightProj;
+	Trigger lightTrig;
 	bool buttonsHidden = false;
 	bool allHidden = false;
 	GUIContent[] turrets;
@@ -20,6 +21,8 @@ public class MyGUIScript : MonoBehaviour
 	GameObject createdTurret;
 	bool discardClick = false;
 	bool startedPlacing = false;
+	float placeablePosY;
+	int groundLayerMask;
 	
 	int lastUpdateFrame;
 	int lastOnGUIFrame;
@@ -45,10 +48,14 @@ public class MyGUIScript : MonoBehaviour
 			}
 		}
 		
+		//arcane bit shift that's needed to get the "layer mask", used for raycasting
+		groundLayerMask = 1 << LayerMask.NameToLayer("GroundLayer");
+		
 		//adjust rotation (since aspectRatio resizes on another axis)
 		rotateObjOnY(lightObj, 90f);
 		lightProj = lightObj.GetComponent<Projector>();
 		lightProj.orthographic = true;
+		lightTrig = lightObj.GetComponent<Trigger>();
 		lightProj.enabled = false;
 	}
 	
@@ -163,18 +170,28 @@ public class MyGUIScript : MonoBehaviour
 				myGameInfo.coins -= placeable.price;
 				lightProj.enabled = true;
 				
+				//this is to put the turret at the right height from the groun, please do not use negative y
+				Transform pTransform = ((GameObject)prefab).GetComponentsInChildren<Transform>(true)[0];
+				placeablePosY = pTransform.position.y;
+				
 				//get size of the box enclosing the prefab (MUST have a MeshFilter set for this to work)
 				//NOTE: there is a bug in Unity that sometimes makes the MeshFilter component disappear
 				Renderer pRenderer = ((GameObject)prefab).GetComponentsInChildren<Renderer>(true)[0];
 				Vector3 boxSize = pRenderer.bounds.size;
 				
-				//align projector to longest dimension of prefab
+				//align projector to longest dimension of prefab (the x rotation is to make it point downwards)
 				if (boxSize.z > boxSize.x) {
-					rotateObjOnY(lightObj, 90f);
+					lightObj.transform.rotation = Quaternion.Euler(new Vector3(90f, 90f, 0f));
+				} else {
+					lightObj.transform.rotation = Quaternion.Euler(new Vector3(90f, 0f, 0f));
 				}
 				//match size of prefab
 				lightProj.orthoGraphicSize = boxSize.x / 2f;
 				lightProj.aspectRatio = boxSize.z / boxSize.x;
+				BoxCollider lightColl = lightObj.GetComponent<BoxCollider>();
+				
+				//we need this correction to account for the x rotation of the projector
+				lightColl.size = new Vector3(boxSize.z, boxSize.x, boxSize.y);
 				
 				startedPlacing = false;
 			}
@@ -188,20 +205,29 @@ public class MyGUIScript : MonoBehaviour
 				rotateObjOnY(lightObj, 90f);
 			}
 
-			//cast ray from camera to ground, get intersection point and move light there
+			//cast ray from camera to ground, get intersection point with ground layer and move light there
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+//			Debug.DrawRay(ray.origin, ray.direction*10000, Color.magenta);
 			RaycastHit hitInfo;
-			if (Physics.Raycast (ray, out hitInfo, Mathf.Infinity)) {
-				Vector3 pos = new Vector3(hitInfo.point.x, 1f, hitInfo.point.z);
-				lightObj.transform.position = pos;
-				
-				//TODO: check for collisions here (and make projector light red)
+			
+			if (Physics.Raycast (ray, out hitInfo, Mathf.Infinity, groundLayerMask)) {
+//				Vector3 pos = new Vector3(hitInfo.point.x, 1f, hitInfo.point.z);
+//				Debug.Log("Position " + pos + ", placeablePosY " + placeablePosY);
+//				lightObj.transform.position = new Vector3(pos.x, pos.y + placeablePosY, pos.z);
+//				Debug.Log("Position " + hitInfo.point + ", placeablePosY " + placeablePosY + ", tag " + hitInfo.collider.tag);
+				lightObj.transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + placeablePosY, hitInfo.point.z);
 				
 				//TODO: replace discardClick
-				if (Input.GetMouseButtonDown (0) && !discardClick) {
-					CreateTurret (selectedTurret, hitInfo.point, lightObj.transform.rotation.eulerAngles.y - 90f);
+				//this also checks for collisions in the zone
+				if (Input.GetMouseButtonDown (0) && !discardClick && !lightTrig.triggered) {
+					GameObject createdTurret = CreateTurret (selectedTurret, hitInfo.point, lightObj.transform.rotation.eulerAngles.y - 90f);
 					lightProj.enabled = false;
 					placingTurret = false;
+					
+					//update pathfinding grid
+					AstarPath.active.UpdateGraphs(createdTurret.collider.bounds);
+					
+					//TODO: check what happens to the paths, are they updated when the grid is updated?
 				}
 			}
 		}
