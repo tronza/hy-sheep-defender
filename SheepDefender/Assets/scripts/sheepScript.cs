@@ -20,7 +20,33 @@ public class sheepScript : MonoBehaviour {
 	
 	public float damage = 5f;
 	
-	void Start() {	
+	/* Attribute for health bar */
+	public int maxHealth = 100; // Maximum Health of sheep
+	public int curHealth = 100; // Current Health of sheep
+	public float lengthBarHealth; // Length Health bar of sheep
+	
+	// For the style of health bar
+	GUIStyle style; 
+    Texture2D texture;
+    Color redColor;
+    Color greenColor;
+	
+	// For incrementation of health bar after n seconds
+	float incrementTime = 2f;
+	float incrementBy = 1;
+	double time = 0;
+	
+	
+	void Start() {
+		// Initialize health bar and its style
+		lengthBarHealth=Screen.width / 3;
+		texture = new Texture2D(1, 1);
+        texture.SetPixel(1, 1, greenColor);
+		
+		style = new GUIStyle();
+		redColor = Color.red;
+    	greenColor = Color.green;
+		
 	}
 	
 	/* Update() : is called once per frame
@@ -72,13 +98,15 @@ public class sheepScript : MonoBehaviour {
         {
 			if(Time.time >= nextShot)
 			{
-				if(currentWeapon==1) //red lazer
+				if(currentWeapon==1 && curHealth>0) //red lazer
 				{
 					Instantiate (lazer_red_prefab, theGun.transform.position, theGun.transform.rotation);
+					curHealth--;
 				}
-				else if(currentWeapon==2) //green lazer
+				else if(currentWeapon==2 && curHealth>0) //green lazer
 				{
 					Instantiate (lazer_green_prefab, theGun.transform.position, theGun.transform.rotation);
+					curHealth=curHealth-2;
 				}
 				nextShot = Time.time + fireRate; //set the next shot time
 			}
@@ -93,6 +121,19 @@ public class sheepScript : MonoBehaviour {
 				currentWeapon=1;
 			}
 		}
+		
+		/* Increment the current health after n seconds */
+		time+=Time.deltaTime;
+		if (time >= incrementTime)
+		{
+			curHealth++;
+			time=0;
+		}
+		
+		/* Adjust to health bar of the sheep */ 
+		AdjustCurrentHealth(0);
+		
+		// TODO Add if curHealth is 0 Destroyed the sheep
 	}
 	
 	/* OnCollisionEnter(Collision collision):
@@ -122,5 +163,47 @@ public class sheepScript : MonoBehaviour {
 	 * */
 	void AddCoin(){
 		
+	}
+	
+	/*OnGUI(): 
+	 * Print the health of the sheep in the screen
+	 * 
+	 * */
+	void OnGUI()
+	{
+		texture.Apply();
+ 
+        style.normal.background = texture;
+		
+		GUI.Box(new Rect(0,200,lengthBarHealth,20), new GUIContent(""),style);
+	}
+	
+	/*
+	 * Adjust the display of the bar of life
+	 * */
+	
+	public void AdjustCurrentHealth(int adj) { 
+ 
+	if (curHealth < 0) 
+		curHealth = 0; 
+	
+	if (curHealth > maxHealth) 
+		curHealth = maxHealth;
+	
+	// No division by zero
+	if (maxHealth < 1)
+		maxHealth = 1;
+	
+	if (curHealth > 50)
+	{
+		texture.SetPixel(1, 1, greenColor);
+	}
+	
+	if (curHealth < 50)
+	{
+		texture.SetPixel(1, 1, redColor);
+	}
+	
+	lengthBarHealth=(Screen.width / 3) * (curHealth / (float)maxHealth);
 	}
 }
