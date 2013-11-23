@@ -24,3 +24,8 @@ Name: Fence
 source URL: http://opengameart.org/content/basic-wooden-fence
 license: CC0
 Author: WeaponGuy
+
+Name: Take_a_Chance.mp3
+source URL: http://incompetech.com/music/royalty-free/index.html?isrc=USUAN1300024.
+license: Creative Commons: By Attribution 3.0
+Author: Kevin MacLeod
