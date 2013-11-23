@@ -5,20 +5,25 @@ Level file structure:
 level group
 keys:
 	- durationInSecs : Defines the level's duration in seconds. If not set, the default value is 30.
+	- name : The levels name. If not set, the default value is "Unnamed level".
 
 example:
 [level]
 durationInSecs=60
+name=Level 1
 
 
 <number> group
 The number of this group indicates the point of time in seconds at which it's processed by the level.cs class. Each group is processed once, values that pass the durationInSecs set in the level group won't be processed. 
+
 keys:
 	-spawn : Contains a semicolon separated list of the game objects to be created at the indicated time point. Each member of the list needs to be a valid prefab name for a prefab that is located under the Resources folder. If not set, the default value is Wolf.
+	-message : A text that will be displayed on the screen. The default value is an empty string.
 
 example:
 [1]
 spawn=Wolf;Wolf
+message=The wolves are coming!
 
 
 sceneObjects group
