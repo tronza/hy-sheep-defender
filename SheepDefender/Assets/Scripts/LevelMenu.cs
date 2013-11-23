@@ -51,7 +51,7 @@ public class LevelMenu : MonoBehaviour {
 		}
 		
 		public void OnGui() {			
-			GUILayout.BeginScrollView(Vector2.zero, GUILayout.Width (200), GUILayout.Height (200));
+			GUILayout.BeginScrollView(Vector2.zero, GUILayout.Width (300), GUILayout.Height (200));
 			
 			foreach(LevelMenu.LevelMenuItem levelMenuItem in this.levelMenu.GetItems()) {
 				
@@ -116,6 +116,10 @@ public class LevelMenu : MonoBehaviour {
 			if(fileName.EndsWith(".ini")){
 			IniFileTool iniFileTool = new IniFileTool(fileName);
 			string levelName = iniFileTool.getValue("level","name","Unnamed level");
+			int levelCompleted = PlayerPrefs.GetInt(fileName);
+			if(levelCompleted==1){//if the level has been completed, show it in the level name
+					levelName = levelName + " (completed)";
+				}
 			this.items.AddLast(new LevelMenu.LevelMenuItem(levelName, fileName));
 			}
 		}

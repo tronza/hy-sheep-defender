@@ -61,7 +61,14 @@ public class level : MonoBehaviour {
 		timeEllapsed++;
 		if(timeEllapsed>=levelDuration){//don't check for the wolves if the level has already ended
 			
-			//Place the end of a level function here
+			//End of the level
+			GameObject wolf = GameObject.FindGameObjectWithTag("Attacker");
+			if(wolf==null){//all wolves are dead!
+				PlayerPrefs.SetInt(levelName, 1);//Marks the level as completed
+				PlayerPrefs.Save();
+				Debug.Log("The level has ended - You won!!");
+				CancelInvoke();//Disables this method
+			}
 			
 			return;
 		}
