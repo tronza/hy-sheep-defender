@@ -6,6 +6,8 @@ public class TitleScreen : MonoBehaviour
 	public GameObject effectFlare;
 	public GameObject pressKeyText;
 	public GameObject gameLogo;
+	public GameObject muteButton;
+	public GameObject exitButton;
 	Vector3 endPointForFlare = new Vector3 (39.67602f, 9.015059f, 591.6068f);//The end point of the flare's movement
 	bool flareReturning = false;//used to store the direction towards which the flare is going.
 	// Use this for initialization
@@ -23,6 +25,11 @@ public class TitleScreen : MonoBehaviour
 			effectFlare.SetActive(false);
 			CancelInvoke();//MoveFlare won't be called again
 			gameObject.GetComponent<LevelMenu>().enabled = true;
+			muteButton.GetComponent<GUITexture>().enabled = true;
+			exitButton.GetComponent<GUITexture>().enabled = true;
+			muteButton.GetComponent<MuteButton>().enabled = true;
+			exitButton.GetComponent<ExitButton>().enabled = true;
+			gameObject.GetComponent<TitleScreen>().enabled = false;
 		}
 	}
 	
