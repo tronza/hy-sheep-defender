@@ -15,18 +15,24 @@ public class ExitButton : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 	
 	}
+	
 	void OnMouseDown ()
 	{
-			ShowDialog(!showDialog);
+		showDialog = !showDialog;
+		this.ShowDialog();
 	}
-	void OnGUI() {
-		
+	
+	void OnGUI() 
+	{	
+
 	}
-	public void ShowDialog(bool show){
-		showDialog = show;
+
+	private void ShowDialog()
+	{
 		menuObject.GetComponent<LevelMenu>().enabled = !show;
 		muteObject.GetComponent<MuteButton>().enabled = !show;
 		muteObject.GetComponent<GUITexture>().enabled = !show;
