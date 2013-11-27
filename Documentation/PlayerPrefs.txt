@@ -1,0 +1,13 @@
+Used PlayerPref keys
+
+Key name: level_current (PlayerPrefKeys.LEVEL_CURRENT)
+	type: string
+	description: Contains the path to the current level file (e.g. levels/level1.ini). The key is set in the level menu and loaded in the base scene by the level class.
+
+Key name: mute (PlayerPrefKeys.MUTE)
+	type: int
+	description: Is 0 if mute is disabled and 1 if it's enabled. The key is used by the Mute class and should only be changed by using this class' methods.
+
+Key name: <level file's path> (e.g. levels/level1.ini)
+	type: int
+	description: The level class sets this to 1 when the level has reached to its end and all the wolves have been killed. If the value is 1, the level will be marked as (Completed) in the level menu. 

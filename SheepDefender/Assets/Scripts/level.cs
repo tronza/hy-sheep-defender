@@ -12,25 +12,32 @@ public class level : MonoBehaviour {
 	private int levelDuration;//Shows the total time for completing the level
 	private int timeEllapsed =0;//shows how much time has ellapsed
 	private Dictionary<int, string[]> wolvesToSpawn = new Dictionary<int, string[]>();//Key is the point in time (second) in which wolves of the value (string array) are generated
+	private Dictionary<int, string> messages = new Dictionary<int, string>();//Key is the point in time (second) in which the message (value) is shown
 	private GameObject[] spawnPoints;//The possible places the wolves can spawn to
 	private int lastWolfsId =0;
 	
 	public Texture progressbarBackground;
 	public Texture progressbarForeground;
+	public GameObject textObject;//The game object used to show messages
+	private GUIText messageText;//The GUIText of the above game object
 	
 	public int progressBarX = 1;
 	public int progressBarY = 1;
 	public int progressBarH = 32;
 	public int progressBarW = 256;
 	
+	private VictoryGUI victoryGUI;
+	
 	// Use this for initialization
 	void Start () {
-		levelName = PlayerPrefs.GetString(PlayerPrefKeys.LEVEL_CURRENT);
 		
+		victoryGUI = gameObject.GetComponent<VictoryGUI>();
+		
+		levelName = PlayerPrefs.GetString(PlayerPrefKeys.LEVEL_CURRENT);
 		LoadLevelFile(levelName );//loads the level file
 		
 		spawnPoints = GameObject.FindGameObjectsWithTag("Spawn"); //all spawn points in scene
-		
+		messageText = textObject.GetComponent<GUIText>();//Sets the gui text to modify
 		InvokeRepeating("TimerTick", 1, 1);//Start the timer that checks for new wolves to spawn
 		
 	}
@@ -58,11 +65,22 @@ public class level : MonoBehaviour {
 		timeEllapsed++;
 		if(timeEllapsed>=levelDuration){//don't check for the wolves if the level has already ended
 			
-			//Place the end of a level function here
+			//End of the level
+			GameObject wolf = GameObject.FindGameObjectWithTag("Attacker");
+			if(wolf==null){//all wolves are dead!
+				PlayerPrefs.SetInt(levelName, 1);//Marks the level as completed
+				PlayerPrefs.Save();
+				victoryGUI.ShowGUI();
+				CancelInvoke();//Disables this method
+			}
 			
 			return;
 		}
 		if(wolvesToSpawn.ContainsKey(timeEllapsed)){//There are wolves to spawn at this time point
+			//Message
+			messageText.text = messages[timeEllapsed];
+			
+			//The wolves
 			System.Random rnd = new System.Random();
 			string[] wolves = wolvesToSpawn[timeEllapsed];
 			List<int> spawnIndices = GenerateListWithNumbers(spawnPoints.Length);//This list contains the possible indicies so that if the number of wolves is smaller than the number of spawners, multiple wolves won't spawn on the same spot
@@ -107,7 +125,9 @@ public class level : MonoBehaviour {
 			int sec = ConvertStringToInt(groupName);
 			if(sec!=-1){//is a group that specifies time
 				string wolves = iniReader.getValue(groupName,"spawn","wolf");
-				wolvesToSpawn.Add(sec,wolves.Split(';')); //sets the time to the group name and wolves obtained from the level file to the dictionary
+				string message = iniReader.getValue(groupName,"message","");
+				wolvesToSpawn.Add(sec,wolves.Split(';')); //sets the time as value and wolves obtained from the level file to the dictionary
+				messages.Add(sec,message);//Adds a message to the list
 			}
 		}
 		
