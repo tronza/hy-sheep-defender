@@ -15,7 +15,6 @@ public class Sheep : MonoBehaviour
 	int jumpCount = 0;
 	public int jumpCap = 2; //double jump allowed!
 	Vector3 moveDir;
-//	Transform cam;
 	CharacterController cont;
 	
 	float advancement;
@@ -44,8 +43,7 @@ public class Sheep : MonoBehaviour
 		else if(transform.position.y > -1.0f) {
 			moveDir.y -= gravity;
 		}
-		
-//		Debug.Log(moveDir);
+
 		cont.Move(moveDir * Time.deltaTime);
 		
 		

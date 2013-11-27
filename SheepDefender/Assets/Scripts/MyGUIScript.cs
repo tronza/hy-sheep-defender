@@ -139,7 +139,6 @@ public class MyGUIScript : MonoBehaviour
 	//changed this so many times that it's better as a function
 	void rotateObjOnY(GameObject obj, float degrees) {
 		obj.transform.RotateAround(obj.transform.position, Vector3.up, degrees);
-//		Debug.Log(obj.transform.rotation.eulerAngles);
 	}
 	
 	//this is the placing of the turret
@@ -224,27 +223,7 @@ public class MyGUIScript : MonoBehaviour
 			}
 		}
 	}
-	
-//	//disable all components but the render
-//	void DisableAllButRender (GameObject obj)
-//	{
-//		//disable all scripts
-//		foreach (Behaviour childComponent in obj.GetComponentsInChildren<Behaviour>()) {
-//			childComponent.enabled = false;
-//		}
-//		obj.collider.enabled = false;
-//		//TODO: ensure every other component is disabled (e.g. what about rigidbody?)
-//	}
-//	
-//	void EnableAll (GameObject obj)
-//	{
-//		foreach (Behaviour childComponent in obj.GetComponentsInChildren<Behaviour>()) {
-//			childComponent.enabled = true;
-//		}
-//		obj.collider.enabled = true;
-//		//TODO: ensure every other component is enabled
-//	}
-	
+
 	GameObject CreateTurret (int turretKind, Vector3 position, float yRotation)
 	{
 		GameObject prefab = (GameObject)placeablePrefabs[turretKind];

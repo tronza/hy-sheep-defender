@@ -21,10 +21,4 @@ public class Shootable : MonoBehaviour {
 		}
 		Destroy(gameObject);
 	}
-	
-//	//directly moving the Transform is ok for kinematic object, not ok for other rigidbodies
-//	void FixedUpdate() {
-//		//deltaTime could be changed for fixedTime
-//		transform.Translate(movementDir * speed * Time.deltaTime, Space.World);
-//	}
 }
