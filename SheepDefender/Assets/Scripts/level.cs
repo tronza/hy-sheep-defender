@@ -26,10 +26,14 @@ public class level : MonoBehaviour {
 	public int progressBarH = 32;
 	public int progressBarW = 256;
 	
+	private VictoryGUI victoryGUI;
+	
 	// Use this for initialization
 	void Start () {
-		levelName = PlayerPrefs.GetString(PlayerPrefKeys.LEVEL_CURRENT);
 		
+		victoryGUI = gameObject.GetComponent<VictoryGUI>();
+		
+		levelName = PlayerPrefs.GetString(PlayerPrefKeys.LEVEL_CURRENT);
 		LoadLevelFile(levelName );//loads the level file
 		
 		spawnPoints = GameObject.FindGameObjectsWithTag("Spawn"); //all spawn points in scene
@@ -66,7 +70,7 @@ public class level : MonoBehaviour {
 			if(wolf==null){//all wolves are dead!
 				PlayerPrefs.SetInt(levelName, 1);//Marks the level as completed
 				PlayerPrefs.Save();
-				Debug.Log("The level has ended - You won!!");
+				victoryGUI.ShowGUI();
 				CancelInvoke();//Disables this method
 			}
 			

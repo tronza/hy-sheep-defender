@@ -14,12 +14,21 @@ public class TitleScreen : MonoBehaviour
 	void Start ()
 	{
 		InvokeRepeating ("MoveFlare", 0, 0.1f);//Starts the flare's movement
+		if(PlayerPrefs.GetInt(PlayerPrefKeys.SKIP_TITLE)==1){
+			PlayerPrefs.SetInt(PlayerPrefKeys.SKIP_TITLE, 0);
+			ShowLevelMenu();//if skip is set
+		}
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
 		if (Input.anyKeyDown) {//Close the title and show the level menu
+			ShowLevelMenu();
+		}
+	}
+	
+	void ShowLevelMenu(){
 			pressKeyText.SetActive(false);
 			gameLogo.SetActive(false);
 			effectFlare.SetActive(false);
@@ -30,7 +39,6 @@ public class TitleScreen : MonoBehaviour
 			muteButton.GetComponent<MuteButton>().enabled = true;
 			exitButton.GetComponent<ExitButton>().enabled = true;
 			gameObject.GetComponent<TitleScreen>().enabled = false;
-		}
 	}
 	
 	void MoveFlare ()//Moves the flare from one direction to another

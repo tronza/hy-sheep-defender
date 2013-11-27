@@ -11,6 +11,9 @@ public class Prologue : MonoBehaviour {
 		TextMesh text = prologueText.GetComponent<TextMesh>();
 		text.text ="In a farm not so far \naway from here, \na farmer had left his \nsheep alone in the field. \n\n Hungry wolves started to \ncome from the woods. \nTheir only goal was to \neat the meaty sheep\nthat were standing in\nthe field eating lawn. \n\nLuckily a space sheep\nhappened to crash his\nspace ship to the very\nsame field. He saw how\nmuch his primitive relatives\nneeded him and decided\nto help them. \n\nThe book of wise sheep\nknows him as \nthe Sheep Defender\n";
 		InvokeRepeating ("MoveText", 0, 0.1f);//Starts the text's movement
+		if(PlayerPrefs.GetInt(PlayerPrefKeys.SKIP_TITLE)==1){
+			ShowTitle();//if skip is set
+		}
 	}
 	
 	// Update is called once per frame
