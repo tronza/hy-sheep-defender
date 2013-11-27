@@ -11,80 +11,83 @@ public class Damageable : MonoBehaviour
 	public int numberOfCoins = 5;
 	public Transform coin_prefab;
 	
-	float healthBarRatio;
 	GameObject healthBar;
-	//Vector3 healthBarStartPoint = new Vector3(-2.0f, 2.0f, 0.0f);
-	//Vector3 healthBarEndPoint   = new Vector3(2.0f, 1.5f, 0.0f);
-	
-	MeshRenderer lineRenderer;
+	float originalScaleX;
+	float originalHealth;
 	
 	// Use this for initialization
 	void Start ()
 	{
-		healthBarRatio = health;
-	    
-		// Creates GameObject and a clone of it...
-		healthBar = (GameObject) Instantiate (new GameObject(), transform.position, Quaternion.identity);
-		healthBar.AddComponent<MeshRenderer>();
-		healthBar.transform.LookAt(Camera.main.transform.position);
+		// Instantiate the HealthBar prefab
+		healthBar = (GameObject) Instantiate (
+			Resources.Load("HealthBar"),
+			transform.position + new Vector3(0.0f, 3.0f, 0.0f),
+			Quaternion.identity
+		);
 		
-		lineRenderer = healthBar.GetComponent<MeshRenderer>();
+		// Make the HealthBar follow the object the Damageable is attached to
+		healthBar.transform.parent = transform;
 		
-		lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
-	    /*lineRenderer.SetColors(Color.green, Color.green);
-	    lineRenderer.SetWidth(0.25f, 0.25f);
-	    lineRenderer.SetVertexCount(2);
-		lineRenderer.enabled = false;*/
+		// Remember the initial size of the HealthBar and initial health amount
+		originalScaleX = healthBar.transform.localScale.x;
+		originalHealth = health;
+		
+		// Hide the HealthBar for now
+		healthBar.SetActive(false);
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		if (lineRenderer.enabled) {	
-			healthBar.transform.LookAt(Camera.main.transform.position, -Vector3.up);
-			
-			/**lineRenderer.SetPosition (0, transform.position + healthBarStartPoint);
-			lineRenderer.SetPosition (1, transform.position + healthBarEndPoint);*/
-		}
+		// Set the HealthBar to face the camera
+		healthBar.transform.LookAt(Camera.main.transform.position, -Vector3.up);
 	}
 
 	public void ReceiveDamage (float damage)
 	{	
+		// Show the HealthBar because damage is received
+		healthBar.SetActive(true);
+		
 		// TODO: do something fancy with the amount of received damage ;-)
 		// if (this.hasArmour ()) {
 		// 	 this.health -= damage / 2;
 		// } etc.
 		
-		float ratio = (healthBarRatio - damage) / healthBarRatio;
+		// Decrease the healthbar width relatively 
+		healthBar.transform.localScale -= new Vector3(
+			(originalScaleX / (originalHealth / damage)), 0.0f, 0.0f
+		);
 		
-		healthBarEndPoint -= new Vector3(0.5f, 0.0f, 0.0f);
+		// Decrease the health
+		health -= damage;
 		
-		this.health -= damage;
-		
+		// If out of health
 		if (!this.HasHealth ()) {
 			// TODO: what happens to the referencing turrets etc after destroying the object?
 			Destroy (healthBar);
 			Destroy (gameObject);
+			
+			// Spawn number of coins
 			for (int i =0; i<numberOfCoins; i++) {
+				
+				// If I am a Wolf object
 				if (gameObject.name.Contains ("Wolf")) {
 					Instantiate (coin_prefab, new Vector3 (
-					transform.localPosition.x+(0.5f*i),
-					transform.localPosition.y + 0.5F,
-					transform.localPosition.z+(0.25f*i)
-				), Quaternion.identity);
+						transform.localPosition.x+(0.5f*i),
+						transform.localPosition.y + 0.5F,
+						transform.localPosition.z+(0.25f*i)
+					), Quaternion.identity);
 				}
 			}
-			
+
 			if (this.dieEffect) {
 				Destroy (Instantiate (this.dieEffect, transform.position, Quaternion.identity), 1);	
 			}
-		} else {
-			lineRenderer.enabled = true;
 		}
 	}
 
 	public bool HasHealth ()
 	{
-		return this.health >= 0;
+		return this.health > 0;
 	}
 }
