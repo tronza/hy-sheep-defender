@@ -25,5 +25,7 @@ public sealed class PlayerPrefKeys
 	//For PayerPrefs, is mute set
 	public const string MUTE = "mute";
 	
+	public const string SKIP_TITLE = "skip_title";
+	
 }
 
