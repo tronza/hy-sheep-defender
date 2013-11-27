@@ -22,6 +22,9 @@ public sealed class PlayerPrefKeys
 	 */
 	public const string LEVEL_CURRENT = "level_current";
 	
+	/* The current score of the Player */
+	public const string SCORE = "score";
+	
 	//For PayerPrefs, is mute set
 	public const string MUTE = "mute";
 	

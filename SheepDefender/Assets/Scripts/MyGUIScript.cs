@@ -51,7 +51,7 @@ public class MyGUIScript : MonoBehaviour
 			GUILayout.FlexibleSpace (); //fill
 			GUILayout.Label ("Level: " + myGameInfo.level);
 			GUILayout.FlexibleSpace (); //fill
-			GUILayout.Label ("Player name: " + myGameInfo.playerName);
+			// GUILayout.Label ("Player name: " + myGameInfo.playerName);
 			GUILayout.EndHorizontal ();
 			
 			if (placingTurret) {
