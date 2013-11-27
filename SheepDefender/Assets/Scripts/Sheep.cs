@@ -21,6 +21,8 @@ public class Sheep : MonoBehaviour
 	float advancement;
 	float rotation;
 	
+	Plane plane = new Plane(Vector3.up,0);
+	
 	void Start () {
 		cont = GetComponent<CharacterController>();
 	}
@@ -48,14 +50,22 @@ public class Sheep : MonoBehaviour
 		
 		
 		//cast ray from camera to ground, get intersection point with ground layer and move light there
-//		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-//		RaycastHit hitInfo;
-//		
-//		//allow for plane
-//		if (Physics.Raycast (ray, out hitInfo, Mathf.Infinity, groundLayerMask)) {lightObj.transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + placeablePosY, hitInfo.point.z);
-//			//
-//		}
 		
+		
+		float dist;
+		Ray ray = Camera.mainCamera.ScreenPointToRay(Input.mousePosition);
+		if (plane.Raycast(ray, out dist)) {
+			Vector3 point = ray.GetPoint(dist);
+			
+			//find the vector pointing from our position to the target
+			Vector3 _direction = (point - transform.position).normalized;
+			 
+			//create the rotation we need to be in to look at the target
+			Quaternion _lookRotation = Quaternion.LookRotation(_direction);
+			 
+			//rotate us over time according to speed until we are in the required rotation
+			transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
+		}
 		
 		/*changing weapon*/
 		if (Input.GetAxis ("Mouse ScrollWheel") > 0) {
