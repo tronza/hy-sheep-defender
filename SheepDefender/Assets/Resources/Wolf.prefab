@@ -1070,7 +1070,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   health: 100
+  numberOfCoins: 5
   coin_prefab: {fileID: 400000, guid: a261febd8c86c48ee917fa9809b1742f, type: 2}
+  healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
