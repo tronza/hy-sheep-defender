@@ -20,7 +20,33 @@ public class sheepScript : MonoBehaviour {
 	
 	public float damage = 5f;
 	
-	void Start() {	
+	/* Attribute for Energy bar */
+	public int maxCooldown = 100; // Maximum Energy of sheep
+	public int curCooldown = 100; // Current Energy of sheep
+	public float lengthCooldown; // Length Energy bar of sheep
+	
+	// For the style of Energy bar
+	GUIStyle style; 
+    Texture2D texture;
+    Color redColor;
+    Color greenColor;
+	
+	// For incrementation of Energy bar after n seconds
+	float incrementTime = 1f;
+	float incrementBy = 1;
+	double time = 0;
+	
+	
+	void Start() {
+		// Initialize Energy bar and its style
+		lengthCooldown=Screen.width / 3;
+		texture = new Texture2D(1, 1);
+        texture.SetPixel(1, 1, greenColor);
+		
+		style = new GUIStyle();
+		redColor = Color.red;
+    	greenColor = Color.green;
+		
 	}
 	
 	/* Update() : is called once per frame
@@ -37,6 +63,7 @@ public class sheepScript : MonoBehaviour {
         controller.Move(moveDirection * Time.deltaTime);*/
 		
 		/* Rotation */
+		//TODO Modify rotation 
 		if(Input.GetAxis("Horizontal")!=0)
         {
             if(angle>360 || angle<-360)
@@ -72,13 +99,15 @@ public class sheepScript : MonoBehaviour {
         {
 			if(Time.time >= nextShot)
 			{
-				if(currentWeapon==1) //red lazer
+				if(currentWeapon==1 && curCooldown>0) //red lazer
 				{
 					Instantiate (lazer_red_prefab, theGun.transform.position, theGun.transform.rotation);
+					curCooldown--;
 				}
-				else if(currentWeapon==2) //green lazer
+				else if(currentWeapon==2 && curCooldown>0) //green lazer
 				{
 					Instantiate (lazer_green_prefab, theGun.transform.position, theGun.transform.rotation);
+					curCooldown=curCooldown-2;
 				}
 				nextShot = Time.time + fireRate; //set the next shot time
 			}
@@ -93,6 +122,17 @@ public class sheepScript : MonoBehaviour {
 				currentWeapon=1;
 			}
 		}
+		
+		/* Increment the current Energy after n seconds */
+		time+=Time.deltaTime;
+		if (time >= incrementTime)
+		{
+			curCooldown++;
+			time=0;
+		}
+		
+		/* Adjust to Energy bar of the sheep */ 
+		AdjustCurrentHealth(0);
 	}
 	
 	/* OnCollisionEnter(Collision collision):
@@ -122,5 +162,47 @@ public class sheepScript : MonoBehaviour {
 	 * */
 	void AddCoin(){
 		
+	}
+	
+	/*OnGUI(): 
+	 * Print the Energy of the sheep in the screen
+	 * 
+	 * */
+	void OnGUI()
+	{
+		texture.Apply();
+ 
+        style.normal.background = texture;
+		
+		GUI.Box(new Rect(0,200,lengthCooldown,20), new GUIContent(""),style);
+	}
+	
+	/*
+	 * Adjust the display of the Energy bar
+	 * */
+	
+	public void AdjustCurrentHealth(int adj) { 
+ 
+	if (curCooldown < 0) 
+		curCooldown = 0; 
+	
+	if (curCooldown > maxCooldown) 
+		curCooldown = maxCooldown;
+	
+	// No division by zero
+	if (maxCooldown < 1)
+		maxCooldown = 1;
+	
+	if (curCooldown > 50)
+	{
+		texture.SetPixel(1, 1, greenColor);
+	}
+	
+	if (curCooldown < 50)
+	{
+		texture.SetPixel(1, 1, redColor);
+	}
+	
+	lengthCooldown=(Screen.width / 3) * (curCooldown / (float)maxCooldown);
 	}
 }
