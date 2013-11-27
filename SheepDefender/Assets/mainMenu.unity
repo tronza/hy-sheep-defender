@@ -202,7 +202,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+  numberOfCoins: 5
   coin_prefab: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!195 &28204779
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -860,7 +862,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+  numberOfCoins: 5
   coin_prefab: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!114 &156375135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8215,7 +8219,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+  numberOfCoins: 5
   coin_prefab: {fileID: 0}
+  healthBar: {fileID: 0}
 --- !u!195 &1932699785
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8982,7 +8988,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400018, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
   m_PrefabInternal: {fileID: 399758453}
   m_GameObject: {fileID: 2112142702}
-  m_LocalRotation: {x: .512206078, y: .685850859, z: .516754031, w: -.014797233}
+  m_LocalRotation: {x: .512206018, y: .685850799, z: .516753972, w: -.0147972321}
   m_LocalPosition: {x: 8.56816769e-08, y: -1.41561031e-07, z: 1.38931524e-08}
   m_LocalScale: {x: 1, y: 1, z: 1.00000012}
   m_Children:

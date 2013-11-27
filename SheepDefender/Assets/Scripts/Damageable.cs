@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Damageable : MonoBehaviour
 {
+	const string HEALTH_BAR = "HealthBar";
+
 	/**
 	 * dieEffect may be null. Then the Damageable object will just... disappear.
 	 */
@@ -11,7 +13,8 @@ public class Damageable : MonoBehaviour
 	public int numberOfCoins = 5;
 	public Transform coin_prefab;
 	
-	GameObject healthBar;
+	// You can override default from the Unity3D editor
+	public GameObject healthBar;
 	float originalScaleX;
 	float originalHealth;
 	
@@ -20,7 +23,7 @@ public class Damageable : MonoBehaviour
 	{
 		// Instantiate the HealthBar prefab
 		healthBar = (GameObject) Instantiate (
-			Resources.Load("HealthBar"),
+			(healthBar == null ? Resources.Load(HEALTH_BAR) : healthBar),
 			transform.position + new Vector3(0.0f, 3.0f, 0.0f),
 			Quaternion.identity
 		);
@@ -81,13 +84,13 @@ public class Damageable : MonoBehaviour
 			}
 
 			if (this.dieEffect) {
-				Destroy (Instantiate (this.dieEffect, transform.position, Quaternion.identity), 1);	
+				Destroy (Instantiate (this.dieEffect, transform.position, Quaternion.identity), 1.0f);	
 			}
 		}
 	}
 
 	public bool HasHealth ()
 	{
-		return this.health > 0;
+		return this.health > 0.0f;
 	}
 }
