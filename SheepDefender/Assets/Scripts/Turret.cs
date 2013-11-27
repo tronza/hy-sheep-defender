@@ -23,6 +23,7 @@ public class Turret : MonoBehaviour
 			transform.LookAt (this.target.transform.position);
 		}
 		
+		// Remove the beam when half of the cooldownTime is passed
 		if (cooldownRemaining <= (cooldownTime/2)) {
 			LineRenderer lineRenderer = GetComponent<LineRenderer>();
 			lineRenderer.enabled = false;
