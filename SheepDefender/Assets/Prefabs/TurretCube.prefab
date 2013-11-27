@@ -13,6 +13,7 @@ GameObject:
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400006}
   m_Layer: 10
   m_Name: TurretCube
   m_TagString: Defender
@@ -94,6 +95,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
+  coin_prefab: {fileID: 0}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90078328f2e6d514d9576c70a678e0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameToDisplay: Turret Cube
+  price: 10
+  icon: {fileID: 2800000, guid: ab94ea3e232a52348912b14003f9c28f, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -12,6 +12,7 @@ TagManager:
   - top
   - right
   - lazer
+  - placer
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
