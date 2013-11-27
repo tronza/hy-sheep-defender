@@ -41,10 +41,8 @@ public class MyGUIScript : MonoBehaviour
 		{
 			Object prefab = placeablePrefabs[i];
 			if(prefab is GameObject){
-				Placeable placeable = ((GameObject)prefab).GetComponentsInChildren<Placeable>(true)[0];
-				string pName = placeable.name;
-				Texture2D pIcon = placeable.icon;
-				turrets[i] = new GUIContent (pName, pIcon);
+				Purchaseable placeable = ((GameObject)prefab).GetComponentsInChildren<Purchaseable>(true)[0];
+				turrets[i] = new GUIContent (placeable.nameToDisplay, placeable.icon);
 			}
 		}
 		
@@ -160,7 +158,7 @@ public class MyGUIScript : MonoBehaviour
 				Object prefab = placeablePrefabs[selectedTurret];
 				
 				//TODO: disable buttons when there are not enough money
-				Placeable placeable = ((GameObject)prefab).GetComponentsInChildren<Placeable>(true)[0];
+				Purchaseable placeable = ((GameObject)prefab).GetComponentsInChildren<Purchaseable>(true)[0];
 				if(myGameInfo.coins < placeable.price) {
 					Debug.Log("Not enough money");
 					placingTurret = false;
@@ -207,18 +205,12 @@ public class MyGUIScript : MonoBehaviour
 
 			//cast ray from camera to ground, get intersection point with ground layer and move light there
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-//			Debug.DrawRay(ray.origin, ray.direction*10000, Color.magenta);
 			RaycastHit hitInfo;
 			
-			if (Physics.Raycast (ray, out hitInfo, Mathf.Infinity, groundLayerMask)) {
-//				Vector3 pos = new Vector3(hitInfo.point.x, 1f, hitInfo.point.z);
-//				Debug.Log("Position " + pos + ", placeablePosY " + placeablePosY);
-//				lightObj.transform.position = new Vector3(pos.x, pos.y + placeablePosY, pos.z);
-//				Debug.Log("Position " + hitInfo.point + ", placeablePosY " + placeablePosY + ", tag " + hitInfo.collider.tag);
-				lightObj.transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + placeablePosY, hitInfo.point.z);
+			if (Physics.Raycast (ray, out hitInfo, Mathf.Infinity, groundLayerMask)) {lightObj.transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + placeablePosY, hitInfo.point.z);
 				
 				//TODO: replace discardClick
-				//this also checks for collisions in the zone
+				//allow placing only if zone is free
 				if (Input.GetMouseButtonDown (0) && !discardClick && !lightTrig.triggered) {
 					GameObject createdTurret = CreateTurret (selectedTurret, hitInfo.point, lightObj.transform.rotation.eulerAngles.y - 90f);
 					lightProj.enabled = false;
@@ -258,7 +250,7 @@ public class MyGUIScript : MonoBehaviour
 		GameObject prefab = (GameObject)placeablePrefabs[turretKind];
 		
 		//consume coins
-		Placeable placeable = prefab.GetComponentsInChildren<Placeable>(true)[0];
+		Purchaseable placeable = prefab.GetComponentsInChildren<Purchaseable>(true)[0];
 		myGameInfo.coins -= placeable.price;
 		
 		//correct placing position with height
