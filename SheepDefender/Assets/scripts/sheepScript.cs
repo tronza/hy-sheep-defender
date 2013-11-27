@@ -20,25 +20,25 @@ public class sheepScript : MonoBehaviour {
 	
 	public float damage = 5f;
 	
-	/* Attribute for health bar */
+	/* Attribute for Energy bar */
 	public int maxCooldown = 100; // Maximum Energy of sheep
 	public int curCooldown = 100; // Current Energy of sheep
 	public float lengthCooldown; // Length Energy bar of sheep
 	
-	// For the style of health bar
+	// For the style of Energy bar
 	GUIStyle style; 
     Texture2D texture;
     Color redColor;
     Color greenColor;
 	
-	// For incrementation of health bar after n seconds
-	float incrementTime = 4f;
+	// For incrementation of Energy bar after n seconds
+	float incrementTime = 1f;
 	float incrementBy = 1;
 	double time = 0;
 	
 	
 	void Start() {
-		// Initialize health bar and its style
+		// Initialize Energy bar and its style
 		lengthCooldown=Screen.width / 3;
 		texture = new Texture2D(1, 1);
         texture.SetPixel(1, 1, greenColor);
@@ -123,7 +123,7 @@ public class sheepScript : MonoBehaviour {
 			}
 		}
 		
-		/* Increment the current health after n seconds */
+		/* Increment the current Energy after n seconds */
 		time+=Time.deltaTime;
 		if (time >= incrementTime)
 		{
@@ -131,10 +131,8 @@ public class sheepScript : MonoBehaviour {
 			time=0;
 		}
 		
-		/* Adjust to health bar of the sheep */ 
+		/* Adjust to Energy bar of the sheep */ 
 		AdjustCurrentHealth(0);
-		
-		// TODO Add if curHealth is 0 Destroyed the sheep
 	}
 	
 	/* OnCollisionEnter(Collision collision):
@@ -167,7 +165,7 @@ public class sheepScript : MonoBehaviour {
 	}
 	
 	/*OnGUI(): 
-	 * Print the health of the sheep in the screen
+	 * Print the Energy of the sheep in the screen
 	 * 
 	 * */
 	void OnGUI()
@@ -180,7 +178,7 @@ public class sheepScript : MonoBehaviour {
 	}
 	
 	/*
-	 * Adjust the display of the bar of life
+	 * Adjust the display of the Energy bar
 	 * */
 	
 	public void AdjustCurrentHealth(int adj) { 
