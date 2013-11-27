@@ -7,13 +7,20 @@ public class GameScore : MonoBehaviour
 	{
 	}
 	
+	public void Start () 
+	{
+		PlayerPrefs.SetInt (PlayerPrefKeys.SCORE, 0);	
+	}
+	
 	public void OnGUI () 
 	{
+		var scorePoints = PlayerPrefs.GetInt (PlayerPrefKeys.SCORE);
+
 		GUILayout.BeginArea (new Rect (0, 0, Screen.width, Screen.height));
 			GUILayout.BeginVertical ();
 				GUILayout.BeginHorizontal ();
 					GUILayout.FlexibleSpace ();
-					GUILayout.Label (PlayerPrefs.GetString (PlayerPrefKeys.SCORE));
+					GUILayout.Label ("Score: " + scorePoints.ToString());
 				GUILayout.EndHorizontal ();
 			GUILayout.EndVertical ();
 		GUILayout.EndArea ();

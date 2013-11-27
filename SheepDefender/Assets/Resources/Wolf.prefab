@@ -555,6 +555,7 @@ GameObject:
   - 114: {fileID: 11400006}
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400008}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Attacker
@@ -1102,6 +1103,19 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 350
   nextWaypointDistance: 3
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c0498ee03f446f7a92b0a1c60f1711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scorePointsBeginning: 5
+  decreaseScorePointEvery: 10
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
