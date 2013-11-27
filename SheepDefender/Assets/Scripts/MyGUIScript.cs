@@ -215,9 +215,6 @@ public class MyGUIScript : MonoBehaviour
 					lightProj.enabled = false;
 					placingTurret = false;
 					
-					//update pathfinding grid
-					AstarPath.active.UpdateGraphs(createdTurret.collider.bounds);
-					
 					//TODO: check what happens to the paths, are they updated when the grid is updated?
 				}
 			}
