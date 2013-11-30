@@ -164,10 +164,9 @@ public class MyGUIScript : MonoBehaviour
 					startedPlacing = false;
 					return;
 				}
-				myGameInfo.coins -= placeable.price;
 				lightProj.enabled = true;
 				
-				//this is to put the turret at the right height from the groun, please do not use negative y
+				//this is to put the turret at the right height from the ground, please do not use negative y
 				Transform pTransform = ((GameObject)prefab).GetComponentsInChildren<Transform>(true)[0];
 				placeablePosY = pTransform.position.y;
 				
