@@ -8,62 +8,103 @@ public class Sheep : MonoBehaviour
 	
 	int currentWeapon = 1; //represents the weapon to use 1->red lazer, 2->green lazer
 	
-	public float moveSpeed = 10f;
+	public float moveSpeed = 10f; //in meters per second
 	public float rotationSpeed = 100.0F; //in degrees per sec
-	float gravity = 9.81f;
-	public float jumpHeight = 4f;
-	int jumpCount = 0;
-	public int jumpCap = 2; //double jump allowed!
-	Vector3 moveDir;
-	CharacterController cont;
+	public float jumpSpeed = 20.0F;
+	public float jumpUpTime = 0.5f; //time a jump goes up in secs
+	public int maxJumps = 2; //double jump allowed!
+	public bool relativeMove = true;
 	
-	float advancement;
+	CharacterController cont;
+	Vector3 moveDir;
+	float advance;
 	float rotation;
+	float jumpTimeLeft;
+	int jumpCount; //how many jumps have been done since touching the ground
+	float gravity;
+	
 	
 	Plane plane = new Plane(Vector3.up,0);
 	
 	void Start () {
 		cont = GetComponent<CharacterController>();
+		jumpTimeLeft = 0F;
+		jumpCount = 0;
+		gravity = Physics.gravity.magnitude;
 	}
 	
 	void Update () {
-		moveDir = Vector3.zero;
-		
-		if(cont.isGrounded) {
-			moveDir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-			jumpCount = 0;
+		if(relativeMove){
+			moveDir = Vector3.zero;
 			
-			if(Input.GetButtonDown("Jump") && jumpCount <= jumpCap) {
-				jumpCount+= 1;
-				moveDir.y += jumpHeight;
+			advance = Input.GetAxis("Vertical") * moveSpeed;
+	        rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+			
+	        rotation *= Time.deltaTime;
+			transform.Rotate(0, rotation, 0);
+			
+			//convert local forward to world forward and advance
+	        moveDir = transform.TransformDirection(Vector3.forward);
+			advance *= Time.deltaTime; //TODO: check
+	        moveDir *= advance;
+			
+			//if you are standing on the ground
+			if(cont.isGrounded) {
+		        jumpCount = 0;
+				jumpTimeLeft = jumpUpTime;
+			} else {
+				moveDir.y -= gravity * Time.deltaTime;
 			}
 			
-			moveDir *= moveSpeed;
-		}
-		else if(transform.position.y > -1.0f) {
-			moveDir.y -= gravity;
-		}
-
-		cont.Move(moveDir * Time.deltaTime);
-		
-		
-		//cast ray from camera to ground, get intersection point with ground layer and move light there
-		
-		
-		float dist;
-		Ray ray = Camera.mainCamera.ScreenPointToRay(Input.mousePosition);
-		if (plane.Raycast(ray, out dist)) {
-			Vector3 point = ray.GetPoint(dist);
+			//if the jump button was just pressed
+			if(Input.GetButtonDown("Jump")) {
+				if(jumpCount < maxJumps) {
+					jumpCount += 1;
+					moveDir.y += jumpSpeed * Time.deltaTime;
+				}
+			} else if(Input.GetButton("Jump")) {
+				if(jumpTimeLeft > 0F) {
+					jumpTimeLeft -= Time.deltaTime;
+					moveDir.y += jumpSpeed * Time.deltaTime;
+				}
+			}
 			
-			//find the vector pointing from our position to the target
-			Vector3 _direction = (point - transform.position).normalized;
-			 
-			//create the rotation we need to be in to look at the target
-			Quaternion _lookRotation = Quaternion.LookRotation(_direction);
-			 
-			//rotate us over time according to speed until we are in the required rotation
-			transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
-		}
+			//takes absolute deltas, gravity must be applied by hand
+			cont.Move(moveDir);
+		} else {
+//			if(cont.isGrounded) {
+//				moveDir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+//				jumpCount = 0;
+//				
+//				if(Input.GetButtonDown("Jump") && jumpCount <= maxJumps) {
+//					jumpCount+= 1;
+//					moveDir.y += jumpHeight;
+//				}
+//				
+//				moveDir *= moveSpeed;
+//			}
+//			else if(transform.position.y > -1.0f) {
+//				moveDir.y -= gravity;
+//			}
+//			
+//			cont.Move(moveDir * Time.deltaTime);
+//			
+//			//cast ray from camera to ground, get intersection point with ground layer and move light there
+//			float dist;
+//			Ray ray = Camera.mainCamera.ScreenPointToRay(Input.mousePosition);
+//			if (plane.Raycast(ray, out dist)) {
+//				Vector3 point = ray.GetPoint(dist);
+//				
+//				//find the vector pointing from our position to the target
+//				Vector3 _direction = (point - transform.position).normalized;
+//				 
+//				//create the rotation we need to be in to look at the target
+//				Quaternion _lookRotation = Quaternion.LookRotation(_direction);
+//				 
+//				//rotate us over time according to speed until we are in the required rotation
+//				transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * rotationSpeed);
+//			}
+			}
 		
 		/*changing weapon*/
 		if (Input.GetAxis ("Mouse ScrollWheel") > 0) {
