@@ -2903,7 +2903,7 @@ MonoBehaviour:
   jumpSpeed: 20
   jumpUpTime: .200000003
   maxJumps: 2
-  relativeMove: 1
+  relativeMove: 0
 --- !u!137 &1055064864
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
