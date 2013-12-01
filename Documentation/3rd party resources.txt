@@ -34,3 +34,8 @@ Name: Long_Time_Coming.mp3
 source URL: http://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100173
 license: Creative Commons: By Attribution 3.0
 Author: Kevin MacLeod
+
+Name: snow.jpg
+source URL: http://css.gamebanana.com/textures/2940
+license: Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License
+Author: markboydude
