@@ -114,9 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90078328f2e6d514d9576c70a678e0e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameToDisplay: 
-  price: 0
-  icon: {fileID: 0}
+  nameToDisplay: Green Laser Gun
+  price: 10
+  icon: {fileID: 2800000, guid: d7e2c3234fa43aa438591c98914e406a, type: 3}
 --- !u!114 &45726299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,9 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911d68c15a61d5d4796fd504e8b80d32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootablePrefab: {fileID: 0}
-  rateOfFire: 0
-  ammoLeft: 0
+  shootablePrefab: {fileID: 100000, guid: 3617ea74f48a5f2479b6d562e88ede8a, type: 2}
+  rateOfFire: .200000003
+  ammoLeft: 1000
 --- !u!1 &48250971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,11 +2899,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  rotationSpeed: 100
+  rotationSpeed: 180
   jumpSpeed: 20
   jumpUpTime: .200000003
   maxJumps: 2
-  relativeMove: 0
+  relativeMove: 1
+  weaponPrefabs: []
 --- !u!137 &1055064864
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -5512,6 +5513,30 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: nameToDisplay
+      value: Green Laser Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: price
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 2800000, guid: d7e2c3234fa43aa438591c98914e406a, type: 3}
+    - target: {fileID: 11400006, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: ammoLeft
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: rateOfFire
+      value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: shootablePrefab
+      value: 
+      objectReference: {fileID: 100000, guid: 3617ea74f48a5f2479b6d562e88ede8a, type: 2}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
