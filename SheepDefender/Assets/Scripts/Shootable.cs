@@ -4,10 +4,11 @@ using System.Collections;
 public class Shootable : MonoBehaviour {
 	public float damage;
 	public float speed;
-	Vector3 movementDir;
 	
+	//this will preserve whatever the original rotation is and make it point the shooting direction
 	public void Shoot(Vector3 direction) {
-		movementDir = direction;
+		//doing *= will not work (quaternions are tricky)
+		transform.rotation = Quaternion.LookRotation(direction) * transform.rotation;
 		rigidbody.velocity = direction*speed;
 	}
 	
