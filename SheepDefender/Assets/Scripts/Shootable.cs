@@ -4,6 +4,7 @@ using System.Collections;
 public class Shootable : MonoBehaviour {
 	public float damage;
 	public float speed;
+	public AmmoStorage.AmmoType ammoType; //must be set to the right type
 	
 	//this will preserve whatever the original rotation is and make it point the shooting direction
 	public void Shoot(Vector3 direction) {

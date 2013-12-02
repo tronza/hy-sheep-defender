@@ -10,37 +10,9 @@ public class SpawnPickables : MonoBehaviour
 	// will work for prefabs of any size ;-)
 	void Start ()
 	{
-//		Rigidbody pRigidBody = ((GameObject)prefab).GetComponentsInChildren<Rigidbody>(true)[0];
-		
-		//if there is physics, we throw stuff in the air and let physics do its trick
-		//please keep the mass of 1
-//		if (pRigidBody != null) {
-//			StartCoroutine(spawnAtIntervals(spawnInterval));
-//		}
-		
 		Animation pAnimation = ((GameObject)prefab).GetComponentsInChildren<Animation>(true)[0];
 		SpawnAtOnce(pAnimation != null);
 	}
-	
-	//this is like a timer
-//	IEnumerator spawnAtIntervals (float interval)
-//	{
-//		GameObject spawned;
-//		Vector3 forceVector;
-//		for (int i = 0; i < numberToSpawn; ++i) {
-//			spawned = (GameObject)Instantiate(prefab, transform.position, Quaternion.identity);
-//			
-//			//add a force in a random direction
-//			forceVector = Random.onUnitSphere;
-//			forceVector.y = Mathf.Abs(forceVector.y);
-//			spawned.rigidbody.AddForce(forceVector);
-//			Debug.Log("Spawn dir " + forceVector);
-//			
-//			//wait before proceeding to the next iteration
-//			yield return new WaitForSeconds(interval);
-//		}
-//		Destroy(this);
-//	}
 	
 	int SpawnWithShift(Vector3 startPosition, Quaternion rotation, Vector3 shift, int times, string dir = "")
 	{

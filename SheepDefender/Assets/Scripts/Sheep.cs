@@ -9,6 +9,7 @@ public class Sheep : MonoBehaviour
 	public float jumpUpTime = 0.5f; //time a jump goes up in secs
 	public int maxJumps = 2; //double jump allowed!
 	public bool relativeMove = true;
+	public Transform gunHolder;
 	public Object[] weaponPrefabs;
 	
 	CharacterController cont;
@@ -19,14 +20,25 @@ public class Sheep : MonoBehaviour
 	int jumpCount; //how many jumps have been done since touching the ground
 	float gravity;
 	Plane plane = new Plane(Vector3.up, 0F);
-	int currentWeapon;
+	int selectedWeapon;
+	Weapon weapon;
+	
+	void SwitchWeapon() {
+		Object wPrefab = weaponPrefabs[selectedWeapon];
+		if (weapon != null) {
+			Destroy(weapon);
+		}
+		weapon = (Weapon)Instantiate(wPrefab, transform.position, Quaternion.identity);
+		weapon.transform.parent = gunHolder;
+	}
 	
 	void Start () {
 		cont = GetComponent<CharacterController>();
 		jumpTimeLeft = 0F;
 		jumpCount = 0;
 		gravity = Physics.gravity.magnitude;
-		currentWeapon = 0;
+		selectedWeapon = 0;
+		SwitchWeapon();
 	}
 	
 	void Update () {
@@ -62,12 +74,15 @@ public class Sheep : MonoBehaviour
 				//create the rotation we need to be in to look at the target
 				Quaternion lookRotation = Quaternion.LookRotation(direction);
 				
-				float angle = Quaternion.Angle(transform.rotation, lookRotation);
-				float timeToComplete = angle / rotationSpeed;
-				
-				//rotate towards a direction, but not immediately (rotate a little every frame)
-				//The 3rd parameter is a number between 0 and 1, where 0 is the start rotation and 1 is the end rotation
-				transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime / timeToComplete);
+				if (transform.rotation != lookRotation) {
+					float angle = Quaternion.Angle(transform.rotation, lookRotation);
+					float timeToComplete = angle / rotationSpeed;
+					float donePercentage = Mathf.Min(1F, Time.deltaTime / timeToComplete);
+					
+					//rotate towards a direction, but not immediately (rotate a little every frame)
+					//The 3rd parameter is a number between 0 and 1, where 0 is the start rotation and 1 is the end rotation
+					transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, donePercentage);
+				}
 			}
 		}
 		//if you are standing on the ground
@@ -99,11 +114,11 @@ public class Sheep : MonoBehaviour
 		float scroll = Input.GetAxis ("Mouse ScrollWheel");
 		if (scroll != 0F){
 			if (scroll > 0F) {
-				++currentWeapon;
+				++selectedWeapon;
 			} else {
-				--currentWeapon;
+				--selectedWeapon;
 			}
-			currentWeapon %= weaponPrefabs.Length;
+			selectedWeapon = Mathf.Abs(selectedWeapon % weaponPrefabs.Length);
 		}
 	}
 	

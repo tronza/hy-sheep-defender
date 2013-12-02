@@ -5,16 +5,9 @@ public class Weapon : MonoBehaviour {
 	
 	public Object shootablePrefab; //this is a prefab (an Object containing one or more GameObjects)
 	public float timeBetweenShots; //how much time to wait between shooting a round and the next
-	public int ammoLeft;
 	
-	//TODO: ammo count should be in sheep, weapon should only be loaded with a cartridge
-	//all these can be implemented or not
-//	public int cartridgeSize;
-//	public int ammoInCartridge;
-//	public float reloadTime;
-	
-	Shootable ammoLoaded;
-	AudioSource shootAudioSrc;
+	Shootable loadedAmmo;
+	AmmoStorage ammoStorage;
 	float readyToFire;
 	Quaternion baseAmmoRotation;
 	bool triggerPulled;
@@ -22,10 +15,10 @@ public class Weapon : MonoBehaviour {
 	
 	void Start() {
 		//we know in this case the prefab is just 1 GameObject
-		ammoLoaded = ((GameObject)shootablePrefab).GetComponentsInChildren<Shootable>(true)[0];
-		shootAudioSrc = GetComponent<AudioSource>();
+		loadedAmmo = ((GameObject)shootablePrefab).GetComponentsInChildren<Shootable>(true)[0];
+		ammoStorage = AmmoStorage.Instance; //singleton
 		readyToFire = Time.time;
-		Transform baseAmmoTransform = ammoLoaded.GetComponentsInChildren<Transform>(true)[0];
+		Transform baseAmmoTransform = loadedAmmo.GetComponentsInChildren<Transform>(true)[0];
 		baseAmmoRotation = baseAmmoTransform.rotation;
 		triggerPulled = false;
 		timeSinceShot = 0F;
@@ -34,26 +27,24 @@ public class Weapon : MonoBehaviour {
 	void Shoot() {
 		//make sure that the prefab orientation is preserved
 		Quaternion ammoRotation = baseAmmoRotation * transform.rotation;
-		Shootable shot = (Shootable)Instantiate(ammoLoaded, transform.position, ammoRotation);
+		Shootable shot = (Shootable)Instantiate(loadedAmmo, transform.position, ammoRotation);
 		
 		//shoot in the direction the weapon is facing
 		shot.Shoot(Vector3.Normalize(transform.forward));
-		--ammoLeft;
+		ammoStorage.ConsumeAmmo(loadedAmmo.ammoType, 1);
 		
 		//play shooting sound
-		shootAudioSrc.Play();
+		audio.Play();
 	}
 	
 	void PullTrigger() {
 		if(!triggerPulled) {
-			Debug.Log("pulling trigger 1st time");
 			triggerPulled = true;
 			timeSinceShot = 0F;
 			Shoot();
 		} else {
 			timeSinceShot += Time.deltaTime;
-			Debug.Log("timeSinceShot " + timeSinceShot);
-			if(timeSinceShot >= timeBetweenShots && ammoLeft > 0) {
+			if(timeSinceShot >= timeBetweenShots && ammoStorage.AvailabeAmmo(loadedAmmo.ammoType) > 0) {
 				timeSinceShot = 0F;
 				Shoot();
 			}
