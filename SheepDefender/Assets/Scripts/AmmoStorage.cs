@@ -2,6 +2,7 @@
 using System.Collections;
 
 //this class is a singleton (simple, non multithreaded)
+//it does _not_ need to be put in a GameObject, it creates its own
 public class AmmoStorage : MonoBehaviour
 {
 	public enum AmmoType {RedLaser, GreenLaser};
@@ -21,12 +22,9 @@ public class AmmoStorage : MonoBehaviour
 	}
 
 	public static AmmoStorage Instance {
-		get {
-			if (instance == null) {
-				instance = new AmmoStorage ();
-			}
-			return instance;
-		}
+		// Here we use the ?? operator, to return 'instance' if 'instance' does not equal null
+        // otherwise we assign instance to a new component and return that
+        get { return instance ?? (instance = new GameObject("AmmoStorage").AddComponent<AmmoStorage>()); }
 	}
 	
 	public int AvailabeAmmo(AmmoType type)

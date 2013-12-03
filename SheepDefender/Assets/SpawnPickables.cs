@@ -16,8 +16,6 @@ public class SpawnPickables : MonoBehaviour
 	
 	int SpawnWithShift(Vector3 startPosition, Quaternion rotation, Vector3 shift, int times, string dir = "")
 	{
-		Debug.Log("" + times + " " + dir);
-		
 		int spawned = 0;
 		for(int i=0; i < times; ++i){
 			//if a position is not free, just skip it
@@ -83,7 +81,6 @@ public class SpawnPickables : MonoBehaviour
 			spawnAt += downShift * (Mathf.Max(1, round * 2));
 			
 			++round;
-			Debug.Log("---");
 		}
 	}
 }

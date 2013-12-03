@@ -12,7 +12,7 @@ public class Sheep : MonoBehaviour
 	public Transform gunHolder;
 	public Object[] weaponPrefabs;
 	
-	CharacterController cont;
+	CharacterController controller;
 	Vector3 moveDir;
 	float advance;
 	float rotation;
@@ -28,12 +28,14 @@ public class Sheep : MonoBehaviour
 		if (weapon != null) {
 			Destroy(weapon);
 		}
-		weapon = (Weapon)Instantiate(wPrefab, transform.position, Quaternion.identity);
-		weapon.transform.parent = gunHolder;
+		//this will ignore any base transform the weapon prefab has (add code if you want to conserve it)
+		GameObject weaponObj = (GameObject)Instantiate(wPrefab, gunHolder.position, gunHolder.rotation);
+		weapon = weaponObj.GetComponent<Weapon>();
+		weaponObj.transform.parent = gunHolder;
 	}
 	
 	void Start () {
-		cont = GetComponent<CharacterController>();
+		controller = GetComponent<CharacterController>();
 		jumpTimeLeft = 0F;
 		jumpCount = 0;
 		gravity = Physics.gravity.magnitude;
@@ -86,7 +88,7 @@ public class Sheep : MonoBehaviour
 			}
 		}
 		//if you are standing on the ground
-		if(cont.isGrounded) {
+		if(controller.isGrounded) {
 	        jumpCount = 0;
 			jumpTimeLeft = jumpUpTime;
 		} else {
@@ -108,7 +110,14 @@ public class Sheep : MonoBehaviour
 		}
 		
 		//takes absolute deltas, gravity must be applied by hand
-		cont.Move(moveDir);
+		controller.Move(moveDir);
+		
+		//weapon firing
+		if (Input.GetButton("Fire1")) {
+			weapon.PullTrigger();
+		} else if (Input.GetButtonUp("Fire1")) {
+			weapon.ReleaseTrigger();
+		}
 		
 		//weapon switching
 		float scroll = Input.GetAxis ("Mouse ScrollWheel");
@@ -119,6 +128,7 @@ public class Sheep : MonoBehaviour
 				--selectedWeapon;
 			}
 			selectedWeapon = Mathf.Abs(selectedWeapon % weaponPrefabs.Length);
+			SwitchWeapon();
 		}
 	}
 	
