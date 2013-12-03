@@ -3698,6 +3698,18 @@ Prefab:
       propertyPath: gameInfo
       value: 
       objectReference: {fileID: 2034953317}
+    - target: {fileID: 11400006, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: relativeMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: faceMouse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: absoluteKeyMove
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
   m_RootGameObject: {fileID: 1811432110}
@@ -4387,7 +4399,8 @@ MonoBehaviour:
   jumpSpeed: 20
   jumpUpTime: .200000003
   maxJumps: 2
-  relativeMove: 1
+  faceMouse: 1
+  absoluteKeyMove: 0
   gunHolder: {fileID: 882409831}
   weaponPrefabs:
   - {fileID: 100000, guid: aa495e9b41033cf44b985d29c79e9265, type: 2}

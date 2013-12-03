@@ -8,7 +8,8 @@ public class Sheep : MonoBehaviour
 	public float jumpSpeed = 20.0F;
 	public float jumpUpTime = 0.5f; //time a jump goes up in secs
 	public int maxJumps = 2; //double jump allowed!
-	public bool relativeMove = true;
+	public bool faceMouse = false;
+	public bool absoluteKeyMove = false;
 	public Transform gunHolder;
 	public Object[] weaponPrefabs;
 	public GameInfo gameInfo;
@@ -45,7 +46,7 @@ public class Sheep : MonoBehaviour
 	}
 	
 	void Update () {
-		if(relativeMove){
+		if (!faceMouse) {
 			moveDir = Vector3.zero;
 			
 			advance = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
@@ -61,10 +62,6 @@ public class Sheep : MonoBehaviour
 	        moveDir = transform.TransformDirection(Vector3.forward);
 	        moveDir *= advance;
 		} else {
-			moveDir.x = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
-			moveDir.y = 0F;
-			moveDir.z = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
-			
 			//cast ray from camera to plane (plane is at ground level, but infinite in space)
 			float dist;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -87,7 +84,21 @@ public class Sheep : MonoBehaviour
 					transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, donePercentage);
 				}
 			}
+			
+			moveDir.x = Input.GetAxis("Horizontal");
+			moveDir.y = 0F;
+			moveDir.z = Input.GetAxis("Vertical");
+			if (moveDir.magnitude > 1F) {
+				moveDir.Normalize();
+			}
+			moveDir *= moveSpeed * Time.deltaTime;
+			
+			if (!absoluteKeyMove) {
+				moveDir = Quaternion.LookRotation(transform.forward) * moveDir;
+			}
 		}
+		
+		
 		//if you are standing on the ground
 		if(controller.isGrounded) {
 	        jumpCount = 0;
