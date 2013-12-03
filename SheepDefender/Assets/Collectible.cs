@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Pickable : MonoBehaviour
-{
+public class Collectible : MonoBehaviour {
 	public float durationTime; //values <= 0 mean object does never disappear
 	public Object vanishingEffect;
 	public int storeValue;

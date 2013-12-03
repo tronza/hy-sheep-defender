@@ -13,6 +13,7 @@ GameObject:
   - 136: {fileID: 13600000}
   - 54: {fileID: 5400000}
   - 111: {fileID: 11100000}
+  - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: NewCoin
@@ -70,7 +71,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 14
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!111 &11100000
 Animation:
@@ -82,7 +83,6 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: a4f558ed90e4f42eebea265ab0f54383, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: a4ceddc32651f84488ed1015d4bbccfc, type: 2}
   - {fileID: 7400000, guid: a4f558ed90e4f42eebea265ab0f54383, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
@@ -93,7 +93,7 @@ Animation:
     m_Extent: {x: 0, y: 0, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
@@ -102,9 +102,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d427ab236ee791a418514b87a27b14a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durationTime: 0
-  vanishingEffect: {fileID: 0}
-  storeValue: 0
+  m_EditorClassIdentifier: 
+  durationTime: 10
+  vanishingEffect: {fileID: 100000, guid: 7a598717ded698c4dbdd57c2260fa1e1, type: 2}
+  storeValue: 20
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4cc4819d2ea0a64fbd6662ccb90507b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  durationTime: 10
+  vanishingEffect: {fileID: 100000, guid: 7a598717ded698c4dbdd57c2260fa1e1, type: 2}
+  storeValue: 10
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -112,7 +127,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: .5
   m_Height: 2

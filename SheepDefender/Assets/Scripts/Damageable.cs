@@ -70,6 +70,7 @@ public class Damageable : MonoBehaviour
 			Destroy (healthBar);
 			Destroy (gameObject);
 			
+			gameObject.SendMessage("SpawnAtOnce", SendMessageOptions.DontRequireReceiver);
 			// Spawn number of coins
 //			for (int i =0; i<numberOfCoins; i++) {
 //				

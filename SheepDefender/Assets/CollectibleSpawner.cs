@@ -1,18 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpawnPickables : MonoBehaviour
-{
+public class CollectibleSpawner : MonoBehaviour {
+	
 	public Object prefab;
 	public int numberToSpawn;
-	public float spawnInterval = 0.1F;
-	
-	// will work for prefabs of any size ;-)
-	void Start ()
-	{
-		Animation pAnimation = ((GameObject)prefab).GetComponentsInChildren<Animation>(true)[0];
-		SpawnAtOnce(pAnimation != null);
-	}
 	
 	int SpawnWithShift(Vector3 startPosition, Quaternion rotation, Vector3 shift, int times, string dir = "")
 	{
@@ -27,8 +19,12 @@ public class SpawnPickables : MonoBehaviour
 		return spawned;
 	}
 	
-	void SpawnAtOnce(bool isAnimated)
+	// will work for prefabs of any size ;-)
+	void SpawnAtOnce()
 	{
+		Animation pAnimation = ((GameObject)prefab).GetComponentsInChildren<Animation>(true)[0];
+		bool isAnimated= pAnimation != null;
+		
 		//this is to spawn at the right height from the ground, please do not use negative y
 		Transform pTransform = ((GameObject)prefab).GetComponentsInChildren<Transform>(true)[0];
 		Vector3 spawnAt = transform.position;

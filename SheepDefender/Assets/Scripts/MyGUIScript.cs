@@ -18,7 +18,6 @@ public class MyGUIScript : MonoBehaviour
 	int selectedTurret = -1;
 	bool selectedTurretChanged = false;
 	bool placingTurret = false;
-	GameObject createdTurret;
 	bool discardClick = false;
 	bool startedPlacing = false;
 	float placeablePosY;
@@ -210,7 +209,7 @@ public class MyGUIScript : MonoBehaviour
 				//TODO: replace discardClick
 				//allow placing only if zone is free
 				if (Input.GetMouseButtonDown (0) && !discardClick && !lightTrig.triggered) {
-					GameObject createdTurret = CreateTurret (selectedTurret, hitInfo.point, lightObj.transform.rotation.eulerAngles.y - 90f);
+					CreateTurret (selectedTurret, hitInfo.point, lightObj.transform.rotation.eulerAngles.y - 90f);
 					lightProj.enabled = false;
 					placingTurret = false;
 					

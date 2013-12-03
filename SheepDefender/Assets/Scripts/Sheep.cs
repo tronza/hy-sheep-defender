@@ -11,6 +11,7 @@ public class Sheep : MonoBehaviour
 	public bool relativeMove = true;
 	public Transform gunHolder;
 	public Object[] weaponPrefabs;
+	public GameInfo gameInfo;
 	
 	CharacterController controller;
 	Vector3 moveDir;
@@ -66,7 +67,7 @@ public class Sheep : MonoBehaviour
 			
 			//cast ray from camera to plane (plane is at ground level, but infinite in space)
 			float dist;
-			Ray ray = Camera.mainCamera.ScreenPointToRay(Input.mousePosition);
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			if (plane.Raycast(ray, out dist)) {
 				Vector3 point = ray.GetPoint(dist);
 				
@@ -137,6 +138,15 @@ public class Sheep : MonoBehaviour
 	{
 		if (hit.gameObject.name.Contains ("coin")) {
 			hit.gameObject.SendMessage ("Collected");
+		}
+	}
+	
+	void OnTriggerEnter(Collider other)
+	{
+		Collectible collectible = other.GetComponent<Collectible>();
+		if (collectible != null) {
+			gameInfo.coins += collectible.storeValue;
+			Destroy(other.gameObject);
 		}
 	}
 }
