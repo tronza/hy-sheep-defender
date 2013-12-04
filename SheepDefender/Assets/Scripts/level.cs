@@ -21,7 +21,7 @@ public class level : MonoBehaviour {
 	public GameObject textObject;//The game object used to show messages
 	private GUIText messageText;//The GUIText of the above game object
 	
-	public int progressBarX = 1;
+	private int progressBarX;
 	public int progressBarY = 1;
 	public int progressBarH = 32;
 	public int progressBarW = 256;
@@ -30,7 +30,7 @@ public class level : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
+		progressBarX = Screen.width/2 - progressBarW/2;
 		victoryGUI = gameObject.GetComponent<VictoryGUI>();
 		
 		levelName = PlayerPrefs.GetString(PlayerPrefKeys.LEVEL_CURRENT);

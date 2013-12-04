@@ -7,7 +7,7 @@ using System.IO;
 
     public class IniFileTool
     {
-        public Encoding merkkikoodaus = Encoding.UTF8;
+        public Encoding characterEncoding = Encoding.UTF8;
         private String file = "";
         public Exception lastError;
         private List<string> inisContents = new List<string>();
@@ -46,7 +46,7 @@ using System.IO;
             try
             {
                 this.inisContents.Clear();
-                StreamReader lataa = new StreamReader(iniTiedosto, merkkikoodaus);
+                StreamReader lataa = new StreamReader(iniTiedosto, characterEncoding);
                 String linja;
                 while ((linja = lataa.ReadLine()) != null)
                 {
@@ -68,7 +68,7 @@ using System.IO;
 
         public void saveIniFile() {
         try {
-            StreamWriter tallenna = new StreamWriter(file, false, merkkikoodaus);
+            StreamWriter tallenna = new StreamWriter(file, false, characterEncoding);
 
             foreach (String rivi in inisContents) {
                 tallenna.WriteLine(rivi);
