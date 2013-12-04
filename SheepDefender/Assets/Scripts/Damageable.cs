@@ -69,6 +69,11 @@ public class Damageable : MonoBehaviour
 			Destroy (gameObject);
 			
 			gameObject.SendMessage("SpawnAtOnce", SendMessageOptions.DontRequireReceiver);
+			
+			//TODO: refactor
+			if (gameObject.name == "PlayerSheep") {
+				GameObject.Find ("CameraController").SendMessage("ActivateMainCamera");	
+			}
 
 			if (this.dieEffect) {
 				Destroy (Instantiate (this.dieEffect, transform.position, Quaternion.identity), 1.0f);	

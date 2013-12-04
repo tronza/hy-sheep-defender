@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		playerSheep = GameObject.Find ("PlayerSheep");
 		ActivateThirdPersonCamera ();
 	}
 	
@@ -24,7 +23,6 @@ public class CameraController : MonoBehaviour
 	
 	public void ActivateMainCamera ()
 	{
-		// Sheep still shoots when this is triggered. :-(
 		playerSheep.GetComponent<Sheep>().SetMovementMode(Sheep.MovementMode.Stopped);
 
 		thirdPersonCamera.gameObject.SetActive (false);

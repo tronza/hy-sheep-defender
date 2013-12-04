@@ -13,7 +13,7 @@ public class Sheep : MonoBehaviour
 	public Object[] weaponPrefabs;
 	public GameInfo gameInfo; //TODO: make singleton
 	public float sensitivityX = 15F;
-	public enum MovementMode {Stopped, LookToMouse, DeltaMouse}
+	public enum MovementMode {Stopped, NoMouse, LookToMouse, DeltaMouse}
 	
 	CharacterController controller;
 	Vector3 moveDir;
@@ -39,7 +39,7 @@ public class Sheep : MonoBehaviour
 	}
 	
 	void Start () {
-		movementMode = MovementMode.LookToMouse;
+		movementMode = MovementMode.DeltaMouse;
 		controller = GetComponent<CharacterController>();
 		jumpTimeLeft = 0F;
 		jumpCount = 0;
@@ -57,7 +57,7 @@ public class Sheep : MonoBehaviour
 			return;
 		}
 		
-		if (movementMode != MovementMode.LookToMouse) {
+		if (movementMode == MovementMode.NoMouse) {
 			moveDir = Vector3.zero;
 			
 			advance = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
@@ -84,7 +84,9 @@ public class Sheep : MonoBehaviour
 			if (movementMode == MovementMode.DeltaMouse) {
 				transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 				moveDir = Quaternion.LookRotation(transform.forward) * moveDir;
-			} else {
+			} else if (movementMode == MovementMode.LookToMouse) {
+				
+				Debug.Log("DOING THE WRONG THING");
 				//cast ray from camera to plane (plane is at ground level, but infinite in space)
 				float dist;
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
