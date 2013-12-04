@@ -4,10 +4,10 @@ using Pathfinding;
 
 public class WolfAI : MonoBehaviour {
 	// The AI's speed per second
-    public float speed = 100;
-    
+	public float speed = 100;
+
 	// The max distance from the AI to a waypoint for it to continue to the next waypoint
-    public float nextWaypointDistance = 3;
+	public float nextWaypointDistance = 3;
  
 	// The tag of a hostile, who to chase down
 	public string tagOfHostiles = "Defender";
@@ -20,18 +20,18 @@ public class WolfAI : MonoBehaviour {
 	
 	private GameObject target;
 	private Seeker seeker;
-    private CharacterController controller;
+	private CharacterController controller;
 	private Path path = null;
 	private float nextAttack = 0;
 	private float attackInterval = 2;
 	private GameObject playerSheep;
-    
+
 	//The waypoint we are currently moving towards
-    private int currentWaypoint = 0;
+	private int currentWaypoint = 0;
 	
 	void Start () {
 		seeker = GetComponent<Seeker>();
-        controller = GetComponent<CharacterController>();
+		controller = GetComponent<CharacterController>();
 		playerSheep = GameObject.Find ("PlayerSheep");
 		
 		// Start Repathing every 1-2 seconds
@@ -65,17 +65,17 @@ public class WolfAI : MonoBehaviour {
 	public void FixedUpdate () {
 		// This applies the physics to the gameobject even if it's not moving
 		controller.SimpleMove (Vector3.zero);
-		
+
 		// Attack if possible
 		Attack ();
-		
+
 		// Try to find a path, otherwise just stay still
 		if (FindPath ()) {
 			Move ();
 		} else {
 			return;	
 		}
-    }
+	}
 	
 	public void Attack () {
 		if (target) {
@@ -102,31 +102,31 @@ public class WolfAI : MonoBehaviour {
 			Repath ();
 			return false;
 		}
-        
-        if (currentWaypoint >= path.vectorPath.Count) {
+
+		if (currentWaypoint >= path.vectorPath.Count) {
 			Repath ();
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	public void Move () {
 		Vector3 dir;
 	
-	  	//Direction to the next waypoint
-        dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
-        dir *= speed * Time.fixedDeltaTime;
+		//Direction to the next waypoint
+		dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
+		dir *= speed * Time.fixedDeltaTime;
 		
 		// Start moving towards the direction
-        controller.SimpleMove (dir);
+		controller.SimpleMove (dir);
 		
 		//Check if we are close enough to the next waypoint
-        //If we are, proceed to follow the next waypoint
-        if (Vector3.Distance (transform.position,path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
-            currentWaypoint++;
-            return;
-        }
+		//If we are, proceed to follow the next waypoint
+		if (Vector3.Distance (transform.position,path.vectorPath[currentWaypoint]) < nextWaypointDistance) {
+			currentWaypoint++;
+			return;
+		}
 		
 		// Animation hack, so that the stupid wolf don't run sideways...
 		dir.y = 0;
@@ -161,12 +161,12 @@ public class WolfAI : MonoBehaviour {
 	}
 	
 	public void OnPathComplete (Path p) {
-        if (!p.error) {
-            path = p;
-            //Reset the waypoint counter
-            currentWaypoint = 0;
-        }
-    }
+		if (!p.error) {
+			path = p;
+			//Reset the waypoint counter
+			currentWaypoint = 0;
+		}
+	}
 	
 	private bool CheckIfShotByPlayer (GameObject go) {
 		// TODO: Add all "projectiles" shot by player here or make up some better solution
@@ -174,7 +174,7 @@ public class WolfAI : MonoBehaviour {
 		return go.name.Contains ("lazerPrefab");
 	}
 	
-	public void OnCollisionEnter(Collision collision)
+	public void OnCollisionEnter (Collision collision)
 	{
 		// If wolf is being collided with something and player is not the target, lets proceed...
 		if (target != playerSheep) {
