@@ -10,9 +10,9 @@ public class Winter : MonoBehaviour {
 		terrain.GetComponent<MeshRenderer>().material.SetTexture("_MainTex", newOne);
 		if (GameObject.FindGameObjectWithTag("Night")==null){
 			//change lights only if the night object is not in the scene
-			GameObject light = GameObject.Find("Spotlight");
+			GameObject light = GameObject.Find("Top Dir Light");
 			light.GetComponent<Light>().intensity = 0.03f;
-			GameObject dLight = GameObject.Find("Directional light");
+			GameObject dLight = GameObject.Find("Obq Dir Light");
 			dLight.GetComponent<Light>().intensity = 0.37f;
 		}
 	}
