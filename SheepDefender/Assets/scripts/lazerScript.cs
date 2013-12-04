@@ -5,9 +5,6 @@ public class lazerScript : MonoBehaviour {
 	public float damage = 5f; //damage delt by the lazer
 	public int speed = 16; //lazer speed
 	
-	// TODO: Why is this public?
-	public GameObject playerSheep;
-
 	/* Update() : is called once per frame
 	 * move the lazer
 	 * */
@@ -22,11 +19,6 @@ public class lazerScript : MonoBehaviour {
 		if (collision.gameObject.tag == "Attacker") 
 		{
 			collision.gameObject.SendMessage("ReceiveDamage", damage);
-			playerSheep = GameObject.Find ("Sheep");
-			
-			if (playerSheep != null) {
-				collision.gameObject.SendMessage ("ChangeTarget", playerSheep.transform);
-			}
 		}
 		
 		//does not destroy itself if it collide with the player
