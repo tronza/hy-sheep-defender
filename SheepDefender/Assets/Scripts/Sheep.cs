@@ -9,10 +9,13 @@ public class Sheep : MonoBehaviour
 	public float jumpUpTime = 0.5f; //time a jump goes up in secs
 	public int maxJumps = 2; //double jump allowed!
 	public bool faceMouse = false;
-	public bool absoluteKeyMove = false;
+	public bool absoluteKeyMove = false; //TODO: should be enabled only if faceMouse is true
+	public bool thirdPerson = true;
 	public Transform gunHolder;
 	public Object[] weaponPrefabs;
 	public GameInfo gameInfo;
+	
+	public float sensitivityX = 15F;
 	
 	CharacterController controller;
 	Vector3 moveDir;
@@ -62,29 +65,6 @@ public class Sheep : MonoBehaviour
 	        moveDir = transform.TransformDirection(Vector3.forward);
 	        moveDir *= advance;
 		} else {
-			//cast ray from camera to plane (plane is at ground level, but infinite in space)
-			float dist;
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (plane.Raycast(ray, out dist)) {
-				Vector3 point = ray.GetPoint(dist);
-				
-				//find the vector pointing from our position to the target
-				Vector3 direction = (point - transform.position).normalized;
-				
-				//create the rotation we need to be in to look at the target
-				Quaternion lookRotation = Quaternion.LookRotation(direction);
-				
-				if (transform.rotation != lookRotation) {
-					float angle = Quaternion.Angle(transform.rotation, lookRotation);
-					float timeToComplete = angle / rotationSpeed;
-					float donePercentage = Mathf.Min(1F, Time.deltaTime / timeToComplete);
-					
-					//rotate towards a direction, but not immediately (rotate a little every frame)
-					//The 3rd parameter is a number between 0 and 1, where 0 is the start rotation and 1 is the end rotation
-					transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, donePercentage);
-				}
-			}
-			
 			moveDir.x = Input.GetAxis("Horizontal");
 			moveDir.y = 0F;
 			moveDir.z = Input.GetAxis("Vertical");
@@ -93,11 +73,37 @@ public class Sheep : MonoBehaviour
 			}
 			moveDir *= moveSpeed * Time.deltaTime;
 			
-			if (!absoluteKeyMove) {
+			if (thirdPerson) {
+				transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 				moveDir = Quaternion.LookRotation(transform.forward) * moveDir;
+			} else {
+				//cast ray from camera to plane (plane is at ground level, but infinite in space)
+				float dist;
+				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+				if (plane.Raycast(ray, out dist)) {
+					Vector3 point = ray.GetPoint(dist);
+					
+					//find the vector pointing from our position to the target
+					Vector3 direction = (point - transform.position).normalized;
+					
+					//create the rotation we need to be in to look at the target
+					Quaternion lookRotation = Quaternion.LookRotation(direction);
+					
+					if (transform.rotation != lookRotation) {
+						float angle = Quaternion.Angle(transform.rotation, lookRotation);
+						float timeToComplete = angle / rotationSpeed;
+						float donePercentage = Mathf.Min(1F, Time.deltaTime / timeToComplete);
+						
+						//rotate towards a direction, but not immediately (rotate a little every frame)
+						//The 3rd parameter is a number between 0 and 1, where 0 is the start rotation and 1 is the end rotation
+						transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, donePercentage);
+					}
+				}
+				if (!absoluteKeyMove) {
+					moveDir = Quaternion.LookRotation(transform.forward) * moveDir;
+				}
 			}
 		}
-		
 		
 		//if you are standing on the ground
 		if(controller.isGrounded) {
