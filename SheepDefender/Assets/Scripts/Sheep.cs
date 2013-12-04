@@ -8,14 +8,12 @@ public class Sheep : MonoBehaviour
 	public float jumpSpeed = 20.0F;
 	public float jumpUpTime = 0.5f; //time a jump goes up in secs
 	public int maxJumps = 2; //double jump allowed!
-	public bool faceMouse = false;
-	public bool absoluteKeyMove = false; //TODO: should be enabled only if faceMouse is true
-	public bool thirdPerson = true;
+	public bool absoluteKeyMove = false;
 	public Transform gunHolder;
 	public Object[] weaponPrefabs;
-	public GameInfo gameInfo;
-	
+	public GameInfo gameInfo; //TODO: make singleton
 	public float sensitivityX = 15F;
+	public enum MovementMode {Stopped, LookToMouse, DeltaMouse}
 	
 	CharacterController controller;
 	Vector3 moveDir;
@@ -27,6 +25,7 @@ public class Sheep : MonoBehaviour
 	Plane plane = new Plane(Vector3.up, 0F);
 	int selectedWeapon;
 	Weapon weapon;
+	MovementMode movementMode;
 	
 	void SwitchWeapon() {
 		Object wPrefab = weaponPrefabs[selectedWeapon];
@@ -40,6 +39,7 @@ public class Sheep : MonoBehaviour
 	}
 	
 	void Start () {
+		movementMode = MovementMode.LookToMouse;
 		controller = GetComponent<CharacterController>();
 		jumpTimeLeft = 0F;
 		jumpCount = 0;
@@ -48,8 +48,16 @@ public class Sheep : MonoBehaviour
 		SwitchWeapon();
 	}
 	
+	public void SetMovementMode(MovementMode mode) {
+		movementMode = mode;
+	}
+	
 	void Update () {
-		if (!faceMouse) {
+		if (movementMode == MovementMode.Stopped) {
+			return;
+		}
+		
+		if (movementMode != MovementMode.LookToMouse) {
 			moveDir = Vector3.zero;
 			
 			advance = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
@@ -73,7 +81,7 @@ public class Sheep : MonoBehaviour
 			}
 			moveDir *= moveSpeed * Time.deltaTime;
 			
-			if (thirdPerson) {
+			if (movementMode == MovementMode.DeltaMouse) {
 				transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
 				moveDir = Quaternion.LookRotation(transform.forward) * moveDir;
 			} else {
