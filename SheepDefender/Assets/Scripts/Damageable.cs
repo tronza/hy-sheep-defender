@@ -10,9 +10,7 @@ public class Damageable : MonoBehaviour
 	 */
 	public GameObject dieEffect;
 	public float health = 100f;
-	public int numberOfCoins = 5;
-	public Transform coin_prefab;
-	
+
 	// You can override default from the Unity3D editor
 	public GameObject healthBar;
 	float originalScaleX;
@@ -70,17 +68,11 @@ public class Damageable : MonoBehaviour
 			Destroy (healthBar);
 			Destroy (gameObject);
 			
-			// Spawn number of coins
-			for (int i =0; i<numberOfCoins; i++) {
-				
-				// If I am a Wolf object
-				if (gameObject.name.Contains ("Wolf")) {
-					Instantiate (coin_prefab, new Vector3 (
-						transform.localPosition.x+(0.5f*i),
-						transform.localPosition.y + 0.5F,
-						transform.localPosition.z+(0.25f*i)
-					), Quaternion.identity);
-				}
+			gameObject.SendMessage("SpawnAtOnce", SendMessageOptions.DontRequireReceiver);
+			
+			//TODO: refactor
+			if (gameObject.name == "PlayerSheep") {
+				GameObject.Find ("CameraController").SendMessage("ActivateMainCamera");	
 			}
 
 			if (this.dieEffect) {

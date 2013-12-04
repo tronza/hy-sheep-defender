@@ -554,6 +554,7 @@ GameObject:
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11400010}
   - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: Wolf
@@ -986,7 +987,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100070}
-  m_LocalRotation: {x: .70710659, y: 0, z: 0, w: -.707106948}
+  m_LocalRotation: {x: .70710665, y: 0, z: 0, w: -.707107008}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1070,8 +1071,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dieEffect: {fileID: 100000, guid: 9c5bd6070cd5d481abdb8755ff51fd7a, type: 2}
   health: 100
-  numberOfCoins: 5
-  coin_prefab: {fileID: 400000, guid: a261febd8c86c48ee917fa9809b1742f, type: 2}
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
 --- !u!114 &11400004
 MonoBehaviour:
@@ -1102,6 +1101,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scorePointsBeginning: 5
   decreaseScorePointEvery: 10
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17acd0656403b2d469763fe73d690a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: a126fb74f3f3f8f43aebe2c46213a215, type: 2}
+  numberToSpawn: 5
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
