@@ -65,9 +65,6 @@ public class WolfAI : MonoBehaviour
 	
 	public void FixedUpdate ()
 	{
-		// This applies the physics to the gameobject even if it's not moving
-		controller.SimpleMove (Vector3.zero);
-
 		// Attack if possible
 		Attack ();
 
@@ -75,6 +72,9 @@ public class WolfAI : MonoBehaviour
 		if (FindPath ()) {
 			Move ();
 		} else {
+			// This applies the physics to the gameobject even if it's not moving
+			controller.SimpleMove (Vector3.zero);
+
 			return;	
 		}
 	}
