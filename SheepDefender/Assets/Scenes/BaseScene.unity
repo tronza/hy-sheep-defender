@@ -1385,7 +1385,7 @@ GameObject:
   - 4: {fileID: 688793796}
   - 132: {fileID: 688793795}
   m_Layer: 0
-  m_Name: levelMessages
+  m_Name: LevelMessages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5537,7 +5537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb1316b7199042a99d9d78f20c31625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lostGUI: {fileID: 0}
+  lostGUI: {fileID: 1773554299}
 --- !u!137 &2104394105
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
