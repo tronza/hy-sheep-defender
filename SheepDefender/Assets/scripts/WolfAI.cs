@@ -63,7 +63,7 @@ public class WolfAI : MonoBehaviour
 		seeker.StartPath (path, OnPathComplete);
 	}
 	
-	public void FixedUpdate ()
+	public void Update ()
 	{
 		// Attack if possible
 		Attack ();
