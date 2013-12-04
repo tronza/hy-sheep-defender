@@ -18,7 +18,6 @@ public class MyGUIScript : MonoBehaviour
 	int selectedTurret = -1;
 	bool selectedTurretChanged = false;
 	bool placingTurret = false;
-	GameObject createdTurret;
 	bool discardClick = false;
 	bool startedPlacing = false;
 	float placeablePosY;
@@ -144,6 +143,12 @@ public class MyGUIScript : MonoBehaviour
 	//this is the placing of the turret
 	void Update ()
 	{
+		if (startedPlacing) {
+			GameObject.Find ("CameraController").SendMessage ("ActivateMainCamera");
+
+			// TODO: Create a button that asks to return to 3rd person mode ???
+		}
+
 		lastUpdateFrame=Time.frameCount;
 		
 		if (lastUpdateFrame > lastOnGUIFrame) {
@@ -162,12 +167,14 @@ public class MyGUIScript : MonoBehaviour
 					Debug.Log("Not enough money");
 					placingTurret = false;
 					startedPlacing = false;
+
+					GameObject.Find ("CameraController").SendMessage ("ActivateThirdPersonCamera");
+
 					return;
 				}
-				myGameInfo.coins -= placeable.price;
 				lightProj.enabled = true;
 				
-				//this is to put the turret at the right height from the groun, please do not use negative y
+				//this is to put the turret at the right height from the ground, please do not use negative y
 				Transform pTransform = ((GameObject)prefab).GetComponentsInChildren<Transform>(true)[0];
 				placeablePosY = pTransform.position.y;
 				
@@ -211,10 +218,10 @@ public class MyGUIScript : MonoBehaviour
 				//TODO: replace discardClick
 				//allow placing only if zone is free
 				if (Input.GetMouseButtonDown (0) && !discardClick && !lightTrig.triggered) {
-					GameObject createdTurret = CreateTurret (selectedTurret, hitInfo.point, lightObj.transform.rotation.eulerAngles.y - 90f);
+					CreateTurret (selectedTurret, hitInfo.point, lightObj.transform.rotation.eulerAngles.y - 90f);
 					lightProj.enabled = false;
 					placingTurret = false;
-					
+					GameObject.Find ("CameraController").SendMessage ("ActivateThirdPersonCamera");
 					//TODO: check what happens to the paths, are they updated when the grid is updated?
 				}
 			}

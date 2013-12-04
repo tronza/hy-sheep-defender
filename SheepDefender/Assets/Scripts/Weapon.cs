@@ -1,53 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon : MonoBehaviour {
+public class Weapon : MonoBehaviour
+{
 	
 	public Object shootablePrefab; //this is a prefab (an Object containing one or more GameObjects)
-	public float rateOfFire;
-	public int ammoLeft;
+	public float timeBetweenShots; //how much time to wait between shooting a round and the next
 	
-	//TODO: ammo count should be in sheep, weapon should only be loaded with a cartridge
-	//all these can be implemented or not
-//	public int cartridgeSize;
-//	public int ammoInCartridge;
-//	public float reloadTime;
-	
-	Shootable ammoLoaded;
-	float readyToFire;
+	Shootable loadedAmmo;
+	AmmoStorage ammoStorage;
 	Quaternion baseAmmoRotation;
+	bool triggerPulled;
+	float timeSinceShot;
 	
-	void Start() {
+	void Start ()
+	{
 		//we know in this case the prefab is just 1 GameObject
-		ammoLoaded = ((GameObject)shootablePrefab).GetComponentsInChildren<Shootable>(true)[0];
-		readyToFire = Time.time;
-		Transform baseAmmoTransform = ammoLoaded.GetComponentsInChildren<Transform>(true)[0];
+		loadedAmmo = ((GameObject)shootablePrefab).GetComponentsInChildren<Shootable> (true) [0];
+		ammoStorage = AmmoStorage.Instance; //singleton
+		Transform baseAmmoTransform = loadedAmmo.GetComponentsInChildren<Transform> (true) [0];
 		baseAmmoRotation = baseAmmoTransform.rotation;
+		triggerPulled = false;
+		timeSinceShot = 0F;
 	}
 	
-	void fire() {
+	void Shoot ()
+	{
 		//make sure that the prefab orientation is preserved
-		Quaternion ammoRotation = baseAmmoRotation * transform.rotation;
-		Shootable shot = (Shootable)Instantiate(ammoLoaded, transform.position, ammoRotation);
+		Quaternion ammoRotation = baseAmmoRotation;
+		Shootable shot = (Shootable)Instantiate (loadedAmmo, transform.position, ammoRotation);
 		
 		//shoot in the direction the weapon is facing
-		shot.Shoot(Vector3.Normalize(transform.forward));
-		--ammoLeft;
-		//TODO: play sound
+		shot.Shoot (Vector3.Normalize (transform.forward));
+		ammoStorage.ConsumeAmmo (loadedAmmo.ammoType, 1);
+		
+		//play shooting sound
+		audio.Play ();
 	}
 	
-	void PressTrigger() {
-		if(Time.time > readyToFire && ammoLeft > 0){
-			readyToFire = Time.time + rateOfFire;
-			fire();
+	public void PullTrigger ()
+	{
+		if (!triggerPulled) {
+			triggerPulled = true;
+			timeSinceShot = 0F;
+			Shoot ();
+		} else {
+			timeSinceShot += Time.deltaTime;
+			if (timeSinceShot >= timeBetweenShots && ammoStorage.AvailabeAmmo (loadedAmmo.ammoType) > 0) {
+				timeSinceShot = 0F;
+				Shoot ();
+			}
 		}
 	}
 	
-	//just a test
-	void Update() {
-		//TODO: this code should be in the sheep
-		if (Input.GetMouseButton(0)) {
-			PressTrigger();
-		}
+	public void ReleaseTrigger ()
+	{
+		triggerPulled = false;
+		timeSinceShot = 0F;
 	}
 }
