@@ -3772,6 +3772,10 @@ Prefab:
       propertyPath: absoluteKeyMove
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: thirdPerson
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
   m_RootGameObject: {fileID: 1811432110}
@@ -4364,7 +4368,6 @@ MonoBehaviour:
   progressbarForeground: {fileID: 2800000, guid: 966f28fdbe334470fa433b976696d8dd,
     type: 3}
   textObject: {fileID: 688793794}
-  progressBarX: 1
   progressBarY: 1
   progressBarH: 32
   progressBarW: 256
@@ -4463,11 +4466,13 @@ MonoBehaviour:
   maxJumps: 2
   faceMouse: 1
   absoluteKeyMove: 0
+  thirdPerson: 0
   gunHolder: {fileID: 882409831}
   weaponPrefabs:
   - {fileID: 100000, guid: aa495e9b41033cf44b985d29c79e9265, type: 2}
   - {fileID: 100000, guid: 0960871b4abb2da4da1795ee80e57eaf, type: 2}
   gameInfo: {fileID: 2034953317}
+  sensitivityX: 15
 --- !u!143 &1811432113
 CharacterController:
   m_ObjectHideFlags: 0
