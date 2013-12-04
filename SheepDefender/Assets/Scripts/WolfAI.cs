@@ -177,9 +177,7 @@ public class WolfAI : MonoBehaviour
 	
 	private bool CheckIfShotByPlayer (GameObject go)
 	{
-		// TODO: Add all "projectiles" shot by player here or make up some better solution
-		
-		return go.name.Contains ("lazerPrefab");
+		return go.tag == "Projectile";
 	}
 	
 	public void OnCollisionEnter (Collision collision)

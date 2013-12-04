@@ -16,7 +16,6 @@ public class SheepInsideFenceScript : MonoBehaviour
 	}
 	
 	void OnDestroy() {
-		print ("Sheep has been destroyed.");
 		PlayerPrefs.SetInt(PlayerPrefKeys.LEVEL_GAMEOVER, 1);
 		lostGUI.ShowGUI();
 	}

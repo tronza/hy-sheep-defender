@@ -8,14 +8,14 @@ public class LostGUI : MonoBehaviour {
 	public GameObject retryText;
 	public GameObject backToMenuText;
 	
-	private GameObject sheep;
+	private GameObject playerSheep;
 	private GameObject guiObj;
 	private Level levelComp;
 	// Use this for initialization
 	void Start () {
 		levelComp = GetComponent<Level>();
 		guiObj = GameObject.Find("GUIobj");
-		sheep = GameObject.Find("sheepPrefab");
+		playerSheep = GameObject.Find("PlayerSheep");
 		
 	}
 	
@@ -28,8 +28,8 @@ public class LostGUI : MonoBehaviour {
 		//Show the end gui
 		levelComp.enabled = false;
 		guiObj.SetActive(false);
-		if(sheep!=null){
-			sheep.GetComponent<sheepScript>().enabled = false;
+		if(playerSheep!=null){
+			playerSheep.GetComponent<Sheep>().enabled = false;
 		}
 		endBackground.GetComponent<GUITexture>().enabled = true;
 		GUIText endMessage = endText.GetComponent<GUIText>();
