@@ -11,3 +11,7 @@ Key name: mute (PlayerPrefKeys.MUTE)
 Key name: <level file's path> (e.g. levels/level1.ini)
 	type: int
 	description: The level class sets this to 1 when the level has reached to its end and all the wolves have been killed. If the value is 1, the level will be marked as (Completed) in the level menu. 
+
+Key name: skip_title (PlayerPrefKeys.SKIP_TITLE)
+	type: int
+	description: If the value is 1, the prologue and logo will be skipped when the menu scene is loaded. The menu scene sets the value back to 0 automatically.

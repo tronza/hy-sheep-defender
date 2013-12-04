@@ -36,13 +36,16 @@ public class Mute : MonoBehaviour
 	{
 		
 		AudioListener audio = cameraWithAudioListener.GetComponent<AudioListener> ();
+		AudioSource music = cameraWithAudioListener.GetComponent<AudioSource> ();
 		if (soundOff) {
 			PlayerPrefs.SetInt (PlayerPrefKeys.MUTE, 1);
 			audio.enabled = false;
+			music.enabled = false;
 			muteStatus = false;
 		} else {
 			PlayerPrefs.SetInt (PlayerPrefKeys.MUTE, 0);
 			audio.enabled = true;
+			music.enabled = true;
 			muteStatus = true;
 		}
 	}

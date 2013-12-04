@@ -8,9 +8,11 @@ public class VictoryGUI : MonoBehaviour {
 	public GameObject endBackground;
 	public GameObject endText;
 	public GameObject backToMenuText;
+	
+	private GameObject sheep;
 	// Use this for initialization
 	void Start () {
-	
+		sheep = GameObject.Find("sheepPrefab");
 	}
 	
 	// Update is called once per frame
@@ -20,6 +22,7 @@ public class VictoryGUI : MonoBehaviour {
 	public void ShowGUI(){
 		gameObject.GetComponent<level>().enabled = false;
 		targetSheep.GetComponent<SheepInsideFenceScript>().enabled = false;
+		sheep.GetComponent<sheepScript>().enabled = false;
 		guiObject.SetActive(false);
 		//Show the end gui
 		endBackground.GetComponent<GUITexture>().enabled = true;
