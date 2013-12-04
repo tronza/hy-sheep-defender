@@ -3248,6 +3248,47 @@ Transform:
   - {fileID: 1314347114}
   - {fileID: 233462010}
   m_Father: {fileID: 1509733864}
+--- !u!1 &1436175224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1436175225}
+  - 114: {fileID: 1436175226}
+  m_Layer: 0
+  m_Name: CameraController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1436175225
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1436175224}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &1436175226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1436175224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebdd9a6fddaa14b1c846606a854aa9d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 1111061517}
+  thirdPersonCamera: {fileID: 1655560795}
+  playerSheep: {fileID: 0}
 --- !u!1 &1443438139
 GameObject:
   m_ObjectHideFlags: 0
@@ -3781,6 +3822,10 @@ Prefab:
       propertyPath: thirdPerson
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100046, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: m_Name
+      value: PlayerSheep
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
   m_RootGameObject: {fileID: 1811432110}
@@ -3967,6 +4012,85 @@ Transform:
   m_LocalScale: {x: .16411154, y: .16411154, z: .16411154}
   m_Children: []
   m_Father: {fileID: 103344432}
+--- !u!1 &1655560790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1655560791}
+  - 20: {fileID: 1655560795}
+  - 124: {fileID: 1655560794}
+  - 92: {fileID: 1655560793}
+  - 81: {fileID: 1655560792}
+  m_Layer: 0
+  m_Name: ThirdPersonCamera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1655560791
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1655560790}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.45186424, z: -8.49490356}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1811432111}
+--- !u!81 &1655560792
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1655560790}
+  m_Enabled: 1
+--- !u!92 &1655560793
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1655560790}
+  m_Enabled: 1
+--- !u!124 &1655560794
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1655560790}
+  m_Enabled: 1
+--- !u!20 &1655560795
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1655560790}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: .300000012
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 100
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_HDR: 0
 --- !u!1 &1658573890
 GameObject:
   m_ObjectHideFlags: 0
@@ -4433,7 +4557,7 @@ GameObject:
   - 143: {fileID: 1811432113}
   - 114: {fileID: 1811432112}
   m_Layer: 0
-  m_Name: NewSheep
+  m_Name: PlayerSheep
   m_TagString: Defender
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4451,6 +4575,7 @@ Transform:
   m_Children:
   - {fileID: 882409831}
   - {fileID: 515086288}
+  - {fileID: 1655560791}
   m_Father: {fileID: 0}
 --- !u!114 &1811432112
 MonoBehaviour:

@@ -143,6 +143,12 @@ public class MyGUIScript : MonoBehaviour
 	//this is the placing of the turret
 	void Update ()
 	{
+		if (startedPlacing) {
+			GameObject.Find ("CameraController").SendMessage ("ActivateMainCamera");
+
+			// TODO: Create a button that asks to return to 3rd person mode ???
+		}
+
 		lastUpdateFrame=Time.frameCount;
 		
 		if (lastUpdateFrame > lastOnGUIFrame) {
@@ -161,6 +167,9 @@ public class MyGUIScript : MonoBehaviour
 					Debug.Log("Not enough money");
 					placingTurret = false;
 					startedPlacing = false;
+
+					GameObject.Find ("CameraController").SendMessage ("ActivateThirdPersonCamera");
+
 					return;
 				}
 				lightProj.enabled = true;
@@ -212,7 +221,7 @@ public class MyGUIScript : MonoBehaviour
 					CreateTurret (selectedTurret, hitInfo.point, lightObj.transform.rotation.eulerAngles.y - 90f);
 					lightProj.enabled = false;
 					placingTurret = false;
-					
+					GameObject.Find ("CameraController").SendMessage ("ActivateThirdPersonCamera");
 					//TODO: check what happens to the paths, are they updated when the grid is updated?
 				}
 			}
