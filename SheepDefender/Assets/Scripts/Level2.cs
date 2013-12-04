@@ -7,7 +7,7 @@ using System.Collections.Generic;
 //The level file will be searched in a subfolder called "levels" in the game's root folder. E.g. levels/level_name.ini
 //Wolf prefabs need to be in the Resources folder and have the exact same name that is used in the level file
 //Wolves will spawn at random in the position of any gameobject that has been tagged with "Spawn" tag
-public class level : MonoBehaviour {
+public class Level : MonoBehaviour {
 	private string levelName;//name of the level eg. levels/level1.ini
 	private int levelDuration;//Shows the total time for completing the level
 	private int timeEllapsed =0;//shows how much time has ellapsed

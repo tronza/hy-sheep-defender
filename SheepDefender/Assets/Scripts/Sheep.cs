@@ -82,6 +82,7 @@ public class Sheep : MonoBehaviour
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				if (plane.Raycast(ray, out dist)) {
 					Vector3 point = ray.GetPoint(dist);
+					point.y = transform.position.y;
 					
 					//find the vector pointing from our position to the target
 					Vector3 direction = (point - transform.position).normalized;

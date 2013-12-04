@@ -20,7 +20,7 @@ public class VictoryGUI : MonoBehaviour {
 	
 	}
 	public void ShowGUI(){
-		gameObject.GetComponent<level>().enabled = false;
+		gameObject.GetComponent<Level>().enabled = false;
 		targetSheep.GetComponent<SheepInsideFenceScript>().enabled = false;
 		sheep.GetComponent<sheepScript>().enabled = false;
 		guiObject.SetActive(false);

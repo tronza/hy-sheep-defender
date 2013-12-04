@@ -3,16 +3,9 @@
 --- !u!78 &1
 TagManager:
   tags:
-  - ground
   - Spawn
   - Defender
   - Attacker
-  - left
-  - bottom
-  - top
-  - right
-  - lazer
-  - placer
   - Projectile
   - Night
   - 
