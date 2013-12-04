@@ -11,10 +11,10 @@ public class Turret : MonoBehaviour
 	void Start ()
 	{
 		LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
-	    lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
-	    lineRenderer.SetColors(Color.cyan, Color.blue);
-	    lineRenderer.SetWidth(0.1f, 0.1f);
-	    lineRenderer.SetVertexCount(2);
+		lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
+		lineRenderer.SetColors(Color.cyan, Color.blue);
+		lineRenderer.SetWidth(0.1f, 0.1f);
+		lineRenderer.SetVertexCount(2);
 	}
 
 	void Update ()
@@ -46,7 +46,7 @@ public class Turret : MonoBehaviour
 	{
 		if (this.target != null) {
 			RaycastHit hit;
-        	
+
 			if (Physics.Raycast (transform.position, transform.TransformDirection (Vector3.forward), out hit)) {
 				// It really does not matter if the target is the target, only the classification matters here.
 				try {

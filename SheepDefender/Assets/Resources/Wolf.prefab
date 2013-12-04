@@ -550,13 +550,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 400072}
   - 111: {fileID: 11100000}
-  - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400006}
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400010}
+  - 114: {fileID: 11400004}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Attacker
@@ -1081,27 +1080,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 100072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 081a5714d0b324d66ae454ad3f051966, type: 3}
+  m_Script: {fileID: 11500000, guid: 77ece900f71f74a138cdbc1ecbda7afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  priorityTarget: {fileID: 0}
-  attackDistance: 3
-  attackDamage: 5
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 330a85523235b457081732f14ca6c5a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
   speed: 350
   nextWaypointDistance: 3
+  tagOfHostiles: Defender
+  attackDistance: 3
+  attackDamage: 5
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1200,8 +1186,8 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 1
-  m_SlopeLimit: 45
-  m_StepOffset: .300000012
+  m_SlopeLimit: 10
+  m_StepOffset: .200000003
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: .800000012, z: 0}

@@ -881,6 +881,9 @@ MonoBehaviour:
   lazer_green_prefab: {fileID: 400000, guid: d15baafa88cb105468a10259ad3eeb46, type: 2}
   theGun: {fileID: 1628137667}
   damage: 5
+  maxCooldown: 100
+  curCooldown: 100
+  lengthCooldown: 0
 --- !u!137 &156375136
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
