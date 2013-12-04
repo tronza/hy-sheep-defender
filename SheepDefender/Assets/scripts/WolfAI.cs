@@ -24,6 +24,7 @@ public class WolfAI : MonoBehaviour {
 	private Path path = null;
 	private float nextAttack = 0;
 	private float attackInterval = 2;
+	private GameObject playerSheep;
     
 	//The waypoint we are currently moving towards
     private int currentWaypoint = 0;
@@ -31,6 +32,7 @@ public class WolfAI : MonoBehaviour {
 	void Start () {
 		seeker = GetComponent<Seeker>();
         controller = GetComponent<CharacterController>();
+		playerSheep = GameObject.Find ("PlayerSheep");
 		
 		// Start Repathing every 1-2 seconds
 		InvokeRepeating ("Repath", 0, 1.0f + Random.Range(0.0f, 1.0f));
@@ -115,6 +117,8 @@ public class WolfAI : MonoBehaviour {
 	  	//Direction to the next waypoint
         dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
         dir *= speed * Time.fixedDeltaTime;
+		
+		// Start moving towards the direction
         controller.SimpleMove (dir);
 		
 		//Check if we are close enough to the next waypoint
@@ -138,9 +142,11 @@ public class WolfAI : MonoBehaviour {
 		
 		hostiles = GameObject.FindGameObjectsWithTag (tagOfHostiles);
 		
+		// If there are hostiles
 		if (hostiles.Length > 0) {
 			float minDist = Mathf.Infinity;
 	
+			// Check which one of the hostiles is the nearest one
 			foreach (GameObject hostile in hostiles) {
 				calcDist = Vector3.Distance (hostile.transform.position, transform.position);
 				if (calcDist < minDist) {
@@ -150,6 +156,7 @@ public class WolfAI : MonoBehaviour {
 			}
 		}
 		
+		// And return the closest hostile target
 		return closest;
 	}
 	
@@ -169,10 +176,11 @@ public class WolfAI : MonoBehaviour {
 	
 	public void OnCollisionEnter(Collision collision)
 	{
-		if (CheckIfShotByPlayer (collision.gameObject)) {
-			GameObject playerSheep = GameObject.Find ("PlayerSheep");
-			
-			if (playerSheep != target) {
+		// If wolf is being collided with something and player is not the target, lets proceed...
+		if (target != playerSheep) {
+			// Check if a colliding object is a projectile (we assume that only player shoots projectiles)
+			if (CheckIfShotByPlayer (collision.gameObject)) {
+				// Roar! Player is being targeted now
 				target = playerSheep;
 			}
 		}
