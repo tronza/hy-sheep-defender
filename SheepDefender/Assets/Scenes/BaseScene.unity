@@ -2222,6 +2222,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100046, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
+      propertyPath: m_Name
+      value: PlayerSheep
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4f048a33c8cce3744ba62d8cd92f811c, type: 2}
   m_RootGameObject: {fileID: 1264089755}
@@ -2991,7 +2995,7 @@ GameObject:
   - 54: {fileID: 1264089758}
   - 65: {fileID: 1264089757}
   m_Layer: 0
-  m_Name: sheepPrefab
+  m_Name: PlayerSheep
   m_TagString: Defender
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3122,6 +3126,9 @@ MonoBehaviour:
   lazer_green_prefab: {fileID: 400000, guid: d15baafa88cb105468a10259ad3eeb46, type: 2}
   theGun: {fileID: 819371081}
   damage: 5
+  maxCooldown: 100
+  curCooldown: 100
+  lengthCooldown: 0
 --- !u!137 &1264089764
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -4516,7 +4523,6 @@ MonoBehaviour:
   progressbarForeground: {fileID: 2800000, guid: 966f28fdbe334470fa433b976696d8dd,
     type: 3}
   textObject: {fileID: 688793794}
-  progressBarX: 1
   progressBarY: 1
   progressBarH: 32
   progressBarW: 256

@@ -161,10 +161,20 @@ public class WolfAI : MonoBehaviour {
         }
     }
 	
-	//public void OnCollisionEnter(Collision collision)
-	//{
-	//	if (collision.	
-	//}
+	private bool CheckIfShotByPlayer (GameObject go) {
+		// TODO: Add all "projectiles" shot by player here or make up some better solution
+		
+		return go.name.Contains ("lazerPrefab");
+	}
 	
-	// TODO: add the priority target change (in case of player shoots at the wolf)
+	public void OnCollisionEnter(Collision collision)
+	{
+		if (CheckIfShotByPlayer (collision.gameObject)) {
+			GameObject playerSheep = GameObject.Find ("PlayerSheep");
+			
+			if (playerSheep != target) {
+				target = playerSheep;
+			}
+		}
+	}
 }
