@@ -24,6 +24,9 @@ public class CameraController : MonoBehaviour
 	
 	public void ActivateMainCamera ()
 	{
+		// Sheep still shoots when this is triggered. :-(
+		playerSheep.GetComponent<Sheep>().SetMovementMode(Sheep.MovementMode.Stopped);
+
 		thirdPersonCamera.gameObject.SetActive (false);
 		mainCamera.gameObject.SetActive (true);
 	}
@@ -32,6 +35,8 @@ public class CameraController : MonoBehaviour
 	{
 		mainCamera.gameObject.SetActive (false);
 		thirdPersonCamera.gameObject.SetActive (true);
+
+		playerSheep.GetComponent<Sheep>().SetMovementMode(Sheep.MovementMode.DeltaMouse);
 	}
 	
 	public void ChangeCamera ()
