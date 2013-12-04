@@ -9,7 +9,6 @@ public class Weapon : MonoBehaviour
 	
 	Shootable loadedAmmo;
 	AmmoStorage ammoStorage;
-	float readyToFire;
 	Quaternion baseAmmoRotation;
 	bool triggerPulled;
 	float timeSinceShot;
@@ -19,7 +18,6 @@ public class Weapon : MonoBehaviour
 		//we know in this case the prefab is just 1 GameObject
 		loadedAmmo = ((GameObject)shootablePrefab).GetComponentsInChildren<Shootable> (true) [0];
 		ammoStorage = AmmoStorage.Instance; //singleton
-		readyToFire = Time.time;
 		Transform baseAmmoTransform = loadedAmmo.GetComponentsInChildren<Transform> (true) [0];
 		baseAmmoRotation = baseAmmoTransform.rotation;
 		triggerPulled = false;
