@@ -117,8 +117,8 @@ public class LevelMenu : MonoBehaviour {
 			IniFileTool iniFileTool = new IniFileTool(fileName);
 			string levelName = iniFileTool.getValue("level","name","Unnamed level");
 			int levelCompleted = PlayerPrefs.GetInt(fileName);
-			if(levelCompleted==1){//if the level has been completed, show it in the level name
-					levelName = levelName + " (completed)";
+			if(levelCompleted!=0){//if the level has been completed, show it in the level name
+					levelName = levelName + " (Score: "+levelCompleted+ ")";
 				}
 			this.items.AddLast(new LevelMenu.LevelMenuItem(levelName, fileName));
 			}

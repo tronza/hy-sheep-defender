@@ -68,9 +68,14 @@ public class Level : MonoBehaviour {
 			//End of the level
 			GameObject wolf = GameObject.FindGameObjectWithTag("Attacker");
 			if(wolf==null){//all wolves are dead!
-				PlayerPrefs.SetInt(levelName, 1);//Marks the level as completed
+				int score =  PlayerPrefs.GetInt (PlayerPrefKeys.SCORE);
+				bool newHighScore = false;
+				if(score > PlayerPrefs.GetInt(levelName,0)){
+					PlayerPrefs.SetInt(levelName, score);//Sets the new high-score
+					newHighScore = true;
+				}
 				PlayerPrefs.Save();
-				victoryGUI.ShowGUI();
+				victoryGUI.ShowGUI(score, newHighScore);
 				CancelInvoke();//Disables this method
 			}
 			
