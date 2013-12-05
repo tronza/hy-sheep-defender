@@ -15,10 +15,7 @@ public class Mute : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
 	{
-		int mute = PlayerPrefs.GetInt (PlayerPrefKeys.MUTE);//1-> mute, 0 -> sound on
-		if (mute == null) {//sets the initial value if no value is saved
-			mute = 0;
-		}
+		int mute = PlayerPrefs.GetInt (PlayerPrefKeys.MUTE,0);//1-> mute, 0 -> sound on
 		if (mute == 0) {
 			SetMute (false);
 		} else {
