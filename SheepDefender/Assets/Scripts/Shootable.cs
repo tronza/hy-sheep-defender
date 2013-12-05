@@ -3,9 +3,10 @@ using System.Collections;
 
 public class Shootable : MonoBehaviour
 {
+	public AmmoStorage.AmmoType ammoType; //must be set to the right type
 	public float damage;
 	public float speed;
-	public AmmoStorage.AmmoType ammoType; //must be set to the right type
+	public string friendlyObjTag = "Defender";
 	
 	//this will preserve whatever the original rotation is and make it point the shooting direction
 	public void Shoot (Vector3 direction)
@@ -22,7 +23,9 @@ public class Shootable : MonoBehaviour
 		
 		//there is no neeed to send a costly message when you can get a reference
 		if (damageable != null) {
-			damageable.ReceiveDamage (damage);
+			if (other.tag != friendlyObjTag) {
+				damageable.ReceiveDamage (damage);
+			}
 		}
 		Destroy (gameObject);
 	}

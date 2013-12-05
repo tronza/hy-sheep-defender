@@ -69,6 +69,7 @@ public class Damageable : MonoBehaviour
 			Destroy (gameObject);
 			
 			gameObject.SendMessage("SpawnAtOnce", SendMessageOptions.DontRequireReceiver);
+			gameObject.SendMessage("Destroyed", SendMessageOptions.DontRequireReceiver);
 			
 			//TODO: refactor
 			if (gameObject.name == "PlayerSheep") {
