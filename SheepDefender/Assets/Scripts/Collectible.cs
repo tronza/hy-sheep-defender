@@ -22,6 +22,6 @@ public class Collectible : MonoBehaviour {
 		yield return new WaitForSeconds(waitTime);
 		//execution starts again here
 		Destroy (Instantiate (vanishingEffect), 0.5F);
-		Destroy (this);
+		Destroy (gameObject);
 	}
 }
