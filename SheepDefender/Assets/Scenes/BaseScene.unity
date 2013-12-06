@@ -648,6 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lostGUI: {fileID: 0}
   dieEffect: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
@@ -1938,6 +1939,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lostGUI: {fileID: 0}
   dieEffect: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
@@ -3848,6 +3850,10 @@ Prefab:
       propertyPath: m_Name
       value: PlayerSheep
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: lostGUI
+      value: 
+      objectReference: {fileID: 1773554299}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
   m_RootGameObject: {fileID: 1811432110}
@@ -4388,6 +4394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lostGUI: {fileID: 0}
   dieEffect: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
@@ -4721,6 +4728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lostGUI: {fileID: 1773554299}
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
@@ -5561,6 +5569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lostGUI: {fileID: 0}
   dieEffect: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
@@ -5740,6 +5749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lostGUI: {fileID: 0}
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
