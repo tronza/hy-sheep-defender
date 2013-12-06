@@ -81,7 +81,7 @@ public class MyGUIScript : MonoBehaviour
 			//TODO: add some padding on the sides
 			GUILayout.Label ("Coins: " + myGameInfo.coins);
 			GUILayout.FlexibleSpace (); //fill
-			GUILayout.Label ("Level: " + myGameInfo.level);
+			GUILayout.Label (myGameInfo.levelName);
 			GUILayout.FlexibleSpace (); //fill
 			// GUILayout.Label ("Player name: " + myGameInfo.playerName);
 			GUILayout.EndHorizontal ();

@@ -37,7 +37,7 @@ public class Level : MonoBehaviour {
 		LoadLevelFile(levelName );//loads the level file
 		
 		spawnPoints = GameObject.FindGameObjectsWithTag("Spawn"); //all spawn points in scene
-		messageText = textObject.GetComponent<GUIText>();//Sets the gui text to modify
+		messageText = textObject.GetComponent<GUIText>();//Sets the gui text to modify		
 		InvokeRepeating("TimerTick", 1, 1);//Start the timer that checks for new wolves to spawn
 		
 	}
@@ -68,9 +68,14 @@ public class Level : MonoBehaviour {
 			//End of the level
 			GameObject wolf = GameObject.FindGameObjectWithTag("Attacker");
 			if(wolf==null){//all wolves are dead!
-				PlayerPrefs.SetInt(levelName, 1);//Marks the level as completed
+				int score =  PlayerPrefs.GetInt (PlayerPrefKeys.SCORE);
+				bool newHighScore = false;
+				if(score > PlayerPrefs.GetInt(levelName,0)){
+					PlayerPrefs.SetInt(levelName, score);//Sets the new high-score
+					newHighScore = true;
+				}
 				PlayerPrefs.Save();
-				victoryGUI.ShowGUI();
+				victoryGUI.ShowGUI(score, newHighScore);
 				CancelInvoke();//Disables this method
 			}
 			
@@ -117,7 +122,7 @@ public class Level : MonoBehaviour {
 	private void LoadLevelFile(string levelPath){//levelPath eg. levels/level1.ini
 		IniFileTool iniReader = new IniFileTool(levelPath, true);
 		levelDuration = iniReader.getValue("level","durationInSecs", 30);//loads the time
-		
+		GameObject.Find("GameInfoObject").GetComponent<GameInfo>().levelName =iniReader.getValue("level","name", "Unnamed level");
 		//the following loop will load the times and wolves into the wolvesToSpawn dictionary
 		int numberOfGroups = iniReader.getNumberOfGroups();
 		for(int i=0; i<numberOfGroups; i++){

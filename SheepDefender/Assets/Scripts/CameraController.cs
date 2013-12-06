@@ -3,8 +3,8 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
-	public Camera mainCamera;
-	public Camera thirdPersonCamera;
+	public GameObject mainCamera;
+	public GameObject thirdPersonCamera;
 	public GameObject playerSheep;
 	
 	// Use this for initialization
@@ -25,21 +25,21 @@ public class CameraController : MonoBehaviour
 	{
 		playerSheep.GetComponent<Sheep>().SetMovementMode(Sheep.MovementMode.Stopped);
 
-		thirdPersonCamera.gameObject.SetActive (false);
-		mainCamera.gameObject.SetActive (true);
+		thirdPersonCamera.GetComponent<Camera>().enabled =  false;
+		mainCamera.GetComponent<Camera>().enabled =  true;
 	}
 	
 	public void ActivateThirdPersonCamera ()
 	{
-		mainCamera.gameObject.SetActive (false);
-		thirdPersonCamera.gameObject.SetActive (true);
+		mainCamera.GetComponent<Camera>().enabled = false;
+		thirdPersonCamera.GetComponent<Camera>().enabled = true;
 
 		playerSheep.GetComponent<Sheep>().SetMovementMode(Sheep.MovementMode.DeltaMouse);
 	}
 	
 	public void ChangeCamera ()
 	{
-		if (mainCamera.gameObject.activeSelf) {
+		if (mainCamera.GetComponent<Camera>().enabled ) {
 			ActivateThirdPersonCamera ();
 		} else {
 			ActivateMainCamera ();
