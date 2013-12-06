@@ -648,7 +648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lostGUI: {fileID: 0}
   dieEffect: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
@@ -755,7 +754,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 458c4afd9d19a48d6990b46f9d6709b7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 35.1920433
+      value: 34.3497162
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 458c4afd9d19a48d6990b46f9d6709b7, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1681,7 +1680,7 @@ Transform:
   m_PrefabInternal: {fileID: 384817833}
   m_GameObject: {fileID: 752501430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.1920433, y: 1.10000002, z: -5.08811951}
+  m_LocalPosition: {x: 34.3497162, y: 1.10000002, z: -5.08811951}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1939,7 +1938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lostGUI: {fileID: 0}
   dieEffect: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
@@ -4394,7 +4392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lostGUI: {fileID: 0}
   dieEffect: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
@@ -4728,7 +4725,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lostGUI: {fileID: 1773554299}
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
@@ -5569,7 +5565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lostGUI: {fileID: 0}
   dieEffect: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
@@ -5749,7 +5744,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10765fe44d97843f3a60096218bd0195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lostGUI: {fileID: 0}
   dieEffect: {fileID: 100000, guid: eec9c0209189c4edcbecef2de9b00e14, type: 2}
   health: 100
   healthBar: {fileID: 100000, guid: 3dce15e577cac46f294b576e2638c69e, type: 2}
