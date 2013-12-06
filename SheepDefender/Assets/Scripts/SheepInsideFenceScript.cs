@@ -19,4 +19,7 @@ public class SheepInsideFenceScript : MonoBehaviour
 		PlayerPrefs.SetInt(PlayerPrefKeys.LEVEL_GAMEOVER, 1);
 		lostGUI.ShowGUI();
 	}
+	void OnDisable(){
+		Destroyed();
+	}
 }

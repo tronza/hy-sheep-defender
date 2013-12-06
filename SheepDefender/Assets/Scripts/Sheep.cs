@@ -26,6 +26,7 @@ public class Sheep : MonoBehaviour
 	int selectedWeapon;
 	Weapon weapon;
 	MovementMode movementMode;
+	string targetSheep = "TargetSheep";
 	
 	void SwitchWeapon() {
 		Object wPrefab = weaponPrefabs[selectedWeapon];
@@ -176,5 +177,11 @@ public class Sheep : MonoBehaviour
 			gameInfo.coins += collectible.storeValue;
 			Destroy(other.gameObject);
 		}
+	}
+	public void Die(){
+		gameObject.GetComponent<Damageable>().enabled = false;
+		gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+		GameObject.Find(targetSheep).SetActive(false);
+		this.enabled = false;
 	}
 }
