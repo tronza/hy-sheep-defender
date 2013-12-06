@@ -181,7 +181,11 @@ public class Sheep : MonoBehaviour
 	public void Die(){
 		gameObject.GetComponent<Damageable>().enabled = false;
 		gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
-		GameObject.Find(targetSheep).SetActive(false);
+
+		if (GameObject.Find (targetSheep)) {
+			GameObject.Find (targetSheep).SetActive (false);
+		}
+
 		this.enabled = false;
 	}
 }
