@@ -45,8 +45,10 @@ public class Damageable : MonoBehaviour
 
 	public void ReceiveDamage (float damage)
 	{	
-		// Show the HealthBar because damage is received
-		healthBar.SetActive(true);
+		if (health == originalHealth) {
+			// Show the HealthBar because damage is received
+			healthBar.SetActive(true);
+		}
 		
 		// TODO: do something fancy with the amount of received damage ;-)
 		// if (this.hasArmour ()) {
@@ -63,12 +65,13 @@ public class Damageable : MonoBehaviour
 		
 		// If out of health
 		if (!this.HasHealth ()) {
-			// TODO: what happens to the referencing turrets etc after destroying the object?
-			Destroy (healthBar);
 			if (gameObject.GetComponent<Sheep>() != null) {
+				// Wolves keep on attacking though...
+				healthBar.SetActive (false);
 				gameObject.GetComponent<Sheep>().Die();
 			} else{
 				Destroy (gameObject);
+				Destroy (healthBar);
 			}
 			
 			gameObject.SendMessage("SpawnAtOnce", SendMessageOptions.DontRequireReceiver);
