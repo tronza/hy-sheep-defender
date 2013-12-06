@@ -58,7 +58,7 @@ public class CollectibleSpawner : MonoBehaviour {
 		
 		//keep spawning following in a counter-clockwise pattern
 		int leftToSpawn = numberToSpawn;
-		int round = 0;
+		int round = 1;
 		
 		Vector3 leftShift = new Vector3(boxSize.x, 0F, 0F);
 		Vector3 rightShift = new Vector3(-boxSize.x, 0F, 0F);
@@ -75,25 +75,26 @@ public class CollectibleSpawner : MonoBehaviour {
 		}
 		
 		while(leftToSpawn > 0) {
+			int doubleOfRound = round * 2;
 			//spawn one in the center, then move 1 down
 			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, Vector3.zero, 1);
 			spawnAt += downShift;
 			
 			//spawn going to the right
-			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, rightShift, round * 2 - 1);
-			spawnAt += rightShift * (Mathf.Max(1, round * 2 - 1));
+			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, rightShift, Mathf.Min(leftToSpawn, doubleOfRound - 1));
+			spawnAt += rightShift * (doubleOfRound - 1);
 			
 			//spawn going up
-			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, upShift, round * 2);
-			spawnAt += upShift * (Mathf.Max(1, round * 2));
+			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, upShift, Mathf.Min(leftToSpawn, doubleOfRound));
+			spawnAt += upShift * doubleOfRound;
 			
 			//spawn going to the left
-			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, leftShift, round * 2);
-			spawnAt += leftShift * (Mathf.Max(1, round * 2));
+			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, leftShift, Mathf.Min(leftToSpawn, doubleOfRound));
+			spawnAt += leftShift * doubleOfRound;
 			
 			//spawn going down
-			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, downShift, round * 2 + 1);
-			spawnAt += downShift * (Mathf.Max(1, round * 2));
+			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, downShift, Mathf.Min(leftToSpawn, doubleOfRound));
+			spawnAt += downShift * doubleOfRound;
 			
 			++round;
 		}
