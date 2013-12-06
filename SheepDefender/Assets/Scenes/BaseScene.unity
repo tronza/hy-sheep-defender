@@ -2678,6 +2678,10 @@ Prefab:
       propertyPath: lostGUI
       value: 
       objectReference: {fileID: 1773554299}
+    - target: {fileID: 11400000, guid: 65941276cbdccee43940a4e8ee592052, type: 2}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 1436175226}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 65941276cbdccee43940a4e8ee592052, type: 2}
   m_RootGameObject: {fileID: 2104394098}
@@ -4488,6 +4492,7 @@ GameObject:
   - 114: {fileID: 1811432114}
   - 143: {fileID: 1811432113}
   - 114: {fileID: 1811432112}
+  - 114: {fileID: 1811432116}
   m_Layer: 0
   m_Name: PlayerSheep
   m_TagString: Defender
@@ -4615,6 +4620,19 @@ SkinnedMeshRenderer:
     m_Center: {x: .655320287, y: -.118838847, z: -.0467108786}
     m_Extent: {x: 1.01764345, y: 1.37190342, z: .809386253}
   m_DirtyAABB: 0
+--- !u!114 &1811432116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1811432110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fe7dade3b9a1b54285529a53f6b715b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lostGUI: {fileID: 1773554299}
+  cameraController: {fileID: 1436175226}
 --- !u!1 &1868028450
 GameObject:
   m_ObjectHideFlags: 0
@@ -5577,6 +5595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lostGUI: {fileID: 1773554299}
+  cameraController: {fileID: 1436175226}
 --- !u!114 &2104394103
 MonoBehaviour:
   m_ObjectHideFlags: 0

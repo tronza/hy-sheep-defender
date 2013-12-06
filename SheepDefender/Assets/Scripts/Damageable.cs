@@ -64,18 +64,14 @@ public class Damageable : MonoBehaviour
 		// If out of health
 		if (!this.HasHealth ()) {
 			// TODO: what happens to the referencing turrets etc after destroying the object?
-			Destroy (healthBar);
-			
-			// TODO: why can't the sheep be destroyed without everything exploding?!
-			if (GetComponent<Sheep>() == null) {
-				Destroy (gameObject);
-			}
-			
 			gameObject.SendMessage("HealthZeroed", SendMessageOptions.DontRequireReceiver);
 			
 			if (this.dieEffect) {
 				Destroy (Instantiate (this.dieEffect, transform.position, Quaternion.identity), 1.0f);	
 			}
+			
+			Destroy (gameObject);
+			Destroy (healthBar);
 		}
 	}
 

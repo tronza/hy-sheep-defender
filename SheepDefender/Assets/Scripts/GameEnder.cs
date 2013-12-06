@@ -5,6 +5,7 @@ public class GameEnder : MonoBehaviour
 {
 
 	public LostGUI lostGUI;
+	public CameraController cameraController;
 	
 	// Use this for initialization
 	void Start ()
@@ -14,6 +15,7 @@ public class GameEnder : MonoBehaviour
 	
 	void HealthZeroed ()
 	{
+		cameraController.ActivateMainCamera();
 		PlayerPrefs.SetInt (PlayerPrefKeys.LEVEL_GAMEOVER, 1);
 		lostGUI.ShowGUI ();
 	}

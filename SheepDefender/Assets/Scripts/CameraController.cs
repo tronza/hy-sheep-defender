@@ -16,33 +16,41 @@ public class CameraController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.GetKeyDown ("c")) {
-			ChangeCamera ();
+		if (PlayerPrefs.GetInt (PlayerPrefKeys.LEVEL_GAMEOVER) == 0) {
+			if (Input.GetKeyDown ("c")) {
+				ChangeCamera ();
+			}
 		}
 	}
 	
 	public void ActivateMainCamera ()
 	{
-		playerSheep.GetComponent<Sheep>().SetMovementMode(Sheep.MovementMode.Stopped);
-
-		thirdPersonCamera.GetComponent<Camera>().enabled =  false;
-		mainCamera.GetComponent<Camera>().enabled =  true;
+		if (PlayerPrefs.GetInt (PlayerPrefKeys.LEVEL_GAMEOVER) == 0) {
+			playerSheep.GetComponent<Sheep> ().SetMovementMode (Sheep.MovementMode.Stopped);
+	
+			thirdPersonCamera.GetComponent<Camera> ().enabled = false;
+			mainCamera.GetComponent<Camera> ().enabled = true;
+		}
 	}
 	
 	public void ActivateThirdPersonCamera ()
 	{
-		mainCamera.GetComponent<Camera>().enabled = false;
-		thirdPersonCamera.GetComponent<Camera>().enabled = true;
-
-		playerSheep.GetComponent<Sheep>().SetMovementMode(Sheep.MovementMode.DeltaMouse);
+		if (PlayerPrefs.GetInt (PlayerPrefKeys.LEVEL_GAMEOVER) == 0) {
+			mainCamera.GetComponent<Camera> ().enabled = false;
+			thirdPersonCamera.GetComponent<Camera> ().enabled = true;
+	
+			playerSheep.GetComponent<Sheep> ().SetMovementMode (Sheep.MovementMode.DeltaMouse);
+		}
 	}
 	
 	public void ChangeCamera ()
 	{
-		if (mainCamera.GetComponent<Camera>().enabled ) {
-			ActivateThirdPersonCamera ();
-		} else {
-			ActivateMainCamera ();
+		if (PlayerPrefs.GetInt (PlayerPrefKeys.LEVEL_GAMEOVER) == 0) {
+			if (mainCamera.GetComponent<Camera> ().enabled) {
+				ActivateThirdPersonCamera ();
+			} else {
+				ActivateMainCamera ();
+			}
 		}
 	}
 }
