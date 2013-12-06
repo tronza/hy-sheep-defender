@@ -94,9 +94,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0ace00fbac65d4ab60a50cf68c0b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
-  speed: 16
   ammoType: 0
+  damage: 25
+  speed: 40
+  friendlyObjTag: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
