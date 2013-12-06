@@ -8,13 +8,11 @@ public class VictoryGUI : MonoBehaviour {
 	public GameObject endBackground;
 	public GameObject endText;
 	public GameObject backToMenuText;
-	public string playerSheepName = "PlayerSheep";
 	
 	private GameObject playerSheep;
-	
 	// Use this for initialization
 	void Start () {
-		playerSheep = GameObject.Find(playerSheepName);
+		playerSheep = GameObject.Find("PlayerSheep");
 	}
 	
 	// Update is called once per frame
@@ -23,7 +21,7 @@ public class VictoryGUI : MonoBehaviour {
 	}
 	public void ShowGUI(int score, bool newHighScore){
 		gameObject.GetComponent<Level>().enabled = false;
-		targetSheep.GetComponent<GameEnder>().enabled = false;
+		targetSheep.GetComponent<SheepInsideFenceScript>().enabled = false;
 		playerSheep.GetComponent<Sheep>().enabled = false;
 		guiObject.SetActive(false);
 		

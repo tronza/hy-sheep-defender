@@ -4,6 +4,7 @@ using System.Collections;
 public class Damageable : MonoBehaviour
 {
 	const string HEALTH_BAR = "HealthBar";
+	public LostGUI lostGUI;
 	/**
 	 * dieEffect may be null. Then the Damageable object will just... disappear.
 	 */
@@ -65,14 +66,20 @@ public class Damageable : MonoBehaviour
 		if (!this.HasHealth ()) {
 			// TODO: what happens to the referencing turrets etc after destroying the object?
 			Destroy (healthBar);
-			
-			// TODO: why can't the sheep be destroyed without everything exploding?!
-			if (GetComponent<Sheep>() == null) {
+			if (gameObject.name == "PlayerSheep") {
+				gameObject.GetComponent<Sheep>().enabled = false;
+				gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
+				lostGUI.ShowGUI();
+				this.enabled = false;
+				
+			} else{
 				Destroy (gameObject);
 			}
 			
-			gameObject.SendMessage("HealthZeroed", SendMessageOptions.DontRequireReceiver);
+			gameObject.SendMessage("SpawnAtOnce", SendMessageOptions.DontRequireReceiver);
+			gameObject.SendMessage("Destroyed", SendMessageOptions.DontRequireReceiver);
 			
+
 			if (this.dieEffect) {
 				Destroy (Instantiate (this.dieEffect, transform.position, Quaternion.identity), 1.0f);	
 			}

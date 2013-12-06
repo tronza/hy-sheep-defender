@@ -22,6 +22,7 @@ public class MyGUIScript : MonoBehaviour
 	bool startedPlacing = false;
 	float placeablePosY;
 	int groundLayerMask;
+	
 	int lastUpdateFrame;
 	int lastOnGUIFrame;
 	int OnGUICallsThisFrame;
@@ -35,29 +36,30 @@ public class MyGUIScript : MonoBehaviour
 		turrets = new GUIContent[placeablePrefabs.Length];
 		
 		//foreach (Object obj in placeablePrefabs)
-		for (int i = 0; i < placeablePrefabs.Length; ++i) {
-			Object prefab = placeablePrefabs [i];
-			if (prefab is GameObject) {
-				Purchaseable placeable = ((GameObject)prefab).GetComponentsInChildren<Purchaseable> (true) [0];
-				turrets [i] = new GUIContent (placeable.nameToDisplay, placeable.icon);
+		for (int i = 0; i < placeablePrefabs.Length; ++i)
+		{
+			Object prefab = placeablePrefabs[i];
+			if(prefab is GameObject){
+				Purchaseable placeable = ((GameObject)prefab).GetComponentsInChildren<Purchaseable>(true)[0];
+				turrets[i] = new GUIContent (placeable.nameToDisplay, placeable.icon);
 			}
 		}
 		
 		//arcane bit shift that's needed to get the "layer mask", used for raycasting
-		groundLayerMask = 1 << LayerMask.NameToLayer ("GroundLayer");
+		groundLayerMask = 1 << LayerMask.NameToLayer("GroundLayer");
 		
 		//adjust rotation (since aspectRatio resizes on another axis)
-		rotateObjOnY (lightObj, 90f);
-		lightProj = lightObj.GetComponent<Projector> ();
+		rotateObjOnY(lightObj, 90f);
+		lightProj = lightObj.GetComponent<Projector>();
 		lightProj.orthographic = true;
-		lightTrig = lightObj.GetComponent<Trigger> ();
+		lightTrig = lightObj.GetComponent<Trigger>();
 		lightProj.enabled = false;
 	}
 	
 	void OnGUI ()
 	{
 		//TODO: use this synchronization to assign variables only once a frame
-		lastOnGUIFrame = Time.frameCount;
+		lastOnGUIFrame=Time.frameCount;
 		
 		if (lastOnGUIFrame > lastUpdateFrame) {
 			++OnGUICallsThisFrame;
@@ -134,9 +136,8 @@ public class MyGUIScript : MonoBehaviour
 	}
 	
 	//changed this so many times that it's better as a function
-	void rotateObjOnY (GameObject obj, float degrees)
-	{
-		obj.transform.RotateAround (obj.transform.position, Vector3.up, degrees);
+	void rotateObjOnY(GameObject obj, float degrees) {
+		obj.transform.RotateAround(obj.transform.position, Vector3.up, degrees);
 	}
 	
 	//this is the placing of the turret
@@ -148,7 +149,7 @@ public class MyGUIScript : MonoBehaviour
 			// TODO: Create a button that asks to return to 3rd person mode ???
 		}
 
-		lastUpdateFrame = Time.frameCount;
+		lastUpdateFrame=Time.frameCount;
 		
 		if (lastUpdateFrame > lastOnGUIFrame) {
 			OnGUICallsThisFrame = 0;
@@ -158,12 +159,12 @@ public class MyGUIScript : MonoBehaviour
 		//TODO: use a "ghost" when positioning the turrets and walls, otherwise it can be placed over a wolf
 		if (placingTurret) {
 			if (startedPlacing) {
-				Object prefab = placeablePrefabs [selectedTurret];
+				Object prefab = placeablePrefabs[selectedTurret];
 				
 				//TODO: disable buttons when there are not enough money
-				Purchaseable placeable = ((GameObject)prefab).GetComponentsInChildren<Purchaseable> (true) [0];
-				if (myGameInfo.coins < placeable.price) {
-					Debug.Log ("Not enough money");
+				Purchaseable placeable = ((GameObject)prefab).GetComponentsInChildren<Purchaseable>(true)[0];
+				if(myGameInfo.coins < placeable.price) {
+					Debug.Log("Not enough money");
 					placingTurret = false;
 					startedPlacing = false;
 
@@ -174,27 +175,27 @@ public class MyGUIScript : MonoBehaviour
 				lightProj.enabled = true;
 				
 				//this is to put the turret at the right height from the ground, please do not use negative y
-				Transform pTransform = ((GameObject)prefab).GetComponentsInChildren<Transform> (true) [0];
+				Transform pTransform = ((GameObject)prefab).GetComponentsInChildren<Transform>(true)[0];
 				placeablePosY = pTransform.position.y;
 				
 				//get size of the box enclosing the prefab (MUST have a MeshFilter set for this to work)
 				//NOTE: there is a bug in Unity that sometimes makes the MeshFilter component disappear
-				Renderer pRenderer = ((GameObject)prefab).GetComponentsInChildren<Renderer> (true) [0];
+				Renderer pRenderer = ((GameObject)prefab).GetComponentsInChildren<Renderer>(true)[0];
 				Vector3 boxSize = pRenderer.bounds.size;
 				
 				//align projector to longest dimension of prefab (the x rotation is to make it point downwards)
 				if (boxSize.z > boxSize.x) {
-					lightObj.transform.rotation = Quaternion.Euler (new Vector3 (90f, 90f, 0f));
+					lightObj.transform.rotation = Quaternion.Euler(new Vector3(90f, 90f, 0f));
 				} else {
-					lightObj.transform.rotation = Quaternion.Euler (new Vector3 (90f, 0f, 0f));
+					lightObj.transform.rotation = Quaternion.Euler(new Vector3(90f, 0f, 0f));
 				}
 				//match size of prefab
 				lightProj.orthoGraphicSize = boxSize.x / 2f;
 				lightProj.aspectRatio = boxSize.z / boxSize.x;
-				BoxCollider lightColl = lightObj.GetComponent<BoxCollider> ();
+				BoxCollider lightColl = lightObj.GetComponent<BoxCollider>();
 				
 				//we need this correction to account for the x rotation of the projector
-				lightColl.size = new Vector3 (boxSize.z, boxSize.x, boxSize.y);
+				lightColl.size = new Vector3(boxSize.z, boxSize.x, boxSize.y);
 				
 				startedPlacing = false;
 			}
@@ -205,15 +206,14 @@ public class MyGUIScript : MonoBehaviour
 
 			//right mouse click to rotate placing position
 			if (Input.GetMouseButtonDown (1)) {
-				rotateObjOnY (lightObj, 90f);
+				rotateObjOnY(lightObj, 90f);
 			}
 
 			//cast ray from camera to ground, get intersection point with ground layer and move light there
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			RaycastHit hitInfo;
 			
-			if (Physics.Raycast (ray, out hitInfo, Mathf.Infinity, groundLayerMask)) {
-				lightObj.transform.position = new Vector3 (hitInfo.point.x, hitInfo.point.y + placeablePosY, hitInfo.point.z);
+			if (Physics.Raycast (ray, out hitInfo, Mathf.Infinity, groundLayerMask)) {lightObj.transform.position = new Vector3(hitInfo.point.x, hitInfo.point.y + placeablePosY, hitInfo.point.z);
 				
 				//TODO: replace discardClick
 				//allow placing only if zone is free
@@ -230,18 +230,18 @@ public class MyGUIScript : MonoBehaviour
 
 	GameObject CreateTurret (int turretKind, Vector3 position, float yRotation)
 	{
-		GameObject prefab = (GameObject)placeablePrefabs [turretKind];
+		GameObject prefab = (GameObject)placeablePrefabs[turretKind];
 		
 		//consume coins
-		Purchaseable placeable = prefab.GetComponentsInChildren<Purchaseable> (true) [0];
+		Purchaseable placeable = prefab.GetComponentsInChildren<Purchaseable>(true)[0];
 		myGameInfo.coins -= placeable.price;
 		
 		//correct placing position with height
-		Transform pTransform = prefab.GetComponentsInChildren<Transform> (true) [0];
-		Vector3 placingPosition = new Vector3 (position.x, position.y + pTransform.position.y, position.z);
+		Transform pTransform = prefab.GetComponentsInChildren<Transform>(true)[0];
+		Vector3 placingPosition = new Vector3(position.x, position.y + pTransform.position.y, position.z);
 		
 		//create and place turret
-		Quaternion rotation = Quaternion.Euler (0, yRotation, 0);
-		return (GameObject)Instantiate (prefab, placingPosition, rotation);
+		Quaternion rotation = Quaternion.Euler(0, yRotation, 0);
+		return (GameObject)Instantiate(prefab, placingPosition, rotation);
 	}
 }
