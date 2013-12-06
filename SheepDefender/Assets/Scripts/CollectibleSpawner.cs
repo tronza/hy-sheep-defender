@@ -6,7 +6,11 @@ public class CollectibleSpawner : MonoBehaviour {
 	public Object prefab;
 	public int numberToSpawn;
 	
-	int SpawnWithShift(Vector3 startPosition, Quaternion rotation, Vector3 shift, int times, string dir = "")
+	public void HealthZeroed() {
+		SpawnAtOnce();
+	}
+	
+	int SpawnWithShift(Vector3 startPosition, Quaternion rotation, Vector3 shift, int times)
 	{
 		int spawned = 0;
 		for(int i=0; i < times; ++i){
@@ -22,12 +26,27 @@ public class CollectibleSpawner : MonoBehaviour {
 	// will work for prefabs of any size ;-)
 	void SpawnAtOnce()
 	{
+		//arcane bit shift that's needed to get the "layer mask", used for raycasting
+		int groundLayerMask = 1 << LayerMask.NameToLayer("GroundLayer");
+		
+		//cast ray from camera to ground, get intersection point with ground layer and move light there
+		Ray rayDown = new Ray(transform.position, Vector3.down);
+		Ray rayUp = new Ray(transform.position, Vector3.up);
+		RaycastHit hitInfo;
+		
+		if (!Physics.Raycast (rayDown, out hitInfo, Mathf.Infinity, groundLayerMask)) {
+			if (!Physics.Raycast (rayUp, out hitInfo, Mathf.Infinity, groundLayerMask)) {
+				Debug.Log("No ground detected");
+				return;
+			}
+		}
+		
 		Animation pAnimation = ((GameObject)prefab).GetComponentsInChildren<Animation>(true)[0];
 		bool isAnimated= pAnimation != null;
 		
 		//this is to spawn at the right height from the ground, please do not use negative y
 		Transform pTransform = ((GameObject)prefab).GetComponentsInChildren<Transform>(true)[0];
-		Vector3 spawnAt = transform.position;
+		Vector3 spawnAt = hitInfo.point;
 		spawnAt.y += pTransform.position.y;
 			
 		Quaternion pRotation = pTransform.rotation;
@@ -57,23 +76,23 @@ public class CollectibleSpawner : MonoBehaviour {
 		
 		while(leftToSpawn > 0) {
 			//spawn one in the center, then move 1 down
-			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, Vector3.zero, 1, "S");
+			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, Vector3.zero, 1);
 			spawnAt += downShift;
 			
 			//spawn going to the right
-			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, rightShift, round * 2 - 1, "R");
+			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, rightShift, round * 2 - 1);
 			spawnAt += rightShift * (Mathf.Max(1, round * 2 - 1));
 			
 			//spawn going up
-			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, upShift, round * 2, "U");
+			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, upShift, round * 2);
 			spawnAt += upShift * (Mathf.Max(1, round * 2));
 			
 			//spawn going to the left
-			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, leftShift, round * 2, "L");
+			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, leftShift, round * 2);
 			spawnAt += leftShift * (Mathf.Max(1, round * 2));
 			
 			//spawn going down
-			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, downShift, round * 2 + 1, "D");
+			leftToSpawn -= SpawnWithShift(spawnAt, pRotation, downShift, round * 2 + 1);
 			spawnAt += downShift * (Mathf.Max(1, round * 2));
 			
 			++round;
