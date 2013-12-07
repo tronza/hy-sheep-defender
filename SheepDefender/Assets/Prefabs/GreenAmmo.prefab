@@ -82,9 +82,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d0ace00fbac65d4ab60a50cf68c0b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
-  speed: 25
   ammoType: 1
+  damage: 50
+  speed: 35
+  friendlyObjTag: 
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

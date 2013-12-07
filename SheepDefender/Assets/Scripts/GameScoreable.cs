@@ -25,7 +25,7 @@ public class GameScoreable : MonoBehaviour
 		this.existsSince = Mathf.FloorToInt (Time.realtimeSinceStartup);	
 	}
 	
-	public void OnDestroy () 
+	public void HealthZeroed () 
 	{
 		var scorePoints = this.scorePointsBeginning + 1;
 		var decreaseBy = Mathf.FloorToInt ((Mathf.FloorToInt (Time.realtimeSinceStartup) - existsSince) / this.decreaseScorePointEvery);

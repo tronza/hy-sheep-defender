@@ -10,7 +10,7 @@ using System.Collections.Generic;
 public class Level : MonoBehaviour {
 	private string levelName;//name of the level eg. levels/level1.ini
 	private int levelDuration;//Shows the total time for completing the level
-	private int timeEllapsed =0;//shows how much time has ellapsed
+	private int timeElapsed =0;//shows how much time has ellapsed
 	private Dictionary<int, string[]> wolvesToSpawn = new Dictionary<int, string[]>();//Key is the point in time (second) in which wolves of the value (string array) are generated
 	private Dictionary<int, string> messages = new Dictionary<int, string>();//Key is the point in time (second) in which the message (value) is shown
 	private GameObject[] spawnPoints;//The possible places the wolves can spawn to
@@ -28,8 +28,12 @@ public class Level : MonoBehaviour {
 	
 	private VictoryGUI victoryGUI;
 	
+	private Dictionary<string, UnityEngine.Object> resourceCache;
+	
 	// Use this for initialization
 	void Start () {
+		resourceCache = new Dictionary<string, UnityEngine.Object>();
+		
 		progressBarX = Screen.width/2 - progressBarW/2;
 		victoryGUI = gameObject.GetComponent<VictoryGUI>();
 		
@@ -39,31 +43,37 @@ public class Level : MonoBehaviour {
 		spawnPoints = GameObject.FindGameObjectsWithTag("Spawn"); //all spawn points in scene
 		messageText = textObject.GetComponent<GUIText>();//Sets the gui text to modify		
 		InvokeRepeating("TimerTick", 1, 1);//Start the timer that checks for new wolves to spawn
-		
 	}
 	
 	private void DrawProgressBar(){//draws the background
 		GUI.DrawTexture(new Rect(progressBarX , progressBarY, progressBarW, progressBarH), progressbarBackground);
-		float progress = ((float)timeEllapsed / (float)levelDuration);
+		float progress = ((float)timeElapsed / (float)levelDuration);
 		if(progress>1){//don't draw an overly long progressbar if the level has ended
 			progress=1;
 		}
 		GUI.DrawTexture(new Rect(progressBarX , progressBarY, progressBarW * progress, progressBarH), progressbarForeground);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-	
+	UnityEngine.Object LoadResource(string path)
+	{
+		UnityEngine.Object resource;
+		if(resourceCache.TryGetValue(path, out resource)) {
+			return resource;
+		} else {
+			resource = Resources.Load(path);
+			resourceCache.Add(path, resource);
+			return resource;
+		}
 	}
+	
 	void OnGUI() {
 		DrawProgressBar();//draws the progressbar to track the level's progress
 		
 	}
 	
 	private void TimerTick(){//This occurs every second and checks for new wolves to be added
-		timeEllapsed++;
-		if(timeEllapsed>=levelDuration){//don't check for the wolves if the level has already ended
+		timeElapsed++;
+		if(timeElapsed>=levelDuration){//don't check for the wolves if the level has already ended
 			
 			//End of the level
 			GameObject wolf = GameObject.FindGameObjectWithTag("Attacker");
@@ -81,13 +91,13 @@ public class Level : MonoBehaviour {
 			
 			return;
 		}
-		if(wolvesToSpawn.ContainsKey(timeEllapsed)){//There are wolves to spawn at this time point
+		if(wolvesToSpawn.ContainsKey(timeElapsed)){//There are wolves to spawn at this time point
 			//Message
-			messageText.text = messages[timeEllapsed];
+			messageText.text = messages[timeElapsed];
 			
 			//The wolves
 			System.Random rnd = new System.Random();
-			string[] wolves = wolvesToSpawn[timeEllapsed];
+			string[] wolves = wolvesToSpawn[timeElapsed];
 			List<int> spawnIndices = GenerateListWithNumbers(spawnPoints.Length);//This list contains the possible indicies so that if the number of wolves is smaller than the number of spawners, multiple wolves won't spawn on the same spot
 			for(int i=0;i<wolves.Length;i++){
 				if(spawnIndices.Count ==0 ){//If the indices list is empty, refill it (only incase there are more wolves at this time point in the level file than there are spawners)
@@ -113,7 +123,7 @@ public class Level : MonoBehaviour {
 	}
 	
 	private void SpawnGameObject(String prefabName, int wolfNumber, Vector3 position, Quaternion rotation) {
-		GameObject gameObj = (GameObject)Instantiate(Resources.Load(prefabName), position, rotation);
+		GameObject gameObj = (GameObject)Instantiate(LoadResource(prefabName), position, rotation);
 		if(wolfNumber!=-1){//-1 means that it's not a wolf
 			gameObj.name = "enemyWolf"+wolfNumber; //unique name.
 		}

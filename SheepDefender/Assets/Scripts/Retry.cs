@@ -14,6 +14,7 @@ public class Retry : MonoBehaviour {
 	}
 	
 	void OnMouseDown(){
+		PlayerPrefs.SetInt (PlayerPrefKeys.LEVEL_GAMEOVER, 0);
 		Application.LoadLevel(Application.loadedLevel);
 	}
 }

@@ -23,23 +23,29 @@ public class CameraController : MonoBehaviour
 	
 	public void ActivateMainCamera ()
 	{
-		playerSheep.GetComponent<Sheep>().SetMovementMode(Sheep.MovementMode.Stopped);
-
-		thirdPersonCamera.GetComponent<Camera>().enabled =  false;
-		mainCamera.GetComponent<Camera>().enabled =  true;
+		if (playerSheep != null) {
+			playerSheep.GetComponent<Sheep> ().SetMovementMode (Sheep.MovementMode.Stopped);
+		}
+		if (thirdPersonCamera != null) {
+			thirdPersonCamera.GetComponent<Camera> ().enabled = false;
+			mainCamera.GetComponent<Camera> ().enabled = true;
+		}
 	}
 	
 	public void ActivateThirdPersonCamera ()
 	{
-		mainCamera.GetComponent<Camera>().enabled = false;
-		thirdPersonCamera.GetComponent<Camera>().enabled = true;
-
-		playerSheep.GetComponent<Sheep>().SetMovementMode(Sheep.MovementMode.DeltaMouse);
+		if (thirdPersonCamera != null) {
+			mainCamera.GetComponent<Camera> ().enabled = false;
+			thirdPersonCamera.GetComponent<Camera> ().enabled = true;
+		}
+		if (playerSheep != null) {
+			playerSheep.GetComponent<Sheep> ().SetMovementMode (Sheep.MovementMode.DeltaMouse);
+		}
 	}
 	
 	public void ChangeCamera ()
 	{
-		if (mainCamera.GetComponent<Camera>().enabled ) {
+		if (mainCamera.GetComponent<Camera> ().enabled) {
 			ActivateThirdPersonCamera ();
 		} else {
 			ActivateMainCamera ();
