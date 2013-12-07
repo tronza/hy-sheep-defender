@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Sheep : MonoBehaviour
 {
+	public GameInfo gameInfo; //TODO: make singleton
+	public GameObject childCamera;
 	public float moveSpeed = 10f; //in meters per second
 	public float rotationSpeed = 180.0F; //in degrees per sec
 	public float jumpSpeed = 20.0F;
@@ -11,7 +13,6 @@ public class Sheep : MonoBehaviour
 	public bool absoluteKeyMove = false;
 	public Transform gunHolder;
 	public Object[] weaponPrefabs;
-	public GameInfo gameInfo; //TODO: make singleton
 	public float sensitivityX = 15F;
 	public enum MovementMode
 	{
@@ -178,5 +179,10 @@ public class Sheep : MonoBehaviour
 			gameInfo.coins += collectible.storeValue;
 			Destroy (other.gameObject);
 		}
+	}
+	
+	void HealthZeroed()
+	{
+		childCamera.GetComponent<Detacheable>().ParentAboutToBeDestroyed();
 	}
 }

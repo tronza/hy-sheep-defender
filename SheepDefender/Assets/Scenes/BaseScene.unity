@@ -3884,6 +3884,7 @@ GameObject:
   - 81: {fileID: 1655560792}
   - 82: {fileID: 1655560796}
   - 114: {fileID: 1655560797}
+  - 114: {fileID: 1655560798}
   m_Layer: 0
   m_Name: ThirdPersonCamera
   m_TagString: MainCamera
@@ -4024,6 +4025,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07e6c48c466a5434284a49070a5f1d62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1655560798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1655560790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 023f9a8f3cba22d459ad15c5eed4762a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1658573890
@@ -4526,6 +4538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9053901e24aefaf428842853e43ce73c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameInfo: {fileID: 2034953317}
+  childCamera: {fileID: 1655560790}
   moveSpeed: 10
   rotationSpeed: 180
   jumpSpeed: 20
@@ -4536,7 +4550,6 @@ MonoBehaviour:
   weaponPrefabs:
   - {fileID: 100000, guid: aa495e9b41033cf44b985d29c79e9265, type: 2}
   - {fileID: 100000, guid: 0960871b4abb2da4da1795ee80e57eaf, type: 2}
-  gameInfo: {fileID: 2034953317}
   sensitivityX: 15
 --- !u!143 &1811432113
 CharacterController:
@@ -5759,6 +5772,10 @@ Prefab:
       propertyPath: gameInfo
       value: 
       objectReference: {fileID: 2034953317}
+    - target: {fileID: 11400006, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
+      propertyPath: childCamera
+      value: 
+      objectReference: {fileID: 1655560790}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a42e1b7d89497d4abbea46e96514e2d, type: 2}
   m_RootGameObject: {fileID: 1811432110}
