@@ -178,14 +178,18 @@ public class Sheep : MonoBehaviour
 			Destroy(other.gameObject);
 		}
 	}
-	public void Die(){
-		gameObject.GetComponent<Damageable>().enabled = false;
-		gameObject.GetComponent<SkinnedMeshRenderer>().enabled = false;
 
+	public void HealthZeroed ()
+	{
+		// Activate the main camera
+		GameObject.Find ("CameraController").SendMessage ("ActivateMainCamera");
+
+		// Set ThirdPersonCamera to not reference Object that is going to be destroyed
+		GameObject.Find ("ThirdPersonCamera").transform.parent = null;
+
+		// Game over, by disabling targetSheep
 		if (GameObject.Find (targetSheep)) {
-			GameObject.Find (targetSheep).SetActive (false);
+			GameObject.Find (targetSheep).SendMessage ("GameOver");
 		}
-
-		this.enabled = false;
 	}
 }

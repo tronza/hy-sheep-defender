@@ -50,11 +50,6 @@ public class Damageable : MonoBehaviour
 			healthBar.SetActive(true);
 		}
 		
-		// TODO: do something fancy with the amount of received damage ;-)
-		// if (this.hasArmour ()) {
-		// 	 this.health -= damage / 2;
-		// } etc.
-		
 		// Decrease the healthbar width relatively 
 		healthBar.transform.localScale -= new Vector3(
 			(originalScaleX / (originalHealth / damage)), 0.0f, 0.0f
@@ -65,18 +60,12 @@ public class Damageable : MonoBehaviour
 		
 		// If out of health
 		if (!this.HasHealth ()) {
-			if (gameObject.GetComponent<Sheep>() != null) {
-				// Wolves keep on attacking though...
-				healthBar.SetActive (false);
-				gameObject.GetComponent<Sheep>().Die();
-			} else{
-				Destroy (gameObject);
-				Destroy (healthBar);
-			}
-			
+			gameObject.SendMessage("HealthZeroed", SendMessageOptions.DontRequireReceiver);
+
+			Destroy (gameObject);
+			Destroy (healthBar);
+
 			gameObject.SendMessage("SpawnAtOnce", SendMessageOptions.DontRequireReceiver);
-			gameObject.SendMessage("Destroyed", SendMessageOptions.DontRequireReceiver);
-			
 
 			if (this.dieEffect) {
 				Destroy (Instantiate (this.dieEffect, transform.position, Quaternion.identity), 1.0f);	
