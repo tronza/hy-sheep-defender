@@ -20,7 +20,7 @@ public class GameScore : MonoBehaviour
 			GUILayout.BeginVertical ();
 				GUILayout.BeginHorizontal ();
 					GUILayout.FlexibleSpace ();
-					GUILayout.Label ("Score: " + scorePoints.ToString());
+					GUILayout.Label ("Score: " + scorePoints.ToString() +"\t\t");
 				GUILayout.EndHorizontal ();
 			GUILayout.EndVertical ();
 		GUILayout.EndArea ();
