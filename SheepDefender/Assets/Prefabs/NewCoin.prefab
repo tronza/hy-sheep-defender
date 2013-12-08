@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   durationTime: 10
   vanishingEffect: {fileID: 100000, guid: 7a598717ded698c4dbdd57c2260fa1e1, type: 2}
-  storeValue: 10
+  storeValue: 1
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

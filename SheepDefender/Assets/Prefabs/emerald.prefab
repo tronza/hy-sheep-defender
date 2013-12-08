@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   durationTime: 10
   vanishingEffect: {fileID: 100000, guid: 7a598717ded698c4dbdd57c2260fa1e1, type: 2}
-  storeValue: 50
+  storeValue: 2
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

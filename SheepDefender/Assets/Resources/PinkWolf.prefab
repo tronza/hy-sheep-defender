@@ -1071,7 +1071,7 @@ MonoBehaviour:
   nextWaypointDistance: 3
   tagOfHostiles: Defender
   attackDistance: 3
-  attackDamage: 3
+  attackDamage: 5
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
