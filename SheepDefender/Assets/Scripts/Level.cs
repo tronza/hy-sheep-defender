@@ -159,7 +159,9 @@ public class Level : MonoBehaviour {
 		}
 		
 	}
-	
+	void OnDisable() {
+		CancelInvoke();//Don't check for wolves if the script is disabled
+	}
 	
 	private int ConvertStringToInt(string stringToConvert){//Converts int to string, if fails, returns -1
 		try

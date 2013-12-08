@@ -3426,7 +3426,7 @@ GUIText:
   m_GameObject: {fileID: 1494705050}
   m_Enabled: 0
   serializedVersion: 3
-  m_Text: Back to Main menu
+  m_Text: Back to main menu
   m_Anchor: 0
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: 0}

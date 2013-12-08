@@ -16,12 +16,15 @@ public class ExitButton : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+			if (Input.GetKeyDown (KeyCode.Escape) && !showDialog) {
+			ShowDialog(!showDialog);
+		}
 	}
 	void OnMouseDown ()
 	{
 			ShowDialog(!showDialog);
 	}
+	
 	void OnGUI() {
 		
 	}

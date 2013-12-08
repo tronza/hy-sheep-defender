@@ -35,7 +35,9 @@ public class Weapon : MonoBehaviour
 		ammoStorage.ConsumeAmmo (loadedAmmo.ammoType, 1);
 		
 		//play shooting sound
-		audio.Play ();
+		if(PlayerPrefs.GetInt (PlayerPrefKeys.MUTE)!=1){
+			audio.Play ();
+		}
 	}
 	
 	public void PullTrigger ()
