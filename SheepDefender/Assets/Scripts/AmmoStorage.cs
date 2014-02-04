@@ -1,3 +1,6 @@
+﻿using UnityEngine;
+using System.Collections;
+
 /**
  * Copyright 2014 Agostino Sturaro
  *
@@ -13,9 +16,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿using UnityEngine;
-using System.Collections;
-
 //this class is a singleton (simple, non multithreaded)
 //it does _not_ need to be put in a GameObject, it creates its own
 public class AmmoStorage : MonoBehaviour

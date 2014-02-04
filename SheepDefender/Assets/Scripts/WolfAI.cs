@@ -1,3 +1,7 @@
+﻿using UnityEngine;
+using System.Collections;
+using Pathfinding;
+
 /**
  * Copyright 2014 Kai Kulju
  *
@@ -13,10 +17,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿using UnityEngine;
-using System.Collections;
-using Pathfinding;
-
 public class WolfAI : MonoBehaviour
 {
 	// The AI's speed per second

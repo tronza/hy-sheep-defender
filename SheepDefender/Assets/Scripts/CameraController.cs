@@ -1,3 +1,6 @@
+﻿using UnityEngine;
+using System.Collections;
+
 /**
  * Copyright 2014 Kai Kulju, Mika Hämäläinen, Agostino Sturaro
  *
@@ -13,9 +16,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿using UnityEngine;
-using System.Collections;
-
 public class CameraController : MonoBehaviour
 {
 	public GameObject mainCamera;

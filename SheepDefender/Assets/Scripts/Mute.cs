@@ -1,3 +1,6 @@
+﻿using UnityEngine;
+using System.Collections;
+
 /**
  * Copyright 2014 Mika Hämäläinen
  *
@@ -13,9 +16,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿using UnityEngine;
-using System.Collections;
-
 /*
  * This class turns sound on or off accordingly.
  * At the beginning, the saved mute state is loaded and set.

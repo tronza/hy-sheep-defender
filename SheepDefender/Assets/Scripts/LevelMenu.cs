@@ -1,3 +1,9 @@
+using UnityEngine;
+using System;
+using System.Collections;
+using System.IO;
+using System.Collections.Generic;
+
 /**
  * Copyright 2014 Jannis Seemann, Mika Hämäläinen
  *
@@ -13,12 +19,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using UnityEngine;
-using System;
-using System.Collections;
-using System.IO;
-using System.Collections.Generic;
-
 /**
  * The LevelMenu class. Used for displaying the level menu.
  * 

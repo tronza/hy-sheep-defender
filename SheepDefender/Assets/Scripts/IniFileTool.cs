@@ -1,3 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Collections;
+using System.IO;
+
 /**
  * Copyright 2014 Mika Hämäläinen, Jannis Seemann
  *
@@ -13,13 +20,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections;
-using System.IO;
-
     public class IniFileTool
     {
         public Encoding characterEncoding = Encoding.UTF8;

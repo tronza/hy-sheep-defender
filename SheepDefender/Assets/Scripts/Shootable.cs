@@ -1,3 +1,6 @@
+﻿using UnityEngine;
+using System.Collections;
+
 /**
  * Copyright 2014 Agostino Sturaro, Kai Kulju
  *
@@ -13,9 +16,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿using UnityEngine;
-using System.Collections;
-
 public class Shootable : MonoBehaviour
 {
 	public AmmoStorage.AmmoType ammoType; //must be set to the right type

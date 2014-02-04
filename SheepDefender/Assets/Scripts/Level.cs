@@ -1,3 +1,9 @@
+﻿using UnityEngine;
+using System;
+using System.Collections;
+using System.IO;
+using System.Collections.Generic;
+
 /**
  * Copyright 2014 Mika Hämäläinen, Agostino Sturaro
  *
@@ -13,11 +19,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-﻿using UnityEngine;
-using System;
-using System.Collections;
-using System.IO;
-using System.Collections.Generic;
 //This class loads a level file and generates the wolves accordingly.
 //The level file will be searched in a subfolder called "levels" in the game's root folder. E.g. levels/level_name.ini
 //Wolf prefabs need to be in the Resources folder and have the exact same name that is used in the level file
