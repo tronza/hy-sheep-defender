@@ -3,6 +3,22 @@ using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
+
+/**
+ * Copyright 2013-2014 Mika Hämäläinen, Agostino Sturaro
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 //This class loads a level file and generates the wolves accordingly.
 //The level file will be searched in a subfolder called "levels" in the game's root folder. E.g. levels/level_name.ini
 //Wolf prefabs need to be in the Resources folder and have the exact same name that is used in the level file
