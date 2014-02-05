@@ -2,7 +2,7 @@
 using System.Collections;
 
 /**
- * Copyright 2014 Kai Kulju, Jannis Seemann, Agostino Sturaro, Mika Hämäläinen, Arthur Joly
+ * Copyright 2013-2014 Kai Kulju, Jannis Seemann, Agostino Sturaro, Mika Hämäläinen, Arthur Joly
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

@@ -2,7 +2,7 @@
 using System.Collections;
 
 /**
- * Copyright 2014 Mika Hämäläinen, Agostino Sturaro, Kai Kulju
+ * Copyright 2013-2014 Mika Hämäläinen, Agostino Sturaro, Kai Kulju
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
