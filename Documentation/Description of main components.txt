@@ -1,4 +1,7 @@
-Components chapter
+This work by Agostino Sturaro is licensed under the Creative Commons Attribution 4.0 International License.
+To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/deed.en_US.
+
+Components
 
 Sheep
 This is the script that takes input from the player, allowing control over the main character of the game. The two main things it handles are movement and shooting.
