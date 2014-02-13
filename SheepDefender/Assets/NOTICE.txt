@@ -1,0 +1,11 @@
+Sheep Defender
+Copyright 2013-2014
+    Agostino Sturaro,
+    Arthur Joly,
+    Jannis Seemann,
+    Kai Kulju,
+    Mika Hämäläinen
+
+This product makes use of A* Pathfinding Project, by Aron Granberg,
+released under the Unity Asset Store license. The original software
+is available from http://arongranberg.com/astar/
