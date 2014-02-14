@@ -85,7 +85,7 @@ MonoBehaviour:
   ammoType: 1
   damage: 50
   speed: 35
-  friendlyObjTag: 
+  friendlyObjTag: Defender
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
