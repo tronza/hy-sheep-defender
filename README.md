@@ -5,6 +5,10 @@ Currently working with Unity 4.2.2
 Project is published under Apache 2.0 License
 http://www.apache.org/licenses/LICENSE-2.0
 
+Sheep Defender is a game that combines elements of tower defense games with the FPS concept.
+Developed with Unity for the 3 main desktop platforms Windows/Mac/Linux.
+A mobile version is planned.
+
 ## Opening the project in Unity
 
 To open the project in Unity, you should select: 
