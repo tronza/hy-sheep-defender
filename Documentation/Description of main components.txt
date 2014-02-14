@@ -1,0 +1,130 @@
+This work by Agostino Sturaro is licensed under the Creative Commons Attribution 4.0 International License.
+To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/deed.en_US.
+
+Components
+
+Sheep
+This is the script that takes input from the player, allowing control over the main character of the game. The two main things it handles are movement and shooting.
+
+Movement
+There are 4 modes of movement, defined by an enum class. Only Stopped and DeltaMouse movements are used in the game right now.
+
+Stopped, prevents any movement and denies the possibility of shooting, used to freeze the character when needed
+
+NoMouse, in this mode the sheep will ignore the mouse and be moved only using the keys, the rotationSpeed option controls how fast the sheep will rotate on itself when the lateral keys are pressed. Forward direction is relative to the sheep rotation.
+
+LookToMouse, in this mode the sheep will always look at the mouse pointer, the movement direction depends on the absoluteKeyMove option. If it's on, then the movement is relative to the world axis (forward = along z axis), or relative to the mouse (forward = along direction sheep-to-mouse). It works by casting a ray from the camera to the mouse pointer and finding the point where this ray intersects the plane. It's advisable to activate this mode only when the camera is placed high over than the sheep.
+
+DeltaMouse, in this mode the sheep is rotated based on the delta of the horizontal mouse position between frames, so the actual position of the mouse pointer does not count. Speed of the rotation is governed by the sensitivityX option, which is internally multiplied by the delta mouse position. Movement is done using the keys, forward direction is relative to the sheep rotation. Strafing left and right is allowed.
+
+Jumps are allowed in all these different modes except Stopped and uses the exact same code inside. Jump options are jumpSpeed, how fast the sheep rises during the jump, and jumpUpTime, how long the sheep rises during the jump before falling down. Gravity is not applied in a realistic way during a jump, so the speed while going up and down does not increase.
+
+Weaponry and shooting
+The weapons the sheep can use are listed in the weaponPrefabs array. Switching between such weapons is done using the mouse wheel. Weapons stored in the array are simple prefab Objects, and are not active. Only the currently selected weapon is an active GameObject.
+
+When a weapon is switched to, the old weapon is destroyed and the new weapon is instantiated. The active weapon has its Transform component set as a child of the gunHolder Transform, so it will be moved and rotated relatively to it. This trick allows to keep the weapon in front of the sheep. In fact, the gunHolder Transform is parented to the Transform component of the sheep, and thus acts as an offset between the weapon and the sheep. To make things clear, weapon.tranform.parent = gunHolder and gunHolder.parent = this.gameObject.Transform
+
+The Sheep uses the PullTrigger function of the weapon when the player presses the "Fire" button, which can be configured before the game starts. The weapon will fire only when it is ready, even if the player keeps the button pushed.
+
+---
+AmmoStorage
+This class is a singleton. It has a static function that allows it to create a new GameObject and attach itself to it. This trick is needed because MonoBehaviours cannot work without being attached to a GameObject.
+AmmoStorage contains the types of ammos as an enum class AmmoType and it keeps count of the available ammo of all kinds.
+The Weapon Component uses this class to consume ammo when it shoots.
+The Shootable Component uses the enum AmmoType of this class to advertise their own type.
+
+---
+
+Weapon
+This class represents a weapon loaded with a kind of ammo (shootablePrefab option) and with a fire rate (timeBetweenShots option).
+It provides 2 public functions, PullTrigger and ReleaseTrigger.
+The loaded Ammo can be any prefab that implements the Shootable Component.
+When the weapon is ready to shoot, and the trigger is pulled, the prefab is instantiated in the direction the weapon is facing.
+The Transform of the ammo prefab is conserved when it is instantiated, and a function is called inside its Shootable Component to pass the direction the weapon is facing, then the bullet will rotate itself accordingly. This allows us to have, for example, a bullet capsule rotated 90 degrees on the X axis, and let it calculate the proper rotation to have when shot.
+
+Right now, the same weapon could be loaded with a different kind of Shootable ammo at runtime, but this is not used in the game.
+All weapons currently implemented are automatic weapons with a cartridge of infinite size. However it would be easy to implement a pistol, it would be a matter of calling ReleaseTrigger right after PullTrigger.
+
+---
+
+Shootable
+This class represents anything that can be shot.
+It advertises its type using the enum class AmmoStorage.AmmoType, this means that for every kind of Shootable ammo there should be an entry in AmmoStorage.AmmoType. This was done because all shootable ammo are very similar, they simply have different damage and a speed values, so they can be instances of the same class. What makes an ammo different in color and shape is the GameObject this Component is attached to.
+A public method Shoot is provided to lets shooters specify the direction the bullet should go. This way the bullet can rotate itself accordingly, and conserve a base rotation, for example if an object needs to be rotated euler (90, 0, 0) to look straight, and the direction is should be shot is euler (0,30,0), then it will rotate itself to (90,30,0) instead of (0,30,0).
+When a GameObject with a Shootable collider collides with something, Shootable checks if that something is a friendly object by comparing its tag with the friendlyObjTag string. This can be used to avoid friendly fire. If the other object is not deemed friendly, then Shootable checks if it has a Damageable component, and, if so, it calls the DealDamage method to inflict damage.
+
+---
+
+Collectible
+This class represents an object that can be picked up by the player.
+
+- int storeValue is the monetary value of the Collectible
+- float durationTime is the number of seconds after which the Collectible self destructs
+- Object vanishingEffect is a prefab effect instantiated when the Collectible self destructs
+
+Collectible should be attached to a GameObject that has a Collider that acts as a trigger. When the player enters the trigger, the GameObject should be destroyed. This is done from outside the Collectible code, so who wants to pick up the Collectible should check for collisions with it and remember to destroy it after reading its storeValue value.
+
+---
+
+CollectibleSpawner
+This component spawns a number of GameObjects when it receives the HealthZeroed message.
+
+- Object prefab is the kind of Object that will be instantiated, it can also not be a Collectible
+- int numberToSpawn is the number of instances to spawn
+
+This component is designed to be able to spawn objects of any size, it uses raycasting to find out the height of the terrain, and it will read the position.y height in the prefab in order instantiate the chosen object at the right height. This also means the y position of the prefab should be set properly. See relative chapter.
+
+Instances are spawned in concentric squares around the center of the spawner. 1 instance in the center, 8 instances in the first square, 16 in the second square, and so on. 
+
+This component should be attached to a GameObject that also has a Damageable component, but it can work anyway, provided it receives the proper message.
+
+---
+
+Placeable
+This class represents objects that can be bought by the player and instantiated through MyGUI.
+It has a nameToDisplay string, a price and an icon.
+When a Placeable script is attached to a prefab, these properties allow the creation of a simple interface (like a button) to buy this object in a shop.
+
+---
+
+MyGUI
+This is the central GUI for buying and placing stuff on the scenario. It also displays some basic game information but not all of them.
+
+In order to adapt to different screen sizes, GUILayout, a Unity class providing static methods for displaying GUI elements (buttons, labels, etc.) is used. This class allows to nest vertical and horizontal layouts inside an area of a defined size, and apply constraints to limit the size of such layouts to a percentage of the area they are nested inside.
+
+GameInfo myGameInfo contains basic game information to be displayed:
+- Object[] placeablePrefabs contains the prefabs that can be bought, such prefabs should include a Purchaseable component
+- Collider ground is used to check the height when placing stuff
+- GameObject lightObj is the object used to let the player see where the item bought will be placed and to check for collisions in that place. In fact, lightObj needs to be a specific GameObject with a light projector, used to let us see where it is, and a BoxCollider set as a trigger, used to check for collisions.
+
+This component is designed to be able to place objects of any size, it uses raycasting to find out the height of the terrain, and it will read the position.y height in the prefab in order instantiate the chosen object at the right height. This also means the y position of the prefab should be set properly. See relative chapter.
+
+In order to check if the place where the prefab should be placed is free, we use the lightObj as a probe. First we set the size of the BoxCollider of lightObj to the size of the bounding box of the prefab we want to place. Then we move lightObj to the position we want to place the prefab on and check if the trigger is activated by a collision. If so, the position is not free to instantiate an object of that size there.
+
+---
+
+Trigger
+This class was named in a hurry. Should be called Placer to make it more clear. This is the component that should be attached to the GameObject used by MyGUI as a probe to check for collisions in a place.
+
+It's used to change the color of the projector when a collision with an object that is not tagged as ground is detected.
+
+---
+
+GameInfo
+This class contains some basic game information, but not all of them. It could be made into a singleton, actually.
+
+- int coins, the number of coins
+- int level, the number of the level, not used
+- levelName, the name of the level
+- playerName, the name of the player, not used
+
+---
+
+GameEnder
+This class is simple component that can be attached to any GameObject with a Damageable component. It makes the game end when such objects are killed.
+
+What it does is simply catching the HealthZeroed message that Damageable sends when the life reached zero points and then act accordingly.
+
+This component allowed us to decouple the Damageable script from the game ending logic. All references needed to call the game over can be placed here instead of inside Damageable. Plus, no casts are needed to check if the Damageable component is attached to an object crucial for the game. Simply, any object containing the GameEnder component will be crucial (killing it means game over).
+
+---

@@ -1,0 +1,54 @@
+This work by Agostino Sturaro is licensed under the Creative Commons Attribution 4.0 International License.
+To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/deed.en_US.
+
+Unity tips and tricks
+
+Properly setting the height of a prefab
+Some of the components we designed instantiate prefabs. In order to know how high the transform of the prefab should be in order to place the prefab just above the ground, a setup is needed. The prefab can be queried to know how tall it is, but how to position it requires knowledge of the height of its origin. For example, if an object is tall 2 units, and its center is at height 1, then the position.y of the prefab should be set to 1.
+
+---
+
+Components, GameObject and Prefabs
+Components in Unity are things that are attached to a GameObject to give it additional properties or to make it behave and react in different ways. Components cannot be used if they are not attached to a GameObject. All script in Unity are Components, precisely they are MonoBehaviours. Other examples are the Transform, Collider and RigidBody components.
+
+Some Components interact with each other, for example, the Transform component, that represents the position and rotation of a GameObject can be influenced by the RigidBody component, which allows the GameObject to react to physics forces. So, if a forward force is applied to a RigidBody, it will make the Transform change its position. More than 2 components can interact, continuing the same example, forward movement can be stopped if the Collider component detects a collision.
+
+GameObject is a class that can get instantiated in the game world. Its properties and behaviours depend on what Components are attached to it. GameObjects can be nested to allow them to move together or to communicate with each other more easily.
+
+Prefabs are Objects, not GameObjects. A single prefab can represent a whole hierarchy of GameObject that have not been instantiated yet. Prefabs can exist without being instantiated inside the game world. When they are instantiated, a copy of the hierarchy of GameObjects they represent is brought to the game world. The original prefab will remain untouched and available for more instantiations.
+
+To sum this up, GameObjects are a bag of Components, Prefabs are a bag ao GameObjects.
+
+---
+
+Tips on parenting of GameObjects
+In Unity GameObjects can be nested using the inspector to create a hierarchy. When an object is nested inside another one, then its Transform component becomes a child of the Transform component of the GameObject a step higher in the hierarchy. That is, childGameObject.transform.parent = parentGameObject.transform
+
+Nesting GameObjects has another less obvious purpose, that is letting the parent object query Components of its children. In order to do this, parentGameObject.GetComponentsInChildren<TypeOfComponent> () will return an array of Components of the requested type. An option can be used inside the parenthesis to also return disabled Components.
+
+This is especially useful to get Components of a prefabs, which are all inactive until the prefab is instantiated. However, since a prefab is an Object and not a GameObject, a cast is needed before applying this operation ((GameObject)prefabObject).GetComponentsInChildren<TypeOfComponent> (true).
+
+Another possible use of nesting is to make them communicate through messages. When a GameObject calls SendMessage("FunctionName"), all Components attached to it or to one of its descendant GameObjects will receive that message.
+Conversely, when a GameObject calls SendMessageUpwards("FunctionName"),  all Components attached to it or to one of its ancestor GameObjects will receive that message.
+
+---
+
+Moving a GameObject
+There are many ways of moving a GameObject, but the appropriate one depends on the Components attached to that GameObject. Ignoring these guidelines can result in strange behaviours.
+
+Simple Gameobjects that just have a Transform can be moved changing their transform directly, changing transform.position, transform.rotation, or using the methods Transform.translate and Transform.Rotate.
+
+GameObjects with a Collider component should not be moved or rotated unless thy also have a RigidBody component. This is because if they do not have such components, unity assumes they are stationary and chaches their positions. So, if an object needs to be moved often, such assumption will not hold and caching will degrade performances.
+
+GameObject with a RigidBody component should be moved with the aid of physic, never directly changing their Transform. That means in order to move them the options are: a change of velocity, applying a force or an acceleration. All these can be done using the function rigidbody.AddForce and choosing the appropriate ForceMode (VelocityChange, Force, Acceleration). Rotations can be done applying a a torque using the function rigidbody.AddForceAtPosition.
+Even teleporting should be done without changing the Transform directly, but using rigidbody.MovePosition instead.
+A RigidBody will stop moving by itself after some time if its drag and angularDrag are set to a value >0.
+If a moving RigidBody meets a Collider that is not a trigger, it will not penetrate it. The physics engine will take care of making the object bounce away or stop, depending on the materials the 2 objects are made of. Such materials are set in the Collider component (Collider.material).
+
+A middle road that allows to move GameObjects giving absolute values or movement deltas like we would do changing the Transform and avoid entering Colliders at the same time is possible. Just implement the CharacterController, which replaces the Collider and RigidBody components of an object.
+
+There are however some non-obvious restrictions, the Collider used internally by the CharacterController is a capsule aligned with the Y axis, that means it can't be flipped.
+
+GameObject with a CharacterController should be moved only using its SimpleMove and Move methods, and never directly changing its Transform, unless maybe in the extreme case we are teleporting it. The methods it provides for movement can be a little confusing:
+- SimpleMove works with a speed vector, applies gravity (no way to disable this) and does _not_ let you jump.
+- Move works with absolute movement deltas, it does _not_ apply gravity (no way to enable it) and lets you "jump".
