@@ -1,6 +1,6 @@
 # Sheep Defender v1.0
 
-Currently working with Unity 4.2.2
+Currently working with Unity 4.5.1 (released version is compiled with Unity 4.2)
 
 Project is published under Apache 2.0 License
 http://www.apache.org/licenses/LICENSE-2.0
